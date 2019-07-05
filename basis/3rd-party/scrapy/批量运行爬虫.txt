@@ -1,0 +1,26 @@
+在Scrapy中，批量运行爬虫文件，常用两种方法:
+1) CrawProcess
+2) 修改crawl源码 + 自定义命令的方式
+
+以下为第二种方式:
+1.创建Scrapy项目后,创建3个爬虫文件
+2.了解Command/crawl.py源码命令,分析,主要由run()方法运行爬虫,对其进行修改
+其中:
+# spname指的是爬虫名
+crawler_process.crawl(spname, **opts.spargs)
+# 而获取所有的爬虫文件,可通过crawler_process.spider_loader.list()获取
+3.建议以文件夹存放要写的源码,位置放在spiders目录同级下
+> mkdir mycmd
+> cd mycmd
+> touch mycrawl.py
+# 然后将crawl源码复制到文件里,然后编写一次运行多个爬虫文件的命令源码
+# 例如获取爬虫文件名列表,用for进行迭代即可
+4.为本目录添加一个__init__.py
+5.在项目配置文件settings.py中修改核心目录
+# 自定义命令源码目录
+COMMANDS_MODULES = 'myproject.mycmd'
+> scrapy -h
+# 可以看到 mycrawl 命令出现在显示内容中
+6.使用
+> scrapy mycrawl --nolog
+# 即同时启动了所在项目中所有爬虫文件

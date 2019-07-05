@@ -1,0 +1,21 @@
+Scrapy中的Item对象保存数据(容器)
+
+1.对需求数据进行结构规划
+2.在爬虫项目中的item.py文件进行结构数据的定义
+3.item.py文件自动生成的类需要我们自行定义
+
+格式:
+结构化数据名 = scrapy.Field()
+例:
+# 对结构化数据网页标题、关键词、版权、地址进行定义
+class MyfirstpjtItem(scrapy.Item):
+    # ...
+    urlname = scrapy.Field()
+    urlkey = scrapy.Field()
+    urlcr = scrapy.Field()
+    urladdr = scrapy.Field()
+    # 内部会存储为一个字典
+
+data = MyfirstpjtItem(urlname='me',urlkey='sex',urlcr='all',urladdr='www.*')
+print(data[urlname]) # me
+print(data[urlkey])  # sex

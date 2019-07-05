@@ -1,0 +1,80 @@
+1.页面交互与填充表单
+第一步:
+driver = webdriver.Firefox()
+driver.get('file://E:/login.html')
+第二步:
+username = driver.find_element_by_name('username')
+password = driver.find_element_by_xpath('.//*[@id="loginForm"]/input[2]')
+login_button = driver.find_element_by_xpath('//input[@type="submit"]')
+第三步:
+username.send_keys['your username']
+password.send_keys['your password']
+login_button.click()
+清除输入框:
+username.clear()
+password.clear()
+
+//下拉选项卡登录方式的选择
+方法一:
+select = driver.find_element_by_xpath('//form/select')
+all_options = select.find_elements_by_tag_name('option')
+for option in all_options:
+    print('value is: %s' % option.get_attribute('value'))
+    option.click()
+
+方法二:
+from selenium.webdriver.support.ui import Select
+select = Select(driver.find_element_by_xpath('//form/select'))
+select.select_by_index(index)              //这里是根据索引进行选择
+select.select_by_visible_text('text')      //文字
+select.select_by_value(value)              //值
+
+//如果select标记中multiple='multiple'，说明该标记支持多选
+其它方法:
+select.deselect_all()            --取消所有选项
+select.options                   --获取所有选项
+select.all_selected_options      --获取已选选项
+
+2.元素拖拽
+说明:
+将一个元素拖到另一个元素的位置,要先找到源元素和目的元素
+from selenium.webdriver import ActionChains
+element = driver.find_element_by_name('source')
+target =  driver.find_element_by_name('target')
+action_chains = ActionChains(driver)
+action_chains.drag_and_drop(element, target).perform()
+
+3.窗口和页面frame的切换
+3.1 切换窗口
+driver.switch_to_window('windowName')
+//也可以获取窗口操作对象
+for handle in driver.window_handles:
+    driver.switch_to_window(handle)
+
+3.2 切换页面
+driver.switch_to_frame('frameName')
+driver.switch_to_frame('frameName.0.child')
+
+4.弹窗处理
+说明:
+处理页面中，触发了事件，跳出弹框,获取弹框对象,关闭该弹框
+alert = driver.switch_to_alert()
+alert.dismiss()
+
+5.历史记录
+说明:
+操作页面的前进和后退功能
+driver.forward()
+driver.back()
+
+6.Cookie处理
+driver.get('http://www.baidu.com')
+cookie = {'name': 'foo', 'value': 'bar'}
+driver.add_cookie(cookie)
+driver.get_cookies()
+
+7.设置phantomJS请求头中的User-Agent
+dcap = dict(DesiredCapabilities.PHANTOMJS)
+dcap['phantomjs.page.settings.userAgent'] = ('Mozilla/5.0 (....)')
+driver = webdriver.PhantomJS()      # desired_capabilities=dcap
+driver.get('http://...')

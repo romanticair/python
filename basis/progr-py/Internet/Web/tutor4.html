@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CGI 101</title>
+</head>
+<body>
+<h1>A second user interaction: tables</h1>
+<hr>
+<form method="post" action="cgi-bin/tutor4.py">
+    <table>
+        <tr>
+            <th align="right">Enter your name:
+            <td><input type="text" name="user">
+        <tr>
+            <th align="right">Enter your age:
+            <td><input type="text" name="age">
+        <tr>
+            <td colspan=2 align="center">
+            <input type="submit" value="Send">
+    </table>
+</form>
+</body>
+</html>

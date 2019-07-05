@@ -1,0 +1,9 @@
+CSVFeedSpider爬虫类
+
+属性:
+# headers = []             # 存放要获取CSV文件头部信息数据的行字段列表
+# delimiter = '\t'         # 字段间的间隔符, ',', etc...
+
+方法:
+# 接受一个response对象，并对其进行处理
+1.parse_row(self, response, row)

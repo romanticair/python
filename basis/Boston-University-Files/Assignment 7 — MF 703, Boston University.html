@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://cs-people.bu.edu/azs/mf703/assignments/a7.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Assignment 7 — MF 703, Boston University</title>
+
+<meta name="description" content="Course website for MF 703, Boston University.">
+<link rel="stylesheet" href="./Assignment 7 — MF 703, Boston University_files/style.css">
+<!-- 
+<link rel="icon" type="image/x-icon" href="http://cs-people.bu.edu/azs/mf703img/favicon.ico"> 
+<link rel="mask-icon" href="http://cs-people.bu.edu/azs/mf703/img/111.svg" color="#cc0000">
+-->
+<script src="./Assignment 7 — MF 703, Boston University_files/respond.min.js.下载"></script>
+<script src="./Assignment 7 — MF 703, Boston University_files/html5shiv.js.下载"></script>
+<script src="./Assignment 7 — MF 703, Boston University_files/cs111.js.下载"></script>
+<meta name="viewport" content="width=device-width, user-scalable=yes">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+</head>
+
+<body onload="setup();">
+
+<div id="left">
+<a id="header" href="http://cs-people.bu.edu/azs/mf703/">
+MF 703
+</a>
+<div id="subheader">
+Fall 2017
+</div>
+
+<nav>
+<ul>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/index.html">Home</a></li>
+    <li><a href="https://questromtools.bu.edu/" target="_top">Questrom Tools</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/files/syllabus.pdf">Syllabus</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/staff.html">Staff</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/assignments/">Assignments</a></li>
+    <li><a href="https://piazza.com/class/j7akiyy9xs84n3" target="_blank">Piazza Discussion</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/resources.html">Resources</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">Collaboration</a></li>
+<!--
+    <li><a href="http://cs-people.bu.edu/azs/mf703/policies.html">Policies</a></li>
+-->
+</ul>
+<ul class="external">
+    <li><a href="http://pythontutor.com/visualize.html#py=3" target="_blank">Python Tutor</a></li>
+<!--    <li><a href="http://cs-people.bu.edu/azs/mf703/apollo/" target="_blank">Apollo</a></li> -->
+</ul>
+</nav>
+
+</div><!-- end #left -->
+
+<div id="middle">
+<section class="main">
+<h1 id="assignment-7">Assignment 7</h1>
+<div class="toc" style="display: none;">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#assignment-7">Assignment 7</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#preliminaries">Preliminaries</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#objective-and-overview">Objective and Overview</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#task-1-a-date-class">Task 1: A Date class</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#task-2-operator-overloading-for-the-date-class">Task 2: Operator Overloading for the Date Class</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#task-3-some-date-clients">Task 3: Some Date clients</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><em>due by <font color="blue"><strong>9:00 p.m.</strong></font> on Tuesday, October 24th, 2017</em></p>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>In your work on this assignment, make sure to abide by the
+<a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">collaboration policies</a> of the course.  </p>
+<p>If you have questions while working on this assignment, please post them on <a href="http://cs-people.bu.edu/azs/mf703/assignments/piazza">Piazza!</a>
+This is the best way to get a quick response from your classmates and the course staff. </p>
+<h2 id="objective-and-overview">Objective and Overview</h2>
+<p><em>Objective</em>: The objective of this assignment is to gain experience with object-oriented
+programming, including class design, writing methods, and client code to use objects of 
+your newly-created class.</p>
+<p><em>Overview</em>: In this assignment, you will develop a <code>Date</code> class to repesent objects that
+are calendar dates. You will store data for the month, day and year, and provide methods
+to manipulate <code>Date</code>s as explained below.</p>
+<p><strong> You may NOT use any functions or tools from the python <code>calendar</code> module or any similar 
+    pre-existing libraries. </strong></p>
+<p><br></p>
+<h3 id="task-1-a-date-class">Task 1: A <code>Date</code> class</h3>
+<p><em>60 points; <strong>individual-only</strong></em></p>
+<p>Some people have an extraordinary talent to compute (<em>in their heads</em>) the
+day of the week that any past date fell on. For example, if you tell them
+that you were born on October 13, 1995, they’ll be able to tell you that
+you were born on a Friday!</p>
+<p>In this assignment, you will create a <code>Date</code> class, from which you will be able
+to create <code>Date</code> objects that represent a day, month, and year. You will add
+functionality to this class that will enable <code>Date</code> objects to find the day
+of the week to which they correspond.</p>
+<p><strong>Getting started</strong><br>
+To start, open a new file in IDLE and save it as <code>a7task1.py</code>. Put all of
+the code that you write for this task in this file. 
+<strong>Don’t forget to include appropriate comments at the top of the file, and a docstring for
+your your class and each method in the class.</strong></p>
+<p><strong>Your tasks</strong>  </p>
+<ol>
+<li>
+<p>Begin by creating a class definition, with the following:</p>
+<ul>
+<li>
+<p>The <strong><code>__init__(self, new_month, new_day, new_year)</code></strong> method, which is
+   the constructor for <code>Date</code> objects. In other words, this is the method
+   that Python uses when making a new <code>Date</code> object. It defines the attributes
+   that compose a <code>Date</code> object (<code>month</code>, <code>day</code>, and <code>year</code>) and accepts
+   parameters to set an object’s attributes to some initial values.</p>
+</li>
+<li>
+<p>The <strong><code>__repr__(self)</code></strong> method, which returns a string representation of a
+   <code>Date</code> object. This method will be called when an object of type
+   <code>Date</code> is printed. It can also be tested by simply evaluating an object
+   from the Shell. This method formats the month, day, and year
+   that represent a <code>Date</code> object into a string of the form <code>'mm/dd/yyyy'</code>
+   and returns it.</p>
+<p>Then, try the following interactions in the Python Shell to experiment
+with the <code>__init__</code>, <code>__repr__</code> methods:</p>
+<div class="codehilite"><pre><span class="c"># Create a Date object named d1 using the constructor.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+
+<span class="c"># An example of using the __repr__ method. Note that no quotes</span>
+<span class="c"># are displayed, even though the function returns a string.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span>
+<span class="mi">10</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2017</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>The <strong><code>copy(self)</code></strong> method, which returns a newly-constructed object of
+   type <code>Date</code> with the same month, day, and year that the called object has.
+   This allows us to create <em>deep copies</em> of <code>Date</code> objects.</p>
+<p>Next, try the following examples in the Python Shell to illustrate
+why we will need to override the <code>__eq__</code> method to change the meaning
+of the <code>==</code> operator:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d3</span> <span class="o">=</span> <span class="n">d1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c"># Determine the memory addresses to which the variables refer.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+<span class="mi">430542</span>             <span class="c"># Your memory address may differ.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+<span class="mi">430542</span>             <span class="c"># d2 is a reference to the same Date that d1 references.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">d3</span><span class="p">)</span>
+<span class="mi">413488</span>             <span class="c"># d3 is a reference to a different Date in memory.</span>
+
+<span class="c"># The == operator tests whether memory addresses are equal.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">==</span> <span class="n">d2</span>
+<span class="bp">True</span>               <span class="c"># Shallow copy -- d1 and d2 have the same memory address.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">==</span> <span class="n">d3</span>
+<span class="bp">False</span>              <span class="c"># Deep copy -- d1 and d3 have different memory addresses.</span>
+</pre></div>
+
+
+<p>You will override the <code>==</code> operator in the <code>__eq__</code> method below.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write the method <strong><code>is_leap_year(self)</code></strong>, which returns <code>True</code> if the called
+   object is in a leap year, and <code>False</code> otherwise. In other
+   words, when we create a <code>Date</code> object and call its <code>is_leap_year</code>
+   method, the method will return whether that specific <code>Date</code> object
+   falls in a leap year.</p>
+<div class="codehilite"><pre>    # Create a Date object named d1 using the constructor.
+    &gt;&gt;&gt; d1 = Date(1, 1, 2016)
+
+    # Check if d1 is in a leap year -- it is!
+    &gt;&gt;&gt; d1.is_leap_year()
+    True
+
+    # Create another object named d2
+    &gt;&gt;&gt; d2 = Date(1, 1, 2017)
+
+    # Check if d2 is in a leap year.
+    &gt;&gt;&gt; d2.is_leap_year()
+    False
+</pre></div>
+
+
+<p>Here are the rules for determining if a year is a leap year:</p>
+<ul>
+<li>
+<p>If the year is not evenly divisible by 4, it is not a leap year.</p>
+</li>
+<li>
+<p>If the year is a century not evenly divisible by 400, it is not a leap year.</p>
+</li>
+<li>
+<p>If the year is a century divisibly by 400, it is a leap year.</p>
+<div class="codehilite"><pre># Here are some further test cases:
+&gt;&gt;&gt; d1 = Date(1, 1, 2000)
+
+# Check if d1 is in a leap year -- it is!
+&gt;&gt;&gt; d1.is_leap_year()
+True
+
+# Create another object named d2
+&gt;&gt;&gt; d2 = Date(1, 1, 1900)
+
+# Check if d2 is in a leap year.
+&gt;&gt;&gt; d2.is_leap_year()
+False
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>Write the method <strong><code>is_valid_date(self)</code></strong> method, which returns <code>True</code> if the 
+    object is a valid date, and False otherwise. You must enforce the following rules:</p>
+<ul>
+<li>
+<p>Valid months have between 1 and 12.</p>
+</li>
+<li>
+<p>Valid days are between 1 and 30 for the months of April, June, September, and November.</p>
+</li>
+<li>
+<p>Valid days are between 1 and 31 for the months of January, March, May, July, August,
+  October and December.</p>
+</li>
+<li>
+<p>Valid days are between 1 and 29 for February if the year is a leap year.</p>
+</li>
+<li>
+<p>Valid days are between 1 and 28 for February if the year is not a leap year.</p>
+<div class="codehilite"><pre># Here are some test cases to try:
+&gt;&gt;&gt; d1 = Date(10,7,2017)
+&gt;&gt;&gt; d1.is_valid_date()
+True
+
+&gt;&gt;&gt; d2 = Date(14,2,2017)
+&gt;&gt;&gt; d2.is_valid_date()
+False
+
+&gt;&gt;&gt; d3 = Date(2,30,2017)
+&gt;&gt;&gt; d3.is_valid_date()
+False
+
+&gt;&gt;&gt; d4 = Date(2,29,2016)
+&gt;&gt;&gt; d4.is_valid_date()
+True
+
+&gt;&gt;&gt; d5 = Date(2,29,2017)
+&gt;&gt;&gt; d5.is_valid_date()
+False
+
+&gt;&gt;&gt; d6 = Date(-4,-4, -5)
+&gt;&gt;&gt; d6.is_valid_date()
+False
+
+&gt;&gt;&gt; d7 = Date(2,29,1900)
+&gt;&gt;&gt; d7.is_valid_date()
+False
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>Write the method <strong><code>add_one_day(self)</code></strong> that <strong><em>changes</em></strong> the called object
+    so that it represents one calendar day after the date that it originally
+    represented.</p>
+<p>Notes:</p>
+<ul>
+<li><strong>This method should not return anything.</strong> Instead, it should change
+  the value of one or more variables inside the called object.</li>
+<li>Since we are advancing the <code>Date</code> object by one day, <code>self.day</code> will
+  change. Depending on what day it is, <code>self.month</code> and <code>self.year</code> may
+  also change.</li>
+<li>You may find it helpful to use the following list by declaring it
+  on the first line of the method:<div class="codehilite"><pre>days_in_month = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+</pre></div>
+
+
+</li>
+</ul>
+<p>You can then use this list to quickly determine the number of days 
+  in a month. For example, <code>days_in_month[1]</code> is 31 to represent that 
+  January (month 1) has 31 days. You can use <code>self.month</code> to index this 
+  list to find the number of days in the month that is represented by 
+  a <code>Date</code> object.</p>
+<p>If you use this approach, be sure to take into account that the
+  <strong><code>days_in_month</code> list is not accurate for <code>Date</code> objects that
+  represent February during leap years</strong>. However, you can use an
+  <code>if</code> statement to account for this case when necessary.</p>
+<p>Examples:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span>
+<span class="mi">12</span><span class="o">/</span><span class="mi">31</span><span class="o">/</span><span class="mi">2017</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">add_one_day</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span>
+<span class="mo">01</span><span class="o">/</span><span class="mo">01</span><span class="o">/</span><span class="mi">2018</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">2016</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">add_one_day</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span>
+<span class="mo">02</span><span class="o">/</span><span class="mi">29</span><span class="o">/</span><span class="mi">2016</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">add_one_day</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span>
+<span class="mo">03</span><span class="o">/</span><span class="mo">01</span><span class="o">/</span><span class="mi">2016</span>
+</pre></div>
+
+
+<ul>
+<li><strong>You are responsible for testing this method thoroughly.</strong>
+Make sure it works for special situations like change of month or change or year.</li>
+</ul>
+</li>
+<li>
+<p>Write the method <strong><code>rem_one_day(self)</code></strong> that <strong><em>changes</em></strong> the called object
+    so that it represents one calendar day before the date that it originally
+    represented. This will be similar to the <strong><code>add_one_day(self)</code></strong> method above,
+    but will obviously require different logic and test cases. Test it thoroughly. </p>
+<p>Notes:</p>
+<ul>
+<li><strong>This method should not return anything.</strong> Instead, it should change
+  the value of one or more variables inside the called object.</li>
+<li>
+<p>Since we are advancing the <code>Date</code> object by one day, <code>self.day</code> will
+  change. Depending on what day it is, <code>self.month</code> and <code>self.year</code> may
+  also change.</p>
+</li>
+<li>
+<p><strong>You are responsible for testing this method thoroughly.</strong>
+Make sure it works for special situations like change of month or change or year.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write the method <strong><code>add_n_days(self, n)</code></strong> that <strong><em>changes</em></strong> the calling
+   object so that it represents <code>n</code> calendar days after the date it originally
+   represented. </p>
+<p>Notes:</p>
+<ul>
+<li>
+<p><strong>This method should not return anything.</strong> Instead, it should change
+    the value of one or more variables inside the called object.</p>
+</li>
+<li>
+<p><strong>Don’t copy code from the <code>add_one_day</code> method</strong>. Instead, you
+    should call the <code>add_one_day</code> method in a loop to accomplish the necessary
+    changes.</p>
+</li>
+<li>
+<p>Because the <code>add_one_day</code> method doesn’t explicitly return a value, it will
+    implicitly return the special value <code>None</code>. As a result, you 
+    need to be careful how you call it. In particular, you should
+    <strong><em>not</em></strong> call it as part of an assignment or as part of a
+    <code>print</code> statement. For example, this would <strong><em>not</em></strong> work:</p>
+<div class="codehilite"><pre><span class="c"># don't do this!</span>
+<span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_one_day</span><span class="p">())</span>
+</pre></div>
+
+
+<p>because you will end up printing <code>None</code>. Rather, you should simply call the 
+method on its own line, and ignore the value of <code>None</code> that is returned:</p>
+<div class="codehilite"><pre><span class="bp">self</span><span class="o">.</span><span class="n">add_one_day</span><span class="p">()</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>To print the current state of the <code>Date</code> object, you can simply
+    do the following:</p>
+<div class="codehilite"><pre><span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+
+
+</li>
+</ul>
+<p>since doing so will call the <code>__repr__</code> method to produce a string
+   representation of <code>self</code> that you can print.</p>
+<ul>
+<li>
+<p>This method should work for any nonnegative integer <code>n</code>.</p>
+</li>
+<li>
+<p>It might be helpful to add a print statement while you are testing this method,
+   but to comment it out later. This print statement would print all of the dates from
+   the starting date to the finishing date, inclusive of both endpoints. If <code>n</code> is 0, 
+   only the starting date should be printed.</p>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="codehilite"><pre>    &gt;&gt;&gt; d = Date(10, 17, 2017)
+    &gt;&gt;&gt; d.add_n_days(3)
+    10/17/2017
+    10/18/2017
+    10/19/2017
+    10/20/2017
+    &gt;&gt;&gt; d
+    10/20/2017
+    &gt;&gt;&gt; d = Date(10, 17, 2017)
+    &gt;&gt;&gt; d.add_n_days(0)
+    10/17/2017
+    &gt;&gt;&gt; d
+    10/17/2017
+</pre></div>
+
+
+<p>Remove this print statement once you are certain that your method works correctly.</p>
+</li>
+<li>
+<p>Write the method <strong><code>rem_n_days(self, n)</code></strong> that <strong><em>changes</em></strong> the calling
+   object so that it represents <code>n</code> calendar days before the date it originally
+   represented. This method should be very similar to the <strong><code>add_n_days(self, n)</code></strong>
+   method above, but obviously it will require different logic and test cases. 
+   Test it thouroughly.</p>
+</li>
+<li>
+<p>Write the method <strong><code>__eq__(self, other)</code></strong> that returns <code>True</code> if the 
+    called object (<code>self</code>) and the argument (<code>other</code>) represent the same 
+    calendar date (i.e., if the have the same values for their <code>day</code>, 
+    <code>month</code>, and <code>year</code> attributes). Otherwise, this method should return 
+    <code>False</code>.</p>
+<p>Recall from lecture that the name <code>__eq__</code> is a special method name 
+that allows us to <em>override</em> the <code>==</code> operator–replacing the default
+version of the operator with our own version. In other words, when 
+the <code>==</code> operator is used with <code>Date</code> objects, our new <code>__eq__</code> method 
+will be invoked!</p>
+<p>This method will allow us to use the <code>==</code> operator to see if two
+<code>Date</code> objects actually represent the same date by testing whether 
+their days, months, and years are the same, instead of testing whether 
+their memory addresses are the same.</p>
+<p>After implementing your <code>__eq__</code> method, try re-executing the following 
+sequence of statements from Task 0:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2018</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d3</span> <span class="o">=</span> <span class="n">d1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c"># Determine the memory addresses to which the variables refer.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+<span class="mi">430542</span>             <span class="c"># Your memory address may differ.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+<span class="mi">430542</span>             <span class="c"># d2 is a reference to the same Date that d1 references.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">d3</span><span class="p">)</span>
+<span class="mi">413488</span>             <span class="c"># d3 is a reference to a different Date in memory.</span>
+
+<span class="c"># The new == operator tests whether the internal date is the same.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">==</span> <span class="n">d2</span>
+<span class="bp">True</span>               <span class="c"># Both refer to the same object, so their internal</span>
+                   <span class="c"># data is also the same.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">==</span> <span class="n">d3</span>
+<span class="bp">True</span>               <span class="c"># These variables refer to different objects, but</span>
+                   <span class="c"># their internal data is the same!</span>
+</pre></div>
+
+
+<p>Notice that we now get <code>True</code> when we evaluate <code>d1 == d3</code>. That’s
+because the new <code>__eq__</code> method compares the internals of the objects 
+to which <code>d1</code> and <code>d3</code> refer, rather than comparing the memory
+addresses of the objects.</p>
+</li>
+<li>
+<p>Write the method <strong><code>is_before(self, other)</code></strong> that returns <code>True</code> if
+    the called object represents a calendar date that occurs before the
+    calendar date that is represented by <code>other</code>. If <code>self</code> and <code>other</code>
+    represent the same day, or if <code>self</code> occurs after <code>other</code>, the method
+    should return <code>False</code>.</p>
+<p>Notes:</p>
+<ul>
+<li>This method is similar to the <code>__eq__</code> method that you have written
+  in that you will need to compare the years, months, and days to
+  determine whether the calling object comes before <code>other</code>.</li>
+</ul>
+<p>Examples:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">ny</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2018</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">ny</span><span class="o">.</span><span class="n">is_before</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">is_before</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">is_before</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d3</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">2017</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d3</span><span class="o">.</span><span class="n">is_before</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d4</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">2018</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d4</span><span class="o">.</span><span class="n">is_before</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
+<span class="bp">False</span>
+</pre></div>
+
+
+<p>You will need additional test cases to be certain that this works correctly!</p>
+</li>
+<li>
+<p>Write the method <strong><code>is_after(self, other)</code></strong> that returns <code>True</code> if
+    the calling object represents a calendar date that occurs after the
+    calendar date that is represented by <code>other</code>. If <code>self</code> and <code>other</code>
+    represent the same day, or if <code>self</code> occurs before <code>other</code>, the method
+    should return <code>False</code>.</p>
+<p>Notes:</p>
+<ul>
+<li>There are two ways of writing this method. You can either emulate
+  your code for <code>is_before</code> <strong>OR</strong> you can think about how you could call
+  <code>__eq__</code> (<code>==</code>) and <code>is_before</code> to make writing this method very simple.</li>
+</ul>
+</li>
+<li>
+<p>Write the method <strong><code>diff(self, other)</code></strong> that returns an integer
+    that represents the number of days between <code>self</code> and <code>other</code>.</p>
+<p>Notes:</p>
+<ul>
+<li><strong>This method should not change <code>self</code> nor should it change <code>other</code>
+  during its execution</strong>.</li>
+<li>
+<p>The sign of the return value is important! In particular:</p>
+<ul>
+<li>If <code>self</code> and <code>other</code> represent the same calendar date, this
+  method should return 0.</li>
+<li>If <code>self</code> is <strong>before</strong> <code>other</code>, this method should return a
+  <strong>negative</strong> integer equal to the number of days between the two
+  dates.</li>
+<li>If <code>self</code> is <strong>after</strong> <code>other</code>, this method should return a
+  <strong>positive</strong> integer equal to the number of days between the two
+  dates.</li>
+</ul>
+</li>
+</ul>
+<p>Suggested Approach:</p>
+<ul>
+<li>Since this method should not change the original objects, you should
+  first create true (deep) copies of <code>self</code> and <code>other</code>.</li>
+<li>Then, use <code>is_before</code> or <code>is_after</code> to figure out which date comes first.</li>
+<li>You can use the <code>add_one_day</code> method that you have already written
+  in a similar way to how you used it in the <code>add_n_days</code> method to
+  count <em>up</em> from one date to another. However,
+  unlike in that method, in <code>diff</code> it is not clear how many times you
+  need to call <code>add_one_day</code> to get an appropriate count from one date to
+  the other. What kind of loop is well-suited for this kind of problem?</li>
+<li>Once you know how many days separate the two values, you can again
+  use <code>is_before</code> or <code>is_after</code> to figure out whether the returned result
+  should be positive or negative.</li>
+<li>You should <strong><em>not</em></strong> try to subtract years, months, and days between
+  the two dates. This technique is too prone to mistakes.</li>
+<li>You should also <strong><em>not</em></strong> try to use <code>add_n_days</code> to implement your
+  <code>diff</code> method. Checking all of the possible difference amounts will be
+  too slow!</li>
+</ul>
+<p>Examples:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">2018</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+<span class="mi">181</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+<span class="o">-</span><span class="mi">181</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span>           <span class="c"># Make sure the original objects did not change.</span>
+<span class="mi">10</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2017</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span>
+<span class="mo">04</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2018</span>
+
+<span class="c"># Here are two that pass over a leap day.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d3</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2015</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d4</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2016</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d4</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">d3</span><span class="p">)</span>
+<span class="mi">105</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Write the method <strong><code>day_of_week(self)</code></strong> that returns a string that indicates
+    the day of the week of the <code>Date</code> object that calls it. In other words, the
+    method should return one of the following strings: <code>'Monday'</code>, <code>'Tuesday'</code>,
+   <code>'Wednesday'</code>, <code>'Thursday'</code>, <code>'Friday'</code>, <code>'Saturday'</code>, <code>'Sunday'</code>.</p>
+<p>Suggested Approach:</p>
+<ul>
+<li>Try using the <code>diff</code> method from a <strong>known</strong> date. For example,
+  how could it help to know the number of days between the called
+  object and a <code>Date</code> object representing Monday, April 18, 2016?
+  How might the modulus (<code>%</code>) operator help?</li>
+<li>Calling <code>diff</code> will give you a negative number if the <code>Date</code> you are
+  operating on comes before the known date used by <code>day_of_week</code>. 
+  You should leave the result as a negative number in such cases; 
+  you should <strong><em>not</em></strong> take its absolute value.</li>
+<li>It will be useful to copy and paste the following list to the first
+  line of your method:<div class="codehilite"><pre><span class="n">day_of_week_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Monday'</span><span class="p">,</span> <span class="s">'Tuesday'</span><span class="p">,</span> <span class="s">'Wednesday'</span><span class="p">,</span> <span class="s">'Thursday'</span><span class="p">,</span>
+                     <span class="s">'Friday'</span><span class="p">,</span> <span class="s">'Saturday'</span><span class="p">,</span> <span class="s">'Sunday'</span><span class="p">]</span>
+</pre></div>
+
+
+</li>
+</ul>
+<p>Examples:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">2018</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">day_of_week</span><span class="p">()</span>
+<span class="s">'Monday'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Date</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2100</span><span class="p">)</span><span class="o">.</span><span class="n">day_of_week</span><span class="p">()</span>
+<span class="s">'Friday'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Date</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1776</span><span class="p">)</span><span class="o">.</span><span class="n">day_of_week</span><span class="p">()</span>
+<span class="s">'Thursday'</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p><br></p>
+<h3 id="task-2-operator-overloading-for-the-date-class">Task 2: Operator Overloading for the Date Class</h3>
+<p><em>20 points; <strong>individual-only</strong></em></p>
+<p>Now that you have written a functional <code>Date</code> class, we will make its syntax just a little
+sweeter by implementing operator overloading. Operator overloading allows us to define
+(or redifine) standard operators to have an appropriate meaning for our custom-designed
+classes, thus simplifying the syntax for using this class.</p>
+<p>To get started, you open your file from <code>a7task1.py</code> and save it under the new name
+<code>a7task2.py</code>. You will add methods to the existing ode from Task 1, but should not
+change any of those methods in this file. </p>
+<ol>
+<li>
+<p>Write the methods <strong><code>__lt__(self, other)</code></strong> and <strong><code>__gt__(self, other)</code></strong>. 
+    These methods overload the comparison operators <code>&lt;</code> and <code>&gt;</code>. </p>
+<ul>
+<li>
+<p><strong><code>__lt__(self, other)</code></strong> should returns <code>True</code> if <code>self</code> comes before <code>other</code>, and 
+<code>False</code> otherwise. </p>
+</li>
+<li>
+<p><strong><code>__gt__(self, other)</code></strong> should returns <code>True</code> if <code>self</code> comes after <code>other</code>, and 
+<code>False</code> otherwise. </p>
+</li>
+</ul>
+<p>Suggested Approach: You should re-use your <strong><code>is_before(self, other)</code></strong> and
+<strong><code>is_after(self, other)</code></strong> methods, calling them from inside
+<strong><code>__lt__(self, other)</code></strong> and <strong><code>__gt__(self, other)</code></strong> respectively.
+The result is this simplified syntax for the client:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">2018</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">&lt;</span> <span class="n">d2</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span> <span class="o">&lt;</span> <span class="n">d1</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">&gt;</span> <span class="n">d2</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span> <span class="o">&gt;</span> <span class="n">d1</span>
+<span class="bp">False</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Write the methods <strong><code>__add__(self, n)</code></strong> and <strong><code>__sub__(self, n)</code></strong>. 
+    These methods overload the arithmetic <code>+</code> and <code>-</code> operators. In each case, your method
+    should create a <strong>copy</strong> of the <code>Date</code> object, adjust its date by <code>n</code> days, and return
+    the reference to the other object (i.e., the copy). Notice that the object on which
+    this method is called must <strong>not</strong> change due to the addition of <code>n</code> days.</p>
+<p>The result is this simplified syntax for the client:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">+</span> <span class="mi">181</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span>
+<span class="mi">10</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2017</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d2</span>
+<span class="mo">04</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2018</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d3</span> <span class="o">=</span> <span class="n">d2</span> <span class="o">-</span> <span class="mi">181</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d3</span>
+<span class="mi">10</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2017</span>
+</pre></div>
+
+
+<p>However, note that you should <strong>only</strong> allow the use of the <code>+</code> or <code>-</code> operators
+for adding/subtracting an integer number of days. Check for this using <code>if/else</code> logic, 
+and provide an error message (but no asserting) when the operator is used incorrectly.</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; d1 + d2
+Operator + is only defined for Date and int.
+</pre></div>
+
+
+</li>
+<li>
+<p>Write the methods <strong><code>__iadd__(self, n)</code></strong> and <strong><code>__isub__(self, n)</code></strong>. 
+    These methods overload the arithmetic <code>+=</code> and <code>-=</code> operators. In these methods,
+    you should in fact change the underlying date in the object, and then return the
+    reference to this object (i.e., <code>self</code>).</p>
+<p>The result is this simplified syntax for the client:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2017</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">+=</span> <span class="mi">181</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span>
+<span class="mo">04</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2018</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span> <span class="o">-=</span> <span class="mi">181</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d1</span>
+<span class="mi">10</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2017</span>
+</pre></div>
+
+
+<p>Again, note that you should <strong>only</strong> allow the use of the <code>+=</code> or <code>-=</code> operators
+for adding/subtracting an integer number of days. Check for this using <code>if/else</code> logic, 
+and provide an error message (but no asserting) when the operator is used incorrectly.</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; d = Date(1,1,2017)
+&gt;&gt;&gt; d += 1
+&gt;&gt;&gt; d
+01/02/2017
+&gt;&gt;&gt; d += 1.2
+Operator += is only defined for Date and int.
+</pre></div>
+
+
+</li>
+</ol>
+<p><br></p>
+<h3 id="task-3-some-date-clients">Task 3: Some <code>Date</code> clients</h3>
+<p><em>20 points; <strong>individual-only</strong></em></p>
+<p>Now that you have written a functional <code>Date</code> class, we will put it to use!
+Remember that the <code>Date</code> class is only a blueprint, or template, for how
+<code>Date</code> objects should behave. We can now create <code>Date</code> objects according to
+that template and use them in <em>client</em> code.</p>
+<p><strong>Getting started</strong><br>
+To start, open a new file in IDLE and save it as <code>a7task2.py</code>. 
+Put all of the code that you write for this problem in this file. 
+<strong>Don’t forget to include appropriate comments at the top of the file, and a docstring for
+your function.</strong></p>
+<p><strong>IMPORTANT:</strong> Since your clients will need to construct <code>Date</code> objects, 
+you need to import the <code>Date</code> class. Therefore, make sure that <code>a7task1.py</code> 
+is in the same directory as <code>a7task2.py</code>, and include the following 
+statement at the top of <code>a7task2.py</code>:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">a7task1</span> <span class="kn">import</span> <span class="n">Date</span>
+</pre></div>
+
+
+<p><strong>Your tasks</strong>  </p>
+<ol>
+<li>
+<p>Most standard options expire on the <em>third Friday</em> of the month. Write a function called 
+    <code>options_expiration_days(year)</code> that returns a list of all of the <code>Date</code>s on which
+    options expire during a calendar year.</p>
+<p>Example output:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">options_expiration_days</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
+<span class="p">[</span><span class="mo">01</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">02</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">03</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">04</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">05</span><span class="o">/</span><span class="mi">19</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">06</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">07</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">08</span><span class="o">/</span><span class="mi">18</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">09</span><span class="o">/</span><span class="mi">15</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">10</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">11</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="o">/</span><span class="mi">15</span><span class="o">/</span><span class="mi">2017</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">options_expiration_days</span><span class="p">(</span><span class="mi">2018</span><span class="p">)</span>
+<span class="p">[</span><span class="mo">01</span><span class="o">/</span><span class="mi">19</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">02</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">03</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">04</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">05</span><span class="o">/</span><span class="mi">18</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">06</span><span class="o">/</span><span class="mi">15</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">07</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">08</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">09</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">10</span><span class="o">/</span><span class="mi">19</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">11</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="o">/</span><span class="mi">21</span><span class="o">/</span><span class="mi">2018</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Notes/Hints:</p>
+<ul>
+<li>
+<p>We know that every month has a third Friday, and we know the earliest date it 
+  can occur is the 15th of the month. Use one or more repetition constructs to find 
+  the correct date.</p>
+</li>
+<li>
+<p>Your function should use an accumulator pattern to build a list of Date objects, 
+  and return that list.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The US stock market and options exchanges are closed on the following holidays each year:</p>
+<ul>
+<li>New Year’s Day (January 1st, but observed on January 2nd if January 1st is a Sunday)</li>
+<li>Martin Luther King Day (the third Monday in January)</li>
+<li>President’s Day (the third Monday in February)</li>
+<li>Memorial Day (the last Monday in May)</li>
+<li>Independence Day (July 4th, observed on July 5th if July 4th is a Sunday)</li>
+<li>Labor Day (the first Monday in September)</li>
+<li>Thanksgiving Day (the fourth Thursday in November)</li>
+<li>Christmas Day (the 25th of December, observed on December 26th if the 25th is a Sunday) </li>
+<li>(The markets are also closed on Good Friday, but its date depends on the 
+ Lunar calendar and not the Gregorian Calendar, so we will skip it for now.)</li>
+</ul>
+<p>Write a function <code>market_holidays(year)</code> that will <em>returns</em> a list of the <code>Date</code>s of
+all market holidays for a given year. In addition, the function should print out each 
+holiday as it generates it.</p>
+<p>Example output:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">market_holidays</span><span class="p">(</span><span class="mi">2017</span><span class="p">)</span>
+<span class="n">New</span> <span class="n">Year</span><span class="s">'s Day is observed on Monday 01/02/2017</span>
+<span class="n">Martin</span> <span class="n">Luther</span> <span class="n">King</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Monday</span> <span class="mo">01</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2017</span>
+<span class="n">President</span><span class="s">'s Day is observed on Monday 02/20/2017</span>
+<span class="n">Memorial</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Monday</span> <span class="mo">05</span><span class="o">/</span><span class="mi">29</span><span class="o">/</span><span class="mi">2017</span>
+<span class="n">Independence</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Tuesday</span> <span class="mo">07</span><span class="o">/</span><span class="mo">04</span><span class="o">/</span><span class="mi">2017</span>
+<span class="n">Labor</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="mi">09</span><span class="o">/</span><span class="mo">04</span><span class="o">/</span><span class="mi">2017</span>
+<span class="n">Thanksgiving</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Thursday</span> <span class="mi">11</span><span class="o">/</span><span class="mi">23</span><span class="o">/</span><span class="mi">2017</span>
+<span class="n">Christmas</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Monday</span> <span class="mi">12</span><span class="o">/</span><span class="mi">25</span><span class="o">/</span><span class="mi">2017</span>
+<span class="p">[</span><span class="mo">01</span><span class="o">/</span><span class="mo">02</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">01</span><span class="o">/</span><span class="mi">16</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">02</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">05</span><span class="o">/</span><span class="mi">29</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mo">07</span><span class="o">/</span><span class="mo">04</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">09</span><span class="o">/</span><span class="mo">04</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">11</span><span class="o">/</span><span class="mi">23</span><span class="o">/</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="o">/</span><span class="mi">25</span><span class="o">/</span><span class="mi">2017</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">market_holidays</span><span class="p">(</span><span class="mi">2018</span><span class="p">)</span>
+<span class="n">New</span> <span class="n">Year</span><span class="s">'s Day is observed on Monday 01/01/2018</span>
+<span class="n">Martin</span> <span class="n">Luther</span> <span class="n">King</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Monday</span> <span class="mo">01</span><span class="o">/</span><span class="mi">15</span><span class="o">/</span><span class="mi">2018</span>
+<span class="n">President</span><span class="s">'s Day is observed on Monday 02/19/2018</span>
+<span class="n">Memorial</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Monday</span> <span class="mo">05</span><span class="o">/</span><span class="mi">28</span><span class="o">/</span><span class="mi">2018</span>
+<span class="n">Independence</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Wednedsay</span> <span class="mo">07</span><span class="o">/</span><span class="mo">04</span><span class="o">/</span><span class="mi">2018</span>
+<span class="n">Labor</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="mi">09</span><span class="o">/</span><span class="mo">03</span><span class="o">/</span><span class="mi">2018</span>
+<span class="n">Thanksgiving</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Thursday</span> <span class="mi">11</span><span class="o">/</span><span class="mi">22</span><span class="o">/</span><span class="mi">2018</span>
+<span class="n">Christmas</span> <span class="n">Day</span> <span class="ow">is</span> <span class="n">observed</span> <span class="n">on</span> <span class="n">Tuesday</span> <span class="mi">12</span><span class="o">/</span><span class="mi">25</span><span class="o">/</span><span class="mi">2018</span>
+<span class="p">[</span><span class="mo">01</span><span class="o">/</span><span class="mo">01</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">01</span><span class="o">/</span><span class="mi">15</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">02</span><span class="o">/</span><span class="mi">19</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">05</span><span class="o">/</span><span class="mi">28</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mo">07</span><span class="o">/</span><span class="mo">04</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">09</span><span class="o">/</span><span class="mo">03</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">11</span><span class="o">/</span><span class="mi">22</span><span class="o">/</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="o">/</span><span class="mi">25</span><span class="o">/</span><span class="mi">2018</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Notes:</p>
+<ul>
+<li>
+<p>In your function, use multiple <code>Date</code> objects to represent each of the holidays,
+  and use the <code>Date</code> methods to find the correct day of week as needed.</p>
+</li>
+<li>
+<p>The sample output above includes the <em>print out</em> generated by the function, as well
+  as a list of <code>Date</code>s returned by the function.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="submitting-your-work">Submitting Your Work</h2>
+<p>Log into <a href="https://questromtools.bu.edu/">Questromtools</a> to submit your work. 
+Under the heading for Assignment 7, attach each of the required files to your submission. 
+You may resubmit multiple times, but only the last submission will be graded. </p>
+<p><br></p>
+</section>
+
+<footer>
+Last modified on October 20, 2017.
+</footer>
+
+</div>
+
+<div id="right" style="display: inherit;">
+<div class="toc">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#assignment-7" class="current">Assignment 7</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#preliminaries">Preliminaries</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#objective-and-overview">Objective and Overview</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#task-1-a-date-class">Task 1: A Date class</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#task-2-operator-overloading-for-the-date-class">Task 2: Operator Overloading for the Date Class</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#task-3-some-date-clients">Task 3: Some Date clients</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a7.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div></div>
+
+
+
+
+</body></html>

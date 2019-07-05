@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://cs-people.bu.edu/azs/mf703/assignments/a3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Assignment 3 — MF 703, Boston University</title>
+
+<meta name="description" content="Course website for MF 703, Boston University.">
+<link rel="stylesheet" href="./Assignment 3 — MF 703, Boston University_files/style.css">
+<!-- 
+<link rel="icon" type="image/x-icon" href="http://cs-people.bu.edu/azs/mf703img/favicon.ico"> 
+<link rel="mask-icon" href="http://cs-people.bu.edu/azs/mf703/img/111.svg" color="#cc0000">
+-->
+<script src="./Assignment 3 — MF 703, Boston University_files/respond.min.js.下载"></script>
+<script src="./Assignment 3 — MF 703, Boston University_files/html5shiv.js.下载"></script>
+<script src="./Assignment 3 — MF 703, Boston University_files/cs111.js.下载"></script>
+<meta name="viewport" content="width=device-width, user-scalable=yes">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+</head>
+
+<body onload="setup();">
+
+<div id="left">
+<a id="header" href="http://cs-people.bu.edu/azs/mf703/">
+MF 703
+</a>
+<div id="subheader">
+Fall 2017
+</div>
+
+<nav>
+<ul>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/index.html">Home</a></li>
+    <li><a href="https://questromtools.bu.edu/" target="_top">Questrom Tools</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/files/syllabus.pdf">Syllabus</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/staff.html">Staff</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/assignments/">Assignments</a></li>
+    <li><a href="https://piazza.com/class/j7akiyy9xs84n3" target="_blank">Piazza Discussion</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/resources.html">Resources</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">Collaboration</a></li>
+<!--
+    <li><a href="http://cs-people.bu.edu/azs/mf703/policies.html">Policies</a></li>
+-->
+</ul>
+<ul class="external">
+    <li><a href="http://pythontutor.com/visualize.html#py=3" target="_blank">Python Tutor</a></li>
+<!--    <li><a href="http://cs-people.bu.edu/azs/mf703/apollo/" target="_blank">Apollo</a></li> -->
+</ul>
+</nav>
+
+</div><!-- end #left -->
+
+<div id="middle">
+<section class="main">
+<h1 id="assignment-3">Assignment 3</h1>
+<div class="toc" style="display: none;">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#assignment-3">Assignment 3</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#preliminaries">Preliminaries</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#task-1-descriptive-statistics">Task 1: Descriptive Statistics</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#task-2-stock-returns-and-statistics">Task 2: Stock Returns and Statistics</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#preliminaries_1">Preliminaries</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><em>due by <font color="blue"><strong>9:00 p.m.</strong></font> on Sunday, September 24th, 2017</em></p>
+<p>Overview</p>
+<hr>
+<p>The objective of this assignment is to practice working with lists, definite loops, the 
+accumulator pattern, and file processing.   </p>
+<p>In this assignment, you will write several functions to process a list of numbers and 
+generate the following descriptive statistics: mean, variance, standard deviation, 
+covariance, correlation, and simple regression. 
+Next, you will write a program to process a data file containing stock price information, 
+calculate stock returns, and generate descriptive statistics about the stocks’ historical 
+rates of return. Finally, you will create a variance-covariance matrix of the stocks’ returns.</p>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>In your work on this assignment, make sure to abide by the
+<a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">collaboration policies</a> of the course.  </p>
+<p>If you have questions while working on this assignment, please post them on <a href="http://cs-people.bu.edu/azs/mf703/assignments/piazza">Piazza!</a>
+This is the best way to get a quick response from your classmates and the course staff. </p>
+<div class="admonition note">
+<p class="admonition-title">Important Notes</p>
+<ul>
+<li>
+<p>You may NOT use any functions or tools from the python <code>stats</code> library, <code>pandas</code>,
+    or similar pre-existing toolkits. The goal of this assignment is for you to 
+    practice writing these functions yourself! </p>
+</li>
+<li>
+<p>You may use other built-in python functions, including <code>sum</code> and <code>len</code>, and <code>list</code>s.</p>
+</li>
+<li>
+<p>Unless otherwise specified, you *<em>must use a definite loop with the accumulator</em> to
+    solve each of these problems.</p>
+</li>
+</ul>
+</div>
+<h3 id="task-1-descriptive-statistics">Task 1: Descriptive Statistics</h3>
+<p><em>50 points; <strong>individual-only</strong></em></p>
+<p>Do this task in a file called <code>a3_task1.py</code>.</p>
+<ol>
+<li>
+<p>Write the function <code>mean(values)</code>, that takes as a parameter a list of numbers, and 
+    calculates and returns the mean of those values. The mean is defined as:</p>
+<p><img src="./Assignment 3 — MF 703, Boston University_files/mean.jpg"></p>
+<p>For example: </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="mf">4.8</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Write the function <code>variance(values)</code>, that takes as a parameter a list of numbers, 
+    and calculates and returns the population variance of the values in that list. The 
+    population variance is defined as:</p>
+<p><img src="./Assignment 3 — MF 703, Boston University_files/variance.jpg"></p>
+<p>For example: </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">variance</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="mf">2.16</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>Your function must use a definite loop and the accumulator pattern to calculate 
+    the sum of squared deviations from the mean.</li>
+<li>Re-use your code! You should call your existing <code>mean</code> function from within your 
+    <code>variance</code> function, and store the result in a local variable.</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>stdev(values)</code>, that takes as a parameter a list of numbers, and 
+    calculates and returns the population standard deviation of the values in that list. 
+    The population standard deviation is the square-root of the population variance.</p>
+<p>For example: </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">stdev</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="mf">1.469693845669907</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>Re-use your code! You should call your existing <code>variance</code> function from 
+    within <code>stdev</code>. This function does not require the accumulator pattern.</li>
+</ul>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">These notes apply to problems 4 through 7.</p>
+<ul>
+<li>The covariance, correlation, r-squared, and regression between two data sets 
+    requires that both data sets be of the same length. Use an assert statement 
+    to test for this condition and print out an error message if the lengths of the<br>
+    two lists are not the same.</li>
+</ul>
+</div>
+<ol start="4">
+<li>
+<p>Write the function <code>covariance(x,y)</code> that takes as parameters two lists of values, 
+    and calculates and returns the population covariance for those two lists. 
+    The population covariance is defined as:</p>
+<p><img src="./Assignment 3 — MF 703, Boston University_files/covariance.jpg"></p>
+<p>For example: </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">covariance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="mf">3.8</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Write the function <code>correlation(x,y)</code> that takes as parameters two lists of values,
+    and calculates and returns the correlation coefficient between these data series. 
+    The correlation coefficient is defined as:</p>
+<p><img src="./Assignment 3 — MF 703, Boston University_files/correlation.jpg"></p>
+<p>For example: </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">correlation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="mf">0.9915217942181532</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">correlation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+<span class="o">-</span><span class="mf">0.9999999999999998</span>
+</pre></div>
+
+
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note about Representational Error</p><p>There is a known <em>representational error</em> when working with <em>binary floating-point numbers</em>. 
+Thus, we will sometimes encounter a result that is arbitrarily close to, but not 
+exactly the same as we expect to see, such as the value of <code>-0.9999999999999998</code> above.
+We will interpret this value as equal to <code>-1</code>, and we will discuss the idea of an
+acceptable margin of error in next week’s assignment.</p>
+<p></p>
+</div>
+<ol start="6">
+<li>
+<p>Write the function <code>rsq(x,y)</code> that takes as parameters two lists of values, and 
+    calculates and returns the <em>square</em> of the correlation between those two data series, 
+    which is a measure of the goodness of fit measure to explain variation in <code>y</code> as a 
+    function of variation of <code>x</code>. </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">rsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="mf">0.9831154684095857</span>
+</pre></div>
+
+
+<p>Additional Example: we expect no correlation and very low r-square between randomly 
+selected data values. This test uses two lists of random numbers. 
+Notice the very low r-squared.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">random</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+<span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+<span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">correlation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="mf">0.12880978865406006</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">rsq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="mf">0.016591961653103622</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Write the function <code>simple_regression(x,y)</code> that takes as parameters two lists of 
+    values, and calculates and returns the regression coefficients between these data 
+    series. The function should return a <code>list</code> containing two values: the intercept 
+    and regression coefficients, α and β.</p>
+<p>The regression coefficient and intercept are defined as:</p>
+<p><img src="./Assignment 3 — MF 703, Boston University_files/simple_regression.jpg"></p>
+<p>For example: </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">simple_regression</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="p">(</span><span class="o">-</span><span class="mf">0.44444444444444287</span><span class="p">,</span> <span class="mf">1.759259259259259</span><span class="p">)</span>
+</pre></div>
+
+
+</li>
+</ol>
+<p><br></p>
+<h3 id="task-2-stock-returns-and-statistics">Task 2: Stock Returns and Statistics</h3>
+<p><em>50 points; <strong>individual-only</strong></em></p>
+<h2 id="preliminaries_1">Preliminaries</h2>
+<div class="admonition note">
+<p class="admonition-title">Obtaining Stock Price Data</p>
+<p>You will download stock price data files to use in your project. 
+There will be a demonstration of how to obtain these files from <a href="http://finance.yahoo.com/">Yahoo Finance</a>
+during class on Tuesday 9/19.</p>
+<ul>
+<li>
+<p>You should download 10 years of daily price data for at least 3 stocks. 
+    You may choose any stocks that you like, provided they have at least 10 years of data. 
+    Here are some recommendations: AAPL, BAC, GOOG, HD, KO, MMM, MSFT, PM, XOM.</p>
+</li>
+<li>
+<p>You should also download data for the stock market as a whole. I recommend that you
+    download data for VTSMX – the Vanguard Total Stock Market Index mutual fund, which
+    tracks the performance of the Wilshire 5000 Index.</p>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Video Example: Processing a CSV data file.</p>
+<p>Here is a <a href="https://www.youtube.com/watch?v=6F_-5deINcA">video example</a> that demonstrates how to read a file in Python, and how
+to process a .CSV data file using a <code>for loop</code> and <code>list</code> indexing. </p>
+</div>
+<p>Do this task in a file called <code>a3_task2.py</code>.</p>
+<ol>
+<li>
+<p>Write a function <code>calc_returns(prices)</code>. This function will process a list of 
+    stock prices and calculate the periodic returns. The function should assume that the 
+    oldest price is in <code>prices[0]</code> and latest price in <code>prices[-1]</code>. The function should 
+    use a loop and accumulator pattern to accumulate a list of returns for periods 
+    1 to n – there is no return for period 0. </p>
+<p>The periodic rate of return is calculated as the rate of change in price from the 
+previous period, i.e.,</p>
+<p><img src="./Assignment 3 — MF 703, Boston University_files/stock_return.jpg"></p>
+<p>For example: </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">112</span><span class="p">,</span><span class="mi">115</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">returns</span> <span class="o">=</span> <span class="n">calc_returns</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+<span class="p">[</span><span class="mf">0.10000000000000009</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.045454545454545414</span><span class="p">,</span> <span class="mf">0.06666666666666665</span><span class="p">,</span> <span class="mf">0.02678571428571419</span><span class="p">]</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>For N stock prices, you will generate a list of N-1 periodic returns.</p>
+</li>
+<li>
+<p>The function <code>calc_prices</code> should not print any output, but rather creates and 
+    returns a <code>list</code> of periodic rates of return. </p>
+</li>
+<li>
+<p>When computing with binary floating point numbers, there is a small representational 
+    error which might result in an unexpected value in the insignificant digits 
+    (e.g., <code>(110 - 100) / 100</code> gave a result of <code>0.10000000000000009</code>.)
+    Do not be alarmed by this small error!</p>
+</li>
+<li>
+<p>The values in the list of returns will be unformatted floating-point numbers; 
+    we’ll do the formatting part later in a separate function.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write a function <code>process_stock_prices_csv(filename)</code>. This function will process a 
+    data file containing stock price data, and return a list of stock prices.</p>
+<p>The format of the file is that each line is a discrete record. The lines in this file 
+are in CSV (“Comma Separated Values”) format. Here is an sample CSV file containing 
+stock prices:</p>
+<div class="codehilite"><pre>    Date,Open,High,Low,Close,Adj Close,Volume
+    2012-01-10,60.844284,60.857143,60.214287,60.462856,54.395779,64549100
+    2012-01-11,60.382858,60.407143,59.901428,60.364285,54.307095,53771200
+    2012-01-12,60.325714,60.414288,59.821430,60.198570,54.158012,53146800
+    2012-01-13,59.957142,60.064285,59.808571,59.972858,53.954945,56505400
+    2012-01-17,60.599998,60.855713,60.422855,60.671429,54.583416,60724300
+</pre></div>
+
+
+<p>The first row contains header information, which we will discard. Each line after the 
+first line is a record for one date. For this assignment, we only care about the 
+next-to-last value (“Adj Close”), which is the adjusted close price on that date. </p>
+<p>Your function should return the stock prices as a <code>list</code>. Here is an algorithm to 
+process this CSV file:</p>
+<ul>
+<li>Create an empty list to hold the prices (i.e., set a list as an accumulator variable).</li>
+<li>Open the file for reading using the built-in function <code>open(filename)</code>. </li>
+<li>Read and discard the first line (i.e., the headers). </li>
+<li>Use a for loop to process the rest of the file. For every remaining line in the file, 
+  parse that line to obtain the last element, which is the price. Convert this price 
+  into a floating-point number (<code>float</code>), and append it to the list.</li>
+</ul>
+<p>Here is an example of client code to run this file. Note that the filename will depend 
+on where you save the file on <em>your</em> computer. This filename works for <em>my computer only!</em></p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">filename</span> <span class="o">=</span> <span class="s">'/Users/azs/Downloads/AAPL.csv'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">prices</span> <span class="o">=</span> <span class="n">process_stock_prices_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># prices is now a list containing the adjusted closing prices for each day.</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a function <code>stock_report</code> as a client program to process stock prices and 
+    display descriptive statistics about the stocks. This program will process several 
+    CSV files to obtain stock prices (for the same time periods) for 5 different stocks, 
+    and produce several outputs. </p>
+<p>Your client program should do the following tasks for each stock:</p>
+<ul>
+<li>Use your function <code>process_stock_prices_csv</code> to read the stock price data from 
+    the file, and obtain a <code>list</code> containing only the stock prices (no other fields).</li>
+<li>Calculate the stock returns by calling your <code>calc_returns(prices)</code> on the <code>list</code> 
+    of the stock’s prices to obtain a list of returns.</li>
+<li>
+<p>Find the mean and standard deviation of returns, and print them out in a nicely 
+    formatted table. You should re-use your functions from Task 1. It would be helpful
+    to import your files, using this line:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">a3task1</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+
+
+<p>which will give you access to all of your statistical functions from Task 1.</p>
+</li>
+</ul>
+<p>We want to compare each stock to the stock market index (VTSMX), to see how this 
+stock might affect a portfolio’s expected return. (If you are not familiar with it,
+here is a brief reading about the <a href="https://en.wikipedia.org/wiki/Capital_asset_pricing_model">Capitabl Asset Pricing Model</a>). </p>
+<p>You will use your functions from Task 1 to find the covariance with the market return 
+(VTSMX), the correlation coefficient, the r-square statistic, and the regression 
+coefficients (beta describes this stocks’ market risk, i.e., how much this stock’s 
+return varies in relation to the market as a whole). </p>
+<p>Finally, your function should create a report that is well-formatted. 
+You may decide what kind of formatting looks good to you, but here is a sample:</p>
+<div class="codehilite"><pre>    Descriptive statistics for annual stock returns:
+    Symbol:       GOOG         KO         SO      VTSMX
+    Mean:       0.1679     0.1158     0.0902     0.0849
+    StDev:      0.2988     0.1567     0.1201     0.2042
+    Covar:      0.0462     0.0252     0.0055
+    Correl:     0.7568     0.7890     0.2258
+    R-SQ:       0.5728     0.6225     0.0510
+    Beta:       0.5171     1.0278     0.3840
+    Alpha:     -0.0019    -0.0341     0.0503
+</pre></div>
+
+
+<p><strong><em>Hints/Notes:</em></strong> </p>
+<ul>
+<li>
+<p>This sample uses annual return data, and you should use your daily return data. 
+    Your results will differ from the sample output! This is expected. 
+    The daily mean return will be approximately 1/250 of the annual return, and the 
+    daily standard deviation will be approximately 1/sqrt(250) of the annual standard deviation.   </p>
+</li>
+<li>
+<p>Before trying to build this table, call each of the statistical functions
+    and save the result in a variable. Print out the variables to ensure you know
+    each function works.  </p>
+</li>
+<li>
+<p>Build the table one line at a time. This sample uses number formatting to limit
+    the number of digits after the decimal point.</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="submitting-your-work">Submitting Your Work</h2>
+<p>Log into <a href="https://questromtools.bu.edu/portal/site/FALL16MF703Z1Z2">Questromtools</a> to submit your work. 
+Under the heading for Assignment 3, attach each of the required files to your submission. </p>
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>You must upload your <code>.csv</code> data files as well as your <code>.py</code> files.</li>
+<li>You may resubmit multiple times, but only the last submission will be graded. </li>
+</ul>
+<p><br></p>
+</section>
+
+<footer>
+Last modified on September 20, 2017.
+</footer>
+
+</div>
+
+<div id="right" style="display: inherit;">
+<div class="toc">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#assignment-3" class="current">Assignment 3</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#preliminaries">Preliminaries</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#task-1-descriptive-statistics">Task 1: Descriptive Statistics</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#task-2-stock-returns-and-statistics">Task 2: Stock Returns and Statistics</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#preliminaries_1">Preliminaries</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a3.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div></div>
+
+
+
+
+</body></html>

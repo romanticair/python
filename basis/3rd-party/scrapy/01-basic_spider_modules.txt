@@ -1,0 +1,23 @@
+1.爬虫文件都要写在spiders目录下
+2.爬虫文件
+
+BasicSpider爬虫类
+parse()方法:
+如果没指定回调函数,则是处理爬虫爬行的网页响应(response)的默认方法,
+可对响应进行处理并返回处理后的数据,也负责对链接的跟进。
+
+start_requests()方法:
+默认读取start_urls属性中的url，为每个网址生成一个Request请求对象，
+并返回可迭代对象(yield返回)
+
+make_requests_from_url(url)方法:
+该方法被start_requests调用,该方法负责实现生成Request请求对象
+
+closed(reason)方法:
+关闭Spider时，该方法会被调用
+
+log(message[, level, component])方法:
+用该方法可实现在Spider中添加log
+
+
+请参考初建项目L:\MyPythonProgr\SomePythonProjects\my_first_scrapy_proj\myfirstpjt\myfirstpjt

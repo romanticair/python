@@ -1,0 +1,52 @@
+/* 部门表 */
+mysql-> CREAT TABLE Department(
+	 -> dpt_id VARCHAR(4) PRIMARY KEY, 
+	 -> dpt_name VARCHAR(10),
+	 -> show_order INT AUTO_INCREMENT
+)AUTO_INCREMENT=1;
+
+
+/* 员工表 */
+mysql-> CREAT TABLE Clerk(
+	 -> clk_id VARCHAR(4) PRIMARY KEY UNIQUE NOT NULL,
+	 -> clk_name VARCHAR(20) NOT NULL,
+	 -> dpt_id VARCHAR(4),
+	 -> clk_gender ENUM('Female', 'Male'),
+	 -> show_order INT AUTO_INCREMENT,
+	 -> CONSTRAINT FK_dpt FOREIGN KEY(dpt_id) REFERENCE Department(dpt_id)
+)AUTO_INCREMENT=1;
+
+
+/* 工资明细表 */  /* 可动态创建 */
+mysql-> CREAT TABLE Detail_20170101(
+	 -> clk_id VARCHAR(4),
+	 -> CONSTRAINT FK_clk FOREIGN KEY(clk_id) REFERENCE Clerk(clk_id)
+);
+
+
+/* 工资总表 */
+mysql-> CREAT TABLE AllWages(
+	 -> allwages_id VARCHAR(4) PRIMARY KEY UNIQUE,
+	 -> maker_id VARCHAR(4),
+	 -> examiner_id VARCHAR(4) DEFAULT @maker_id,
+	 -> approver_id VARCHAR(4) DEFAULT @maker_id,
+	 -> issue_date DATE UNIQUE,
+	 -> archiving_status BOOL NOT NULL,
+	 -> WS_name CHARVAR(20) UNIQUE NOT NULL,
+	 -> CONSTRAINT (FK_clk, FK_clk, FK_clk) FOREIGN KEY(maker_id,examiner_id,approver_id)
+	 REFERENCE Clerk(clk_id, clk_id, clk_id) 
+);
+
+
+/* 工资项目及类别表 */
+mysql-> CREATE TABLE WageSources(
+	 -> pj_id VARCHAR(4) PRIMARY KEY UNIQUE,
+	 -> pj_name VARCHAR(20) NOT NULL UNIQUE,
+	 -> cls_id VARCHAR(2) NOT NULL,
+	 -> cls_name VARCHAR(20) NOT NULL,
+	 -> show_order INT AUTO_INCREMENT
+)AUTO_INCREMENT=1;
+
+
+
+/* ON DELETE CASCADE ON UPDATE CASCADE; */

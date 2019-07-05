@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://cs-people.bu.edu/azs/mf703/assignments/a1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Assignment 1 — MF 703, Boston University</title>
+
+<meta name="description" content="Course website for MF 703, Boston University.">
+<link rel="stylesheet" href="./Assignment 1 — MF 703, Boston University_files/style.css">
+<!-- 
+<link rel="icon" type="image/x-icon" href="http://cs-people.bu.edu/azs/mf703img/favicon.ico"> 
+<link rel="mask-icon" href="http://cs-people.bu.edu/azs/mf703/img/111.svg" color="#cc0000">
+-->
+<script src="./Assignment 1 — MF 703, Boston University_files/respond.min.js.下载"></script>
+<script src="./Assignment 1 — MF 703, Boston University_files/html5shiv.js.下载"></script>
+<script src="./Assignment 1 — MF 703, Boston University_files/cs111.js.下载"></script>
+<meta name="viewport" content="width=device-width, user-scalable=yes">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+</head>
+
+<body onload="setup();">
+
+<div id="left">
+<a id="header" href="http://cs-people.bu.edu/azs/mf703/">
+MF 703
+</a>
+<div id="subheader">
+Fall 2017
+</div>
+
+<nav>
+<ul>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/index.html">Home</a></li>
+    <li><a href="https://questromtools.bu.edu/" target="_top">Questrom Tools</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/files/syllabus.pdf">Syllabus</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/staff.html">Staff</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/assignments/">Assignments</a></li>
+    <li><a href="https://piazza.com/class/j7akiyy9xs84n3" target="_blank">Piazza Discussion</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/resources.html">Resources</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">Collaboration</a></li>
+<!--
+    <li><a href="http://cs-people.bu.edu/azs/mf703/policies.html">Policies</a></li>
+-->
+</ul>
+<ul class="external">
+    <li><a href="http://pythontutor.com/visualize.html#py=3" target="_blank">Python Tutor</a></li>
+<!--    <li><a href="http://cs-people.bu.edu/azs/mf703/apollo/" target="_blank">Apollo</a></li> -->
+</ul>
+</nav>
+
+</div><!-- end #left -->
+
+<div id="middle">
+<section class="main">
+<h1 id="assignment-1">Assignment 1</h1>
+<div class="toc" style="display: none;">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#assignment-1">Assignment 1</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#preliminaries">Preliminaries</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#task-1-indexing-and-slicing-puzzles">Task 1: Indexing and slicing puzzles</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#task-2-functions-with-numeric-inputs">Task 2: Functions with numeric inputs</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#task-3-tracing-program-execution">Task 3: Tracing program execution</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#task-4-functions-for-time-value-of-money-calculations">Task 4: Functions for time value of money calculations</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><em>due by <font color="blue"><strong>9:00 p.m.</strong></font> on Sunday, September 10, 2017</em></p>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>In your work on this assignment, make sure to abide by the
+<a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">collaboration policies</a> of the course.  </p>
+<p>If you have questions while working on this assignment, please post them on <a href="https://piazza.com/bu/fall2017/mf703">Piazza!</a>
+This is the best way to get a quick response from your classmates and the course staff. </p>
+<p>For each problem in this problem set, we will be writing or evaluating some Python code.
+You are encouraged to use the Spyder IDE which will be discuss/presented in class, 
+but you are welcome to use another IDE if you choose.</p>
+<hr>
+<h3 id="task-1-indexing-and-slicing-puzzles">Task 1: Indexing and slicing puzzles</h3>
+<p><em>30 points; <strong>individual-only</strong></em></p>
+<p>This problem will give you practice with indexing and slicing. 
+Begin by downloading this file: <a href="http://cs-people.bu.edu/azs/mf703/files/a1/a1task1.py"><code>a1task1.py</code></a>.
+Open it in Spyder, as discussed in class.</p>
+<p><strong>List puzzles</strong><br>
+The first half of the problem focuses on lists. 
+In particular, you will be constructing new lists from the following:</p>
+<div class="codehilite"><pre>pi = [3, 1, 4, 1, 5, 9]
+e = [2, 7, 1]
+</pre></div>
+
+
+<p>We’ve given you these lines in <code>a1task1.py</code>. In addition, we’ve provided
+the answer to the first puzzle (puzzle 0). You should add in the 
+answers for the remaining puzzles, <em>following the format that we’ve 
+given you for puzzle 0</em>. </p>
+<p><em>The expressions that you construct must <strong>only</strong> use
+<code>pi</code> and <code>e</code> and the following list operations:</em></p>
+<ul>
+<li>list indexing (e.g., <code>pi[0]</code>)</li>
+<li>list slicing (e.g., <code>e[1:]</code> or <code>pi[2:4]</code>)</li>
+<li>skip-slicing (e.g., <code>pi[6:4:-1]</code>)</li>
+<li>list concatenation (e.g., <code>pi[:1] + e[1:]</code>. Note that you may
+  <em>not</em> use <code>+</code> to add values numerically.)</li>
+<li>list construction (e.g., <code>[e[2]]</code> or <code>[e[2], e[0]]</code>)</li>
+</ul>
+<p>We encourage you to try using as few operations as possible, to keep
+your answers elegant and efficient. However, you will get full credit
+for <em>any</em> expression that follows the rules above and produces the
+correct result.</p>
+<p>Before getting started, you should run <code>a1task1.py</code> in your IDE (in Spyder: using
+<em>F5</em>). This will make the lists <code>pi</code> and <code>e</code> available to you in the
+Python Shell. </p>
+<p>Here are the puzzles:</p>
+<ol start="0">
+<li>
+<p>Use <code>pi</code> and/or <code>e</code> to create the list <code>[2, 5, 9]</code>, and assign it to
+    the variable <code>answer0</code>. We’ve given you the code for this puzzle.</p>
+</li>
+<li>
+<p>Use <code>pi</code> and/or <code>e</code> to create the list <code>[2, 7]</code> and assign it to
+    the variable <code>answer1</code>. Your answer should follow the format that we’ve 
+    given you for problem 0. In other words, it should look like this:</p>
+<div class="codehilite"><pre># Puzzle 1:
+# Creating the list [2, 7] from pi and e
+answer1 = 
+print(answer1)
+</pre></div>
+
+
+<p>where you put the appropriate expression to the right of the assignment
+operator (<code>=</code>). <strong>Please leave a blank line between puzzles to make
+things more readable.</strong></p>
+</li>
+<li>
+<p>Use <code>pi</code> and/or <code>e</code> to create the list <code>[5, 4, 3]</code>, and assign it to
+    the variable <code>answer2</code>. Here again, make sure to follow the
+    correct format, and to leave a blank line between puzzles.</p>
+</li>
+<li>
+<p>Use <code>pi</code> and/or <code>e</code> to create the list <code>[3, 5, 7]</code>, and assign it to
+    the variable <code>answer3</code>. (<em>Optional challenge:</em> See if you can do this
+    with just three list operations!)</p>
+</li>
+<li>
+<p>Use <code>pi</code> and/or <code>e</code> to create the list <code>[1, 2, 3, 4, 5]</code>, and assign it to
+    the variable <code>answer4</code>. (<em>Optional challenge:</em> See if you can do this
+    with just three list operations!)</p>
+</li>
+</ol>
+<p><strong>String puzzles</strong><br>
+The second half of the problem focuses on strings. In particular, you
+will be working with the following strings:</p>
+<div class="codehilite"><pre>b = 'boston'
+u = 'university'
+t = 'terriers'
+</pre></div>
+
+
+<p>We’ve given you these lines in <code>a1task1.py</code>, along with the answer
+to the first string puzzle (puzzle 5). Run the file as needed so that
+the strings will be available for you to experiment with in IDLE.</p>
+<p><em>The expressions that you construct for the remaining puzzles must 
+<strong>only</strong> use the above strings and the following string operations:</em></p>
+<ul>
+<li>string indexing (e.g., <code>b[0]</code>)</li>
+<li>string slicing (e.g., <code>u[1:]</code> or <code>t[2:4]</code>)</li>
+<li>skip-slicing (e.g., <code>u[6:4:-1]</code>)</li>
+<li>string concatenation (e.g., <code>b + u</code>)</li>
+<li>string repetition (e.g., <code>5*b</code> or <code>3*u[-1]</code>)</li>
+</ul>
+<p>Here again, you will get full credit for <em>any</em> expression that 
+follows the rules above and produces the correct result, but
+we encourage you to try using as few operations as possible. </p>
+<p>Here are the puzzles:</p>
+<ol start="5">
+<li>
+<p>Use <code>b</code>, <code>u</code>, and/or <code>t</code> to create the string <code>'bossy'</code>, and assign it
+    to the variable <code>answer5</code>. We’ve given you the following code for 
+    this puzzle:</p>
+<div class="codehilite"><pre># Puzzle 5:
+# Creating the string 'bossy'
+answer5 = b[:3] + t[-1] + u[-1]
+print(answer5)
+</pre></div>
+
+
+<p>Note that our answer involves 5 operations: 2 uses of indexing, 1 slice,
+and 2 concatenations with <code>+</code>. (It’s actually possible to solve this
+puzzle using only 3 operations. Give it a try if you have time!)</p>
+</li>
+<li>
+<p>Use <code>b</code>, <code>u</code>, and/or <code>t</code> to create the string <code>'universe'</code>, and assign it
+    to the variable <code>answer6</code>. (Our best answer uses 3 ops.) Here again, 
+    make sure to follow the correct format, and to leave a blank line 
+    between puzzles.</p>
+</li>
+<li>
+<p>Use <code>b</code>, <code>u</code>, and/or <code>t</code> to create the string <code>'roster'</code>, and assign it
+    to the variable <code>answer7</code>. (Our best: 5 ops.)</p>
+</li>
+<li>
+<p>Use <code>b</code>, <code>u</code>, and/or <code>t</code> to create the string <code>'boisterous'</code>, and assign it
+    to the variable <code>answer8</code>. (Our best: 8 ops.)</p>
+</li>
+<li>
+<p>Use <code>b</code>, <code>u</code>, and/or <code>t</code> to create the string <code>'yesyesyes'</code>, and assign it
+    to the variable <code>answer9</code>. (Our best: 4 ops.)</p>
+</li>
+<li>
+<p>Use <code>b</code>, <code>u</code>, and/or <code>t</code> to create the string <code>'trist'</code>, and assign it
+    to the variable <code>answer10</code>. (Our best: 4 ops.)</p>
+</li>
+</ol>
+<p><strong><em>After finishing all of the puzzles, make sure to run your
+<code>a1task1.py</code> file to check that the correct outputs are printed.</em></strong></p>
+<p><br></p>
+<h3 id="task-2-functions-with-numeric-inputs">Task 2: Functions with numeric inputs</h3>
+<p><i>30 points; <font color="blue"><b>pair-optional</b></font></i></p><i><font color="blue"><b>
+</b></font></i><p><i><font color="blue"><b>This is the only problem of the assignment
+that you may complete with a partner. See the <a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">rules for working with
+a partner on pair-optional problems</a> for
+details about how this type of collaboration must be
+structured.</b></font></i></p>
+<p>In this problem you will write a collection of simple functions that 
+operate on numeric inputs.</p>
+<p>Begin by downloading this file: <a href="http://cs-people.bu.edu/azs/mf703/files/a1/a1task2.py"><code>a1task2.py</code></a>.
+Open it in your IDE, following the procedure outlined in class.</p>
+<div class="admonition note">
+<p class="admonition-title">Important guidelines:</p>
+<ul>
+<li><strong>Your functions <em>must</em> have the exact names that we have specified,
+    or we won’t be able to test them.</strong> Note in particular that the
+    case of the letters matters (all of them should be lowercase), and that
+    you should use an underscore character (<code>_</code>) wherever we have specified
+    one (e.g., in <code>convert_from_inches</code>).</li>
+<li>If a function takes more than one input, you <strong><em>must</em></strong> keep the inputs
+    in the order that we have specified. </li>
+<li>Each of your functions should include a docstring that describes
+    <strong>what your function does</strong> and <strong>what its inputs are</strong>. See our
+    example function for a model.</li>
+<li>Make sure that your functions <strong><em>return</em></strong> the specified value, rather
+    than printing it. None of these functions should use a <code>print</code> 
+    statement.</li>
+<li><strong>You should <em>not</em> use any Python features that we have not
+    discussed in class or read about in the textbook.</strong></li>
+<li>Your functions do <em>not</em> need to handle bad inputs – inputs with
+    a type or value that doesn’t correspond to the description of
+    the inputs provided in the problem.</li>
+<li><strong><em>Test each function after you write it.</em></strong> Here are two ways to do so:<ul>
+<li>Run your <code>a1task2.py</code> file after you finish a given function. 
+    Doing so will bring you to the Shell, where you can call the 
+    function using different inputs and check to see that you obtain 
+    the correct outputs.</li>
+<li>Add test calls to the bottom of your <code>a1task2.py</code> file. These
+    will be called every time that you run the file, which will
+    save you from having to enter the tests yourself. We have
+    given you an example of one such test in the starter file.</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Here are the descriptions of the functions:</p>
+<ol start="0">
+<li>
+<p>(example) Write a function <code>opposite(x)</code> that takes a
+    number <code>x</code> as its input and <strong><em>returns</em></strong> the opposite of its input. 
+    We have given you this example function in the starter file.</p>
+</li>
+<li>
+<p>Write a function <code>cube(x)</code> that takes a number <code>x</code> as its input 
+    and <strong><em>returns</em></strong> the cube of its input (i.e., <code>x</code> raised to the power of
+    3). For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; cube(2)
+8
+&gt;&gt;&gt; print(cube(-5))
+-125
+</pre></div>
+
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure that your function <strong><em>returns</em></strong> the correct value
+rather than printing it. If your function is printing the
+return value, you will see the word <code>None</code> as part of the
+output for the second test above. If you are seeing <code>None</code> in your 
+output, you <strong><em>must</em></strong> fix your function so that it uses a <code>return</code> 
+statement rather than a <code>print</code> statement. This same warning
+applies to <strong><em>all</em></strong> of the functions that you will write for
+this assignment.</p>
+</div>
+<p><strong>Note:</strong> You should leave one or two blank lines between functions to 
+make things more readable, and make sure to include a docstring like 
+the one in our example function.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure that you use the correct amount of indentation. In
+particular, your docstrings should be indented by 4 spaces as shown
+in our code for <code>opposite</code>, so that they line up with the code 
+inside the function.</p>
+</div>
+</li>
+<li>
+<p>Write a function <code>slope(x1, y1, x2, y2)</code> that takes four numeric 
+    inputs that specify the coordinates of two points <code>(x1, y1)</code> and <code>(x2, y2)</code> 
+    in the Cartesian plane, and that <strong><em>returns</em></strong> the slope of the line
+    formed by those two points. Recall that slope is given
+    by the following formula:</p>
+<div class="codehilite"><pre>         y2 - y1
+slope = ---------
+         x2 - x1
+</pre></div>
+
+
+<p>Examples:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; slope(2, 3, 4, 7)     # line between (2,3) and (4,7)
+2.0
+&gt;&gt;&gt; slope(7, 2, 3, 4)     # line between (7,2) and (3,4)
+-0.5
+&gt;&gt;&gt; print(slope(2, 3, 5, 3))
+0.0
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Python, if you divide <code>0</code> by a negative number using the
+<code>/</code> operator, the result is <code>-0.0</code>. You don’t need to worry if your <code>slope</code> function returns <code>-0.0</code> for cases in which the slope is 0.</p>
+<p>Also, if you divide by 0, the program will crash. 
+You do not need to handle this case for this week’s assignment.</p>
+</div>
+</li>
+<li>
+<p>Write a function <code>make_change(cents)</code> that takes a nonnegative
+    integer <code>cents</code> that represents an amount of money in cents and 
+    <strong><em>returns</em></strong> a list of four integers in which that amount has been 
+    broken up into quarters, dimes, nickels, and pennies. Although there
+    are many ways to make change for a given number of cents, the
+    values returned by the function should minimize the total number of coins.
+    For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; make_change(347)         # 347 cents = 13 quarters, 2 dimes, 0 nickels, 2 pennies
+[13, 2, 0, 2]         
+&gt;&gt;&gt; print(make_change(84))   # 84 cents = 3 quarters, 0 dimes, 1 nickel, 4 pennies
+[3, 0, 1, 4]
+</pre></div>
+
+
+<p>Here’s the beginning of one possible template that you could use:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">make_change</span><span class="p">(</span><span class="n">cents</span><span class="p">):</span>
+    <span class="sd">""" put your docstring here</span>
+<span class="sd">    """</span>
+    <span class="n">quarters</span> <span class="o">=</span>                  <span class="c"># number of quarters</span>
+    <span class="n">cents</span> <span class="o">=</span>                     <span class="c"># leftover number of cents</span>
+    <span class="n">dimes</span> <span class="o">=</span>                     <span class="c"># number of dimes</span>
+    <span class="n">cents</span> <span class="o">=</span>                     <span class="c"># leftover number of cents</span>
+    <span class="c"># add more code here!</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">quarters</span><span class="p">,</span> <span class="n">dimes</span><span class="p">,</span> <span class="n">nickels</span><span class="p">,</span> <span class="n">pennies</span><span class="p">]</span>
+</pre></div>
+
+
+<p><em>Hint:</em> The integer division (<code>//</code>) and modulus (<code>%</code>) operators will come 
+in handy for this problem.</p>
+</li>
+</ol>
+<p><strong><em>Don’t forget to test your functions using the approaches mentioned
+   at the start of the problem.</em></strong></p>
+<p>You may also find it helpful to use the <a href="http://www.pythontutor.com/visualize.html#py=3">Python Tutor Visualizer</a> to
+trace through the execution of your functions – either to
+verify that they’re working as expected, or to determine why they’re
+not working! Paste your function definition into the Visualizer’s code box,
+and follow the definition with code that calls the function. Then click
+the <em>Visualize Execution</em> button below the code box to begin the visualization.
+For example, to test the <code>circle_area</code> function that we discussed in lecture,
+you could paste the following into the Visualizer:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">circle_area</span><span class="p">(</span><span class="n">diam</span><span class="p">):</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="n">diam</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="p">(</span><span class="n">radius</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">area</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="n">circle_area</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'test is'</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+</pre></div>
+
+
+<p><br></p>
+<h3 id="task-3-tracing-program-execution">Task 3: Tracing program execution</h3>
+<p><em>10 points; <strong>individual-only</strong></em></p>
+<p>Create a new text file called <code>a1task3.txt</code>, and save your work in this program into that file.</p>
+<ol>
+<li>
+<p>Consider the following Python program:</p>
+<div class="codehilite"><pre>x = 11
+y = 5
+x = x + 6
+z = y + x
+x = x // 7
+y = z % 3
+</pre></div>
+
+
+<p>Copy the table shown below into your text file for this problem, and
+fill in the missing values to illustrate how the values of the variables
+change over the course of the program. We’ve given you the values of
+the variables after the first two lines of code. You should complete
+the remaining rows of the table.</p>
+<div class="codehilite"><pre>line of code   | x  | y  | z  |
+--------------------------------
+x = 11         | 11 |    |    |
+y = 5          | 11 | 5  |    |   
+x = x + 6      |    |    |    |
+z = y + x      |    |    |    |
+x = x // 7     |    |    |    |
+y = z % 3      |    |    |    |
+</pre></div>
+
+
+</li>
+<li>
+<p>Consider the following Python program:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">2</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'foo'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">foo</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Trace the execution of this program. Your answer should include:</p>
+<ul>
+<li>
+<p>a table for the variables in the global scope that illustrates 
+    how their values change over time. You can begin it as follows:</p>
+<div class="codehilite"><pre>  a  |  b
+-----------
+  7  |  4
+</pre></div>
+
+
+</li>
+<li>
+<p>one or more separate tables that illustrate the changes in the local 
+    variables that belong to the function <code>foo</code>;
+you can either use a different table for 
+each function call, or one table for the function as a whole</p>
+</li>
+<li>a separate section that specifies the output of the program
+    (i.e., the values that are printed).</li>
+</ul>
+</li>
+</ol>
+<p><br></p>
+<h3 id="task-4-functions-for-time-value-of-money-calculations">Task 4: Functions for time value of money calculations</h3>
+<p><em>30 points; <strong>individual-only</strong></em></p>
+<p>Create a new Python code file and save it with the name <code>a1task4.py</code>. Remember to create a 
+ header comment at the top of your file with your name, email address, assignment number, 
+ and a brief description. Write all of the functions for this task in the file <code>a1task4.py</code>.</p>
+<ol>
+<li>Write a function <code>fv_lump_sum(r, n, pv)</code> to calculate and return the future value of a 
+ lump sump <code>pv</code> invested at the periodic rate <code>r</code> for <code>n</code> periods. 
+ Recall the equation for the future value of a lump sum:
+  <img alt="FVFORUMULA" src="./Assignment 1 — MF 703, Boston University_files/fv.jpg"></li>
+</ol>
+<p>Examples:</p>
+<div class="codehilite"><pre>    &gt;&gt;&gt; # $100 at 5% rate for 2 years
+    &gt;&gt;&gt; fv_lump_sum(0.05, 2, 100)
+    110.25
+    &gt;&gt;&gt; # $400 at 8% APR for 20 years (with monthly compounding)
+    &gt;&gt;&gt; fv_lump_sum(0.08/12, 20*12, 400)
+    1970.7211083238797
+</pre></div>
+
+
+<ol start="2">
+<li>Write a function <code>pv_lump_sum(r, n, fv)</code> to calculate and return the present value 
+  of a lump sum <code>fv</code> to be received in the future, discounted at the periodic rate <code>r</code> 
+  for <code>n</code> periods. 
+  Recall the equation for the present value of a lump sum:<br><br>
+<img alt="PVFORUMULA" src="./Assignment 1 — MF 703, Boston University_files/pv.jpg"></li>
+</ol>
+<p>Examples:</p>
+<div class="codehilite"><pre>    &gt;&gt;&gt; # $1000 to be received in 5 years at 6% per year
+    &gt;&gt;&gt; pv_lump_sum(0.06, 5, 1000)
+    747.2581728660571
+    &gt;&gt;&gt; # $500 received in 5 years, 6% APR, semi-ann. compounding
+    &gt;&gt;&gt; pv_lump_sum(0.06/2, 5*2, 500)
+    372.0469574483625
+</pre></div>
+
+
+<ol start="3">
+<li>
+<p>Write a function <code>fv_annuity(r, n, pmt)</code> to calculate and return the future value of 
+  an annuity of <code>pmt</code> to be received each period for <code>n</code> periods, invested at the periodic 
+  rate <code>r</code>. 
+  Recall the equation for the future value of an annuity is:
+  <img alt="FVANNUITY" src="./Assignment 1 — MF 703, Boston University_files/fv_annuity.jpg"></p>
+<p>Examples:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; # invest $100 per year for 5 years at 4% interest
+&gt;&gt;&gt; fv_annuity(0.04, 5, 100)
+541.6322560000003
+&gt;&gt;&gt; # invest $100 per month for 10 years at 9% APR
+&gt;&gt;&gt; fv_annuity(0.09/12, 10*12, 100)
+19351.42770833082
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a function <code>pv_annuity(r, n, pmt)</code> to calculate and return the present value 
+  of an annuity of <code>pmt</code> to be received each period for <code>n</code> periods, discounted at the 
+  rate <code>r</code>. 
+  Recall the equation for the present value of an annuity is:
+  <img alt="PVANNUITY" src="./Assignment 1 — MF 703, Boston University_files/pv_annuity.jpg"></p>
+<p>Examples: </p>
+<div class="codehilite"><pre>&gt;&gt;&gt; # pv of 30 payments of $250 per year, 5% interest
+&gt;&gt;&gt; pv_annuity(0.05, 30, 250)
+3843.1127567207104
+&gt;&gt;&gt; # pv of 60 payments of $471.75 per month, 0.9% APR
+&gt;&gt;&gt; pv_annuity(0.009/12,60, 471.75)
+27667.441596482677
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a function <code>pmt_amortizing(r, n, pv)</code> that calculates the amortizing loan 
+  payment for a present value of <code>pv</code> to be repaid at a periodic interest rate of <code>r</code> 
+  for <code>n</code> periods. 
+  Recall the equation for the amortizing loan payment is:</p>
+</li>
+</ol>
+<p><img alt="PMT" src="./Assignment 1 — MF 703, Boston University_files/pmt.jpg"></p>
+<div class="codehilite"><pre>Examples:
+
+    &gt;&gt;&gt; # loan payment for pv of $1,000 for 10 year at 5%
+    &gt;&gt;&gt; pmt_amortizing(0.05, 10, 1000)
+    129.5045749654566
+    &gt;&gt;&gt; # loan payment for pv of $27,667 for 60 months at 0.9% APR
+    &gt;&gt;&gt; pmt_amortizing(0.009/12, 60, 27667.44)
+    471.7499727788093
+</pre></div>
+
+
+<hr>
+<h2 id="submitting-your-work">Submitting Your Work</h2>
+<p>Log into <a href="https://questromtools.bu.edu/">Questromtools</a> to submit your work. 
+Under the heading for Assignment 1, attach each of the 4 required files to your submission. 
+You may resubmit multiple times, but only the last submission will be graded. </p>
+<p><br></p>
+</section>
+
+<footer>
+Last modified on September  7, 2017.
+</footer>
+
+</div>
+
+<div id="right" style="display: inherit;">
+<div class="toc">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#assignment-1" class="current">Assignment 1</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#preliminaries">Preliminaries</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#task-1-indexing-and-slicing-puzzles">Task 1: Indexing and slicing puzzles</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#task-2-functions-with-numeric-inputs">Task 2: Functions with numeric inputs</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#task-3-tracing-program-execution">Task 3: Tracing program execution</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#task-4-functions-for-time-value-of-money-calculations">Task 4: Functions for time value of money calculations</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a1.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div></div>
+
+
+
+
+</body></html>

@@ -1,0 +1,95 @@
+Task1: Tracing function calls
+1 - - * * * * * * * * * * * * * * * * * * * * * * * * - - 1
+def decide(a, b, c):
+    if a <= c:
+        if b > c:
+            a = a * 3
+        else:
+            b = b + 4
+    elif b >= c:
+        if b == a:
+            c = c + 2
+        else:
+            a = a + 3
+    b = b * 5
+    print('decide', a, b, c)
+    return b
+
+a = 1
+b = 3
+c = 2
+decide(a, b, c)
+print(a, b, c)
+c = decide(b, a, a)
+print(a, b, c)
+
+global variables
+- - -- - - - -
+a | b | c
+1 | 3 | 2
+1 | 3 | 5
+
+local variables ones belong to decide()
+- - -- - - - --
+a | b | c
+3 | 15| 2
+6 | 5 | 1
+
+(output)printed by programme
+- - -- - - - -
+3 15  2
+1  3  2
+6  5  1
+1  3  5
+-- - - - - -- -
+
+1 - - * * * * * * * * * * * * * * * * * * * * * * * * - - 1
+
+2 - - * * * * * * * * * * * * * * * * * * * * * * * * - - 2
+def foo(a):
+    b = bar(a) + bar(a - 2)
+    print('foo:', a, b)
+    return b
+
+def bar(b):
+    a = b * 2
+    print('bar:', a, b)
+    return a
+
+a = 3
+b = 2
+print(a, b)
+bar(b)
+print(a, b)
+a = foo(a)
+print(a, b)
+
+global variables(ones that belong to the global scope)
+a | b
+- - - -
+3   2
+8   2
+
+bar's local variables
+a | b
+- - - -
+4   2
+6   3
+2   1
+
+foo's local variables
+a | b
+- - - -
+3   8
+
+output(the lines printed by the program)
+- - - -
+3  2
+4  2
+3  2
+6  3
+2  1
+3  8
+8  2
+
+2 - - * * * * * * * * * * * * * * * * * * * * * * * * - - 2

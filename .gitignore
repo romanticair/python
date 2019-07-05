@@ -1,0 +1,12 @@
+.DS_Store
+
+# local env files
+*.env.*
+
+# Log files
+*.log*
+
+# Editor directories and files
+__pycache__/
+.idea
+.pyc

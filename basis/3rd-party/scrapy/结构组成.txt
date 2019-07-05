@@ -1,0 +1,7 @@
+1) Scrapy引擎(Scrapy Engine)
+2) 调度器(Sheduler)
+3) 下载器(Downloader)
+4) 下载中间件(DownloaderMiddlewares)
+5) 蜘蛛(可能存在多个Spiders爬虫文件)
+6) 爬虫中间件(SpiderMiddlewares)
+7) 实体管道(Item Pipeline)

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://cs-people.bu.edu/azs/mf703/assignments/a2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Assignment 2 — MF 703, Boston University</title>
+
+<meta name="description" content="Course website for MF 703, Boston University.">
+<link rel="stylesheet" href="./Assignment 2 — MF 703, Boston University_files/style.css">
+<!-- 
+<link rel="icon" type="image/x-icon" href="http://cs-people.bu.edu/azs/mf703img/favicon.ico"> 
+<link rel="mask-icon" href="http://cs-people.bu.edu/azs/mf703/img/111.svg" color="#cc0000">
+-->
+<script src="./Assignment 2 — MF 703, Boston University_files/respond.min.js.下载"></script>
+<script src="./Assignment 2 — MF 703, Boston University_files/html5shiv.js.下载"></script>
+<script src="./Assignment 2 — MF 703, Boston University_files/cs111.js.下载"></script>
+<meta name="viewport" content="width=device-width, user-scalable=yes">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+</head>
+
+<body onload="setup();">
+
+<div id="left">
+<a id="header" href="http://cs-people.bu.edu/azs/mf703/">
+MF 703
+</a>
+<div id="subheader">
+Fall 2017
+</div>
+
+<nav>
+<ul>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/index.html">Home</a></li>
+    <li><a href="https://questromtools.bu.edu/" target="_top">Questrom Tools</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/files/syllabus.pdf">Syllabus</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/staff.html">Staff</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/assignments/">Assignments</a></li>
+    <li><a href="https://piazza.com/class/j7akiyy9xs84n3" target="_blank">Piazza Discussion</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/resources.html">Resources</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">Collaboration</a></li>
+<!--
+    <li><a href="http://cs-people.bu.edu/azs/mf703/policies.html">Policies</a></li>
+-->
+</ul>
+<ul class="external">
+    <li><a href="http://pythontutor.com/visualize.html#py=3" target="_blank">Python Tutor</a></li>
+<!--    <li><a href="http://cs-people.bu.edu/azs/mf703/apollo/" target="_blank">Apollo</a></li> -->
+</ul>
+</nav>
+
+</div><!-- end #left -->
+
+<div id="middle">
+<section class="main">
+<h1 id="assignment-2">Assignment 2</h1>
+<div class="toc" style="display: none;">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#assignment-2">Assignment 2</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#preliminaries">Preliminaries</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-1-tracing-function-calls">Task 1: Tracing function calls</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-2-thinking-recursively">Task 2: Thinking recursively</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-3-fun-with-recursion-part-i">Task 3: Fun with recursion, part I</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-4-fun-with-recursion-part-2">Task 4: Fun with Recursion, part 2</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-5-sorting-with-recursion">Task 5: Sorting with Recursion</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><em>due by <font color="blue"><strong>9:00 p.m.</strong></font> on Sunday, September 17, 2017</em></p>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>In your work on this assignment, make sure to abide by the
+<a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">collaboration policies</a> of the course.  </p>
+<p>If you have questions while working on this assignment, please post them on <a href="http://cs-people.bu.edu/azs/mf703/assignments/piazza">Piazza!</a>
+This is the best way to get a quick response from your classmates and the course staff. </p>
+<p><br></p>
+<h3 id="task-1-tracing-function-calls">Task 1: Tracing function calls</h3>
+<p><em>15 points; <strong>individual-only</strong></em></p>
+<p>Put your answers for this problem in a <a href="http://cs-people.bu.edu/azs/mf703/assignments/plain_text.html"><strong>plain-text file</strong></a> named 
+<code>a2task1.txt</code>. </p>
+<ol>
+<li>
+<p>Consider the following Python program:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">decide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">c</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">4</span>
+    <span class="k">elif</span> <span class="n">b</span> <span class="o">&gt;=</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="n">a</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">3</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="mi">5</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'decide'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">decide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">decide</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Copy the tables shown below into your text file for this problem, and
+complete them to illustrate the execution of the program.</p>
+<div class="codehilite"><pre>global variables (ones that belong to the global scope)
+  a  |  b  |  c
+-----------------
+  1  |  3  |  2   
+     |     |
+
+local variables (ones that belong to the decide function)
+  a  |  b  |  c
+-----------------
+     |     |  
+     |     |
+
+output (the lines printed by the program)
+------
+1 3 2
+</pre></div>
+
+
+<p>Note that you must include three tables: one for the global variables
+(the ones that belong to the global scope), one for the local
+variables (the ones that belong to the function <code>decide</code>), and one
+for the output of the program. <strong><em>Don’t forget to follow the rules 
+for variable scope.</em></strong></p>
+<p>We have started the first and third tables for you. You should: </p>
+<ul>
+<li>complete the first and second tables so that they illustrate
+    how the values of the variables change over time</li>
+<li>complete the last table so that it shows the output of the program
+    (i.e., the values that are printed).</li>
+</ul>
+<p>You should add rows to the tables as needed.</p>
+</li>
+<li>
+<p>Consider the following Python program:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">bar</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">bar</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'foo:'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'bar:'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">bar</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">foo</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Copy the tables shown below into your text file for this problem, and
+complete them to illustrate the execution of the program.</p>
+<div class="codehilite"><pre>global variables (ones that belong to the global scope)
+  a  |  b  
+-----------
+  3  |  2     
+     |
+
+bar's local variables
+  a  |  b  
+-----------
+     |       
+     |
+
+foo's local variables
+  a  |  b  
+-----------
+     |       
+     |
+
+output (the lines printed by the program)
+------
+3 2
+</pre></div>
+
+
+<p>Note that you must include four tables: one for the global variables
+(the ones that belong to the global scope), one for the local
+variables that belong to the function <code>foo</code>, one for the local 
+variables that belong to the function <code>bar</code>, and one
+for the output of the program. <strong><em>Don’t forget to follow the rules 
+for variable scope.</em></strong></p>
+<p>We have started the first and fourth tables for you. You should: </p>
+<ul>
+<li>complete the first three tables so that they illustrate
+    how the values of the variables change over time</li>
+<li>complete the last table so that it shows the output of the program
+    (i.e., the values that are printed).</li>
+</ul>
+<p>You should add rows to the tables as needed.</p>
+</li>
+</ol>
+<p><br></p>
+<h3 id="task-2-thinking-recursively">Task 2: Thinking recursively</h3>
+<p><i>10 points; <font color="blue"><b>pair-optional</b></font></i></p><i><font color="blue"><b>
+</b></font></i><p><i><font color="blue"><b>This is the only problem of the assignment
+that you may complete with a partner. See the <a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">rules for working with
+a partner on pair-optional problems</a> for
+details about how this type of collaboration must be
+structured.</b></font></i></p>
+<p>Put your answers for this problem in a <a href="http://cs-people.bu.edu/azs/mf703/assignments/plain_text.html"><strong>plain-text file</strong></a> named 
+<code>a2task2.txt</code>. </p>
+<p>Consider the following recursive function:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">mystery</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">myst_rest</span> <span class="o">=</span> <span class="n">mystery</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">b</span> <span class="o">+</span> <span class="n">myst_rest</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>Trace the execution of <code>mystery(5, 6)</code>.
+    You may use any reasonable approach, provided that you show <em>all</em>
+    of the calls to the function.</p>
+</li>
+<li>
+<p>What is the value returned by <code>mystery(5, 6)</code>?</p>
+</li>
+<li>
+<p>During the execution of <code>mystery(5, 6)</code>, stack frames are added 
+    and then removed from the stack. How many stack frames are on the stack
+    when the base case is reached?  You should assume
+    that the initial call to <code>mystery(5, 6)</code> is made from the global
+    scope, and you should include the stack frame for the global
+    scope in your count. </p>
+</li>
+<li>
+<p>Give an example of specific values of <code>a</code> and <code>b</code> that would produce 
+    infinite recursion, and explain why it would occur.</p>
+</li>
+</ol>
+<p>You may find it helpful to use the [Python Tutor visualizer][tutor] to
+build intuition about how recursion works, to check your answers to 
+parts 1-3 of this problem, and to test and debug the functions that you write
+in the later problems. For example, to test the <code>mylen</code> function that we 
+discussed in lecture, you could paste the following into the visualizer:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">mylen</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="s">''</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">len_rest</span> <span class="o">=</span> <span class="n">mylen</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">len_rest</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="n">mylen</span><span class="p">(</span><span class="s">'cs111'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'test is'</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+</pre></div>
+
+
+<p><br></p>
+<h3 id="task-3-fun-with-recursion-part-i">Task 3: Fun with recursion, part I</h3>
+<p><i>25 points; <strong>individual-only</strong></i></p><i>
+<p>In this problem you will write several functions that employ the power
+of recursion!</p>
+<p>In Spyder, use the <em>File -&gt; New Window</em> menu option to open a new editor 
+window for your program, and <strong>save it using the the name <code>a2task3.py</code></strong>.
+Make sure to specify the <code>.py</code> extension. </p>
+<div class="admonition note">
+<p class="admonition-title">Important guidelines</p>
+<ul>
+<li>
+<p>Include comments at the top of the file that are similar to the ones 
+    that we gave you at the top of <a href="http://cs-people.bu.edu/azs/mf703/files/a1/a1task1.py"><code>a1task1.py</code></a>.</p>
+</li>
+<li>
+<p><strong>Your functions must have the exact names specified below, 
+    or we won’t be able to test them.</strong> Note in particular that the
+    case of the letters matters (all of them should be lowercase), 
+    and that some of the names include an underscore character (<code>_</code>).</p>
+</li>
+<li>
+<p>As usual, <strong>each of your functions should include a docstring 
+    that describes
+    <em>what your function does</em> and <em>what its inputs are</em>. </strong></p>
+</li>
+<li>
+<p>Make sure that your functions <strong><em>return</em></strong> the specified value, rather
+    than printing it. None of these functions should use 
+    a <code>print</code> statement.</p>
+</li>
+<li>
+<p><strong>Unless the problem states otherwise, the functions that you write 
+    must use recursion</strong>. They may <strong><em>not</em></strong> use any iterative constructs 
+    that you may be aware of (<code>for</code>, <code>while</code>, etc.), and they may <strong><em>not</em></strong>
+    use list comprehensions.</p>
+</li>
+<li>
+<p><strong>More generally, you should <em>not</em> use any Python features that 
+    we have not discussed in lecture or read about in the online textbook.</strong></p>
+</li>
+<li>
+<p>Your functions do <em>not</em> need to handle bad inputs – inputs with
+    a type or value that doesn’t correspond to the description of
+    the inputs provided in the problem.</p>
+</li>
+<li>
+<p>Leave one or two blank lines between functions to make things 
+    more readable.</p>
+</li>
+<li>
+<p><strong><em>Test each function after you write it.</em></strong> Here are two ways to do so:</p>
+<ul>
+<li>
+<p>Run your file after you finish a given function. 
+    Doing so will bring you to the Shell, where you can call the 
+    function using different inputs and check to see that you obtain 
+    the correct outputs.</p>
+</li>
+<li>
+<p>Add test calls to a <code>test</code> function at the bottom of your file.<br>
+    After running your <code>a2task3.py</code> file, you can call the <code>test</code> 
+    function (by entering <code>test()</code>) to see the results of all of 
+    the test calls.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>To facilitate grading, please put any test code inside a 
+    function. Do <strong><em>not</em></strong> add any lines of code that
+    belong to the global scope of the program (i.e., lines that are 
+    outside of any function).</p>
+</li>
+</ul>
+</div>
+<p>Here are the descriptions of the functions:</p>
+<ol>
+<li>
+<p>Write a function <code>mult(n, m)</code> that takes two integers <code>n</code> and <code>m</code> as 
+    inputs and <strong><em>uses recursion</em></strong> to compute and <strong><em>return</em></strong> the product 
+    of those integers. To force you to use
+    recursion, you may <strong><em>not</em></strong> use the multiplication operator (<code>*</code>).
+    Rather, you should use recursion to add together <code>n</code> copies of <code>m</code>.
+    For example, 4*5 = 5 + 5 + 5 + 5.</p>
+<p>Here are two examples of how <code>mult</code> should work:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; mult(6, 7)
+42
+&gt;&gt;&gt; mult(-3, 6)
+-18
+</pre></div>
+
+
+<p>This function is similar to the <a href="http://cs-people.bu.edu/azs/mf703/files/a2/recursion_examples.py.txt"><code>power</code> function</a> from lecture.
+However, you will need a special case for when the first parameter 
+is negative. To do so, add the following <code>elif</code> clause after your code
+that checks for the base case:</p>
+<div class="codehilite"><pre><span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">mult</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Note that this code uses the negation operator (<code>-</code>) to change the sign of
+a number. In particular:</p>
+<ul>
+<li><code>-n</code> gives us the opposite of the value of <code>n</code></li>
+<li><code>-mult(-n, m)</code> gives us the opposite of the value returned by 
+    <code>mult(-n, m)</code>. </li>
+</ul>
+<p>For example, the call <code>mult(-3, 6)</code> will return
+the opposite of the value returned by <code>mult(3, 6)</code>.</p>
+</li>
+<li>
+<p>Write a function <code>dot(l1, l2)</code> that takes as inputs two lists of numbers,
+    <code>l1</code> and<code>l2</code>, and <strong><em>uses recursion</em></strong> to compute and <strong><em>return</em></strong> 
+    the <em>dot product</em> of those lists – 
+    i.e., the sum of the products of the elements in the same positions
+    in the two lists. For example, the dot product of <code>[1, 2, 3]</code>
+    and <code>[4, 5, 6]</code> is <code>1*4 + 2*5 + 3*6</code> or <code>32</code>. If the two lists do not
+    have the same length or if either list is empty, <code>dot</code> should return
+    <code>0.0</code>. Here are some other examples:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; dot([5, 3], [6, 4])     # get a decimal because the base case returns 0.0
+42.0
+&gt;&gt;&gt; dot([1, 2, 3, 4], [10, 100, 1000, 10000])
+43210.0
+&gt;&gt;&gt; dot([5, 3], [6])
+0.0
+</pre></div>
+
+
+<p>This function is somewhat similar to the the <code>mylen</code> function
+from lecture, but it needs to deal with lists instead of strings, and
+it needs to process two lists at the same time. You can find a
+modified version of <code>mylen</code> that handles both strings and lists
+<a href="http://cs-people.bu.edu/azs/mf703/files/a2/recursion_examples.py.txt">here</a>.</p>
+</li>
+<li>
+<p>Write a function <code>letter_score(letter)</code> that takes a lowercase
+    letter as input and <strong><em>returns</em></strong> the value of that letter as a
+    scrabble tile. If <code>letter</code> is not a lowercase letter from ‘a’ to ‘z’,
+    the function should return 0. 
+    <strong>This function does <em>not</em> require recursion.</strong> </p>
+<p>Here is the mapping of letters to scores that you should use: </p>
+<p><img alt="letter scores" src="./Assignment 2 — MF 703, Boston University_files/letter_scores.gif"></p>
+<p>For example:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">letter_score</span><span class="p">(</span><span class="s">'w'</span><span class="p">)</span>
+<span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">letter_score</span><span class="p">(</span><span class="s">'q'</span><span class="p">))</span>
+<span class="mi">10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">letter_score</span><span class="p">(</span><span class="s">'%'</span><span class="p">)</span>      <span class="c"># not a letter</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">letter_score</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>      <span class="c"># not lower-case</span>
+<span class="mi">0</span>
+</pre></div>
+
+
+<p>We encourage you to begin with the following template:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">letter_score</span><span class="p">(</span><span class="n">letter</span><span class="p">):</span>
+    <span class="sd">""" your docstring goes here """</span>
+    <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># put the rest of your function here</span>
+</pre></div>
+
+
+<p>Note that we begin with an <code>assert</code> statement that validates the input
+for the parameter <code>c</code>. If the condition given to <code>assert</code>
+is <em>not</em> true–in this case, if the input provided for <code>c</code> has
+a length other than 0–then <code>assert</code> will cause
+your code to crash with an <code>AssertionError</code>. Using <code>assert</code> in this
+way can help you to find and debug situations in which you accidentally
+pass in incorrect values for the parameter of a function.</p>
+<p><strong><em>Hints:</em></strong> </p>
+<ul>
+<li>
+<p>You will need to use conditional execution (<code>if-elif-else</code>) to
+    determine the correct score for a given letter.</p>
+</li>
+<li>
+<p>You can greatly reduce the number of cases if you use the <code>in</code> 
+    operator, which tests for the presence of one string in another. 
+    For example:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">letter</span> <span class="o">=</span> <span class="s">'a'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s">'happy'</span>       <span class="c"># 'happy' does have an 'a'</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">letter</span> <span class="ow">in</span> <span class="s">'recursion'</span>   <span class="c"># 'recursion' does not have an 'a'</span>
+<span class="bp">False</span>
+</pre></div>
+
+
+<p>More generally, the <code>in</code> operator can be used to test for the presence
+of an element in <em>any</em> sequence – including a list. For example, 
+given the variable <code>letter</code> above we could do:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">letter</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="bp">True</span>
+</pre></div>
+
+
+</li>
+</ul>
+</li>
+<li>
+<p>Write a function <code>scrabble_score(word)</code> that takes as input a string 
+    <code>word</code> containing only lowercase letters, and that <strong><em>uses recursion</em></strong>
+    to compute and <strong><em>return</em></strong> the scrabble score of that string – i.e., 
+    the sum of the scrabble scores of its letters. For example:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">scrabble_score</span><span class="p">(</span><span class="s">'python'</span><span class="p">)</span>
+<span class="mi">14</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scrabble_score</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scrabble_score</span><span class="p">(</span><span class="s">'quetzal'</span><span class="p">)</span>
+<span class="mi">25</span>
+</pre></div>
+
+
+<p>Use your <code>letter_score</code> function and recursion to solve this problem.
+You may find it helpful to use the <a href="http://cs-people.bu.edu/azs/mf703/files/a2/recursion_examples.py.txt"><code>num_vowels</code></a> function from 
+lecture as a model. In that function, every vowel essentially had a 
+value of 1, and every consonant had a value of 0. In this function, 
+each letter has its letter score as its value.</p>
+</li>
+<li>
+<p>At the bottom of your <code>a2task3.py</code> file, add a <code>test()</code> function 
+    that includes at least one test call for each of the functions that 
+    you wrote for this problem. For example:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="sd">""" test function for the functions above """</span>
+    <span class="n">test1</span> <span class="o">=</span> <span class="n">mult</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'the first test returns'</span><span class="p">,</span> <span class="n">test1</span><span class="p">)</span>
+</pre></div>
+
+
+<p><strong>This function does <em>not</em> require recursion.</strong> Also, remember
+that a test function like this one does <em>not</em> need to return
+anything itself, because its only purpose is to call the other
+functions and print the results of those calls. Calling this <code>test</code>
+function from the Shell will allow you to see the results of the
+test calls and ensure that they are correct.</p>
+</li>
+</ol>
+<hr>
+<h3 id="task-4-fun-with-recursion-part-2">Task 4: Fun with Recursion, part 2</h3>
+<p><em>25 points; <strong>individual-only</strong></em></p>
+<p>Create a new Python code file and save it with the name <code>a2task4.py</code>. 
+ Remember to create a header comment at the top of your file with your name, 
+ email address, assignment number, and a brief description. 
+ Write all of the functions for this task in the file <code>a2task4.py</code>.</p>
+<ol>
+<li>Write a function <code>copy(s, n)</code> that takes as inputs a string <code>s</code> and an integer <code>n</code>, 
+  and that uses recursion to create and return a string in which <code>n</code> copies of <code>s</code> have 
+  been concatenated together. 
+  If <code>n</code> is less than or equal to 0, the function should return the empty string (i.e., 
+  the string ‘’, which does not have any spaces between the quotes).</li>
+</ol>
+<p>Here are some test cases:</p>
+<div class="codehilite"><pre>    &gt;&gt;&gt; copy('da', 2)
+    'dada'
+    &gt;&gt;&gt; copy('Go BU!', 4)
+    'Go BU!Go BU!Go BU!Go BU!'
+    &gt;&gt;&gt; copy('hello', 1)
+    'hello'
+    &gt;&gt;&gt; copy('hello', 0)
+    ''
+    &gt;&gt;&gt; copy('hello', -7)
+    ''
+</pre></div>
+
+
+<ol start="2">
+<li>
+<p>Write a function <code>double(s)</code> that takes an arbitrary string <code>s</code> as
+    input, and that <strong><em>uses recursion</em></strong> to construct and <strong><em>return</em></strong>
+    the string formed by doubling each character in the string.
+    Here are three examples:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">double</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+<span class="s">'hheelllloo'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">double</span><span class="p">(</span><span class="s">'python'</span><span class="p">)</span>
+<span class="s">'ppyytthhoonn'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">double</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="s">''</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a function <code>weave(s1, s2)</code> that takes as inputs two
+    strings <code>s1</code> and <code>s2</code> 
+    and <strong><em>uses recursion</em></strong> to construct and <strong><em>return</em></strong>
+    a new string that is formed by “weaving” together the characters 
+    in the strings <code>s1</code> and <code>s2</code> to create a single string. 
+    In other words, the new string should alternate characters from 
+    the two strings: the first character from <code>s1</code>, followed by the 
+    first character from <code>s2</code>, followed by the second character from <code>s1</code>, 
+    followed by the second character from <code>s2</code>, etc. If one 
+    of the strings is longer than the other, its
+    “extra” characters – the ones with no counterparts in the
+    shorter string – should appear immediately after 
+    the “woven” characters (if any) in the new string.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">weave</span><span class="p">(</span><span class="s">'aaaaaa'</span><span class="p">,</span> <span class="s">'bbbbbb'</span><span class="p">)</span>
+<span class="s">'abababababab'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">weave</span><span class="p">(</span><span class="s">'abcde'</span><span class="p">,</span> <span class="s">'VWXYZ'</span><span class="p">)</span>
+<span class="s">'aVbWcXdYeZ'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">weave</span><span class="p">(</span><span class="s">'aaaaaa'</span><span class="p">,</span> <span class="s">'bb'</span><span class="p">)</span>    <span class="c"># four extra 'a' characters at the end</span>
+<span class="s">'ababaaaa'</span>         
+<span class="o">&gt;&gt;&gt;</span> <span class="n">weave</span><span class="p">(</span><span class="s">'aaaa'</span><span class="p">,</span> <span class="s">'bbbbbb'</span><span class="p">)</span>  <span class="c"># two extra 'b' characters at the end</span>
+<span class="s">'ababababbb'</span>       
+<span class="o">&gt;&gt;&gt;</span> <span class="n">weave</span><span class="p">(</span><span class="s">'aaaa'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>        <span class="c"># all of the 'a' characters are extra!</span>
+<span class="s">'aaaa'</span>       
+<span class="o">&gt;&gt;&gt;</span> <span class="n">weave</span><span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="s">'bbbb'</span><span class="p">)</span>        <span class="c"># all of the 'b' characters are extra!</span>
+<span class="s">'bbbb'</span>       
+<span class="o">&gt;&gt;&gt;</span> <span class="n">weave</span><span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>        
+<span class="s">''</span>
+</pre></div>
+
+
+<p><em>Hint:</em> You will need more than one base case.</p>
+</li>
+<li>
+<p>Write a function <code>find_min(items)</code>, which uses recursion to find the minimum from a 
+     list of items.</p>
+<ul>
+<li>
+<p>For a list of numbers, the minimum will be the smallest number. </p>
+</li>
+<li>
+<p>For a list of strings, the minimum will be the string closest to the start of 
+    the alphabet.</p>
+</li>
+</ul>
+<p>Examples:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; values = [14,8,7,12]
+&gt;&gt;&gt; find_min(values)
+7
+&gt;&gt;&gt; letters = ['z','h','e','l','m','c','s']
+&gt;&gt;&gt; find_min(letters)
+'c'
+&gt;&gt;&gt; values = [42]
+&gt;&gt;&gt; find_min(values)
+42
+</pre></div>
+
+
+<p><strong><em>Hints:</em></strong></p>
+<ul>
+<li>
+<p>Check for the base case! In a list with only one item, that item is the minimum.</p>
+</li>
+<li>
+<p>Remember to use recursion on the remainder of the list, and do your one step to
+  handle the value at the beginning of the list.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write a function <code>index(elem, seq)</code> that takes as inputs an element
+    <code>elem</code> and a sequence <code>seq</code>, and that <strong><em>uses recursion</em></strong> to
+     find and <strong><em>return</em></strong> the index of the first occurrence
+    of <code>elem</code> in <code>seq</code>. The sequence <code>seq</code> can be either a list or a string.
+    If <code>seq</code> is a string, <code>elem</code> will be a single-character string; if
+    <code>seq</code> is a list, <code>elem</code> can be any value. 
+    Don’t forget that the index of the first element in a sequence is 0.</p>
+<p>Important notes:</p>
+<ul>
+<li>
+<p>If <code>elem</code> is not an element of <code>seq</code>, the function should return 
+    the special value <code>None</code>, which does <strong><em>not</em></strong> have any quotes 
+    around it.</p>
+</li>
+<li>
+<p>You may <strong><em>not</em></strong> use the <code>in</code> operator in this function.</p>
+</li>
+</ul>
+<p>Here are some examples:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">index</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">index</span><span class="p">(</span><span class="s">'hi'</span><span class="p">,</span> <span class="p">[</span><span class="s">'well'</span><span class="p">,</span> <span class="s">'hi'</span><span class="p">,</span> <span class="s">'there'</span><span class="p">])</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">index</span><span class="p">(</span><span class="s">'b'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">)</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">index</span><span class="p">(</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">index</span><span class="p">(</span><span class="s">'i'</span><span class="p">,</span> <span class="s">'team'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+
+
+<p><strong>Important:</strong> If you call your <code>index</code> function from the Shell
+and the function returns <code>None</code>, you will <em>not</em> actually 
+see the <code>None</code> value after the function call. Instead, you will just
+see another Shell prompt, as shown above. To make sure that your function
+is returning <code>None</code>, you can either make the call as part of a <code>print</code>
+statement or compare the return value to <code>None</code>:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; print(index('i', 'team'))
+None
+&gt;&gt;&gt; index('i', 'team') == None
+True
+</pre></div>
+
+
+<p>We recommend that you try both of these tests. Here are some other
+examples:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; print(index('hi', ['hello', 111, True]))
+None
+&gt;&gt;&gt; print(index('a', ''))      # the empty string 
+None
+&gt;&gt;&gt; print(index(42, []))       # the empty list
+None
+</pre></div>
+
+
+<p><em>Hints:</em></p>
+<ul>
+<li>The closest model for this problem is the version of the
+    <a href="http://cs-people.bu.edu/azs/mf703/files/a2/recursion_examples.py.txt"><code>mylen</code></a> function that is able to handle both lists 
+    and strings.</li>
+<li>You will need more than one base case for this function.</li>
+<li>In the recursive case, the decision about what to return
+    will need to take into account the result of the recursive call.
+    As a result, it is especially important that you store in a 
+    variable the value that is returned by the recursive call.</li>
+</ul>
+</li>
+</ol>
+<p><br></p>
+<h3 id="task-5-sorting-with-recursion">Task 5: Sorting with Recursion</h3>
+<p><em>25 points; <strong>individual-only</strong></em></p>
+<p><strong> Merge Sort </strong> is a divide and conquer strategy that sorts efficiently by dividing 
+  a list into smaller sublists and recombining these sublists into a sorted (whole) list. 
+  The reason it works is that by definition, a list of only one element is sorted.
+  Thus, if we divide any list enough times we will end up with a sorted list 
+  containing one item. Next, we use a helper function to combine these sub lists into 
+  a complete list. In this section, you will first write the <code>combine_lists</code> function, 
+  and then work on the <code>merge_sort</code> function.</p>
+<p>Create a new Python code file and save it with the name <code>a2task5.py</code>. 
+  Remember to create a header comment at the top of your file with your name, 
+  email address, assignment number, and a brief description. 
+  Write all of the functions for this task in the file <code>a2task5.py</code>.  </p>
+<ol>
+<li>
+<p>Write a function <code>combine_lists(left, right)</code> that uses recursion to combine two 
+     lists into one list. The combine function assumes that each list is already in sorted 
+     order.</p>
+<p>Examples:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; combine_lists([3,5,6,9], [1,4,7,8])
+[1, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; combine_lists([1,2,3],[4,5])
+[1, 2, 3, 4, 5]
+</pre></div>
+
+
+<p>If either list is empty, the combined list is simply the other list, for example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; combine_lists([],[1,2,3])
+[1,2,3]
+</pre></div>
+
+
+<p>To combine two lists, you will select the smaller element from the fronts of the 
+two lists, and put that element on a new list. Use recursion to combine the remaining 
+elements from both lists (i.e., make a function call to <code>combine_lists</code>), and 
+concatenate the results with a list containing the first element.</p>
+<p>For example, to combine the lists <code>left = [3,5,6,9]</code> and <code>right = [1,4,7,8]</code>, 
+you would compare the first element of each list (the 3 from left and 1 from right). </p>
+<ul>
+<li>
+<p>Create a new list containing the smaller first item (i.e., the 1 from right). </p>
+</li>
+<li>
+<p>Use recursion to combine <code>[3,5,6,9]</code> and <code>[4,7,8]</code>, and then concatenate the combined 
+list with the list containing the smaller item.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write a function <code>merge_sort(values)</code> to implement the merge sort algorithm on a 
+    list of values. The result of this function call will be to sort the list, for example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; v = [9, 2, 4, 6, 14, 8, 7, 12]
+&gt;&gt;&gt; merge_sort(v)
+[2, 4, 6, 7, 8, 9, 12, 14]
+</pre></div>
+
+
+<p>This algorithm is as follows:</p>
+<ul>
+<li>
+<p>Use slicing to split the list of values into two lists, called <code>left</code> and <code>right</code>.</p>
+</li>
+<li>
+<p>Call the <code>merge_sort</code> function on each sublist. Let recursion do the work for you.</p>
+</li>
+<li>
+<p>Use your <code>combine_lists</code> function from above to combine the sorted sublists.</p>
+</li>
+</ul>
+<p>How it works: </p>
+<ul>
+<li>
+<p>Merge sort splits this initial list <code>[9, 2, 4, 6, 14, 8, 7, 12]</code> into two sub lists,
+<code>[9, 2, 4, 6]</code> and <code>[14, 8, 7, 12]</code>. </p>
+</li>
+<li>
+<p>It then calls <code>merge_sort</code> again on each sublist...</p>
+</li>
+<li>
+<p><code>merge_sort([9,2,4,6])</code> splits the list into two sublists <code>[9,2]</code> and <code>[4,6]</code>, and so on. </p>
+</li>
+<li>
+<p>Eventually, each sublist only has one element (or zero elements), so <code>merge_sort</code> 
+  gets to a base case:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; merge_sort([42])
+[42]
+&gt;&gt;&gt; merge_sort([])
+[]
+</pre></div>
+
+
+</li>
+<li>
+<p>After reaching a base case, the sublists are combined using the <code>combine_lists</code> function.</p>
+</li>
+</ul>
+<p><strong>TESTING</strong> 
+You must test your <code>merge_sort</code> function thoroughly. Be sure to include multiple test 
+cases in your file including testing already sorted data, unsorted data, 
+reverse-sorted data, etc. </p>
+</li>
+</ol>
+<hr>
+<h2 id="submitting-your-work">Submitting Your Work</h2>
+<p>Log into <a href="https://questromtools.bu.edu/">Questromtools</a> to submit your work. 
+Under the heading for Assignment 2, attach each of the <strong>5</strong> required files to your submission. 
+You may resubmit multiple times, but only the last submission will be graded. </p>
+<p><br></p>
+</i></section><i>
+
+<footer>
+Last modified on September 11, 2017.
+</footer>
+
+</i></div><i>
+
+<div id="right" style="display: inherit;">
+<div class="toc">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#assignment-2" class="current">Assignment 2</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#preliminaries">Preliminaries</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-1-tracing-function-calls">Task 1: Tracing function calls</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-2-thinking-recursively">Task 2: Thinking recursively</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-3-fun-with-recursion-part-i">Task 3: Fun with recursion, part I</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-4-fun-with-recursion-part-2">Task 4: Fun with Recursion, part 2</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#task-5-sorting-with-recursion">Task 5: Sorting with Recursion</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a2.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div></div>
+
+
+
+
+</i></body></html>

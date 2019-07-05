@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>People Input Form</title>
+</head>
+<body>
+<form method="post" action="cgi-bin/people_cgi.py">
+    <table>
+        <tr><th>Key <td><input type="text" name="key"></tr>
+        <tr><th>Name<td><input type="text" name="name"></tr>
+        <tr><th>Age <td><input type="text" name="age"></tr>
+        <tr><th>Job <td><input type="text" name="job"></tr>
+        <tr><th>Pay <td><input type="text" name="pay"></tr>
+    </table>
+    <p>
+        <input type="submit" value="Fetch", name="action">
+        <input type="submit" value="Update", name="action">
+    </p>
+</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+XMLFeedSpider爬虫类
+
+# 常用来处理RSS订阅信息
+
+类属性:
+iterator = 'iternodes'     # 指定迭代器，默认为iternodes(基于正则高性能),可为html,xml
+itertag = 'item'           # 设置开始迭代的结点
+namespaces                 # 以列表形式存在,定义在文档中被蜘蛛处理的可用命名空间
+
+类方法:
+1.parse_node(self, response, selector)
+# 在结点与所提供的标签名相符合时被调用,可进行一些信息的提取和处理
+2.adapt_response(self, response)
+# 在spider分析响应(Response)前被调用
+3.process_results(response, results)
+# 在spider返回结果前被调用,主要对结果在返回前进行最后处理

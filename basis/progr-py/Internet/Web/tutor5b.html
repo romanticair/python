@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CGI 101</title>
+</head>
+<body>
+<h1>Common input devices: alternative layout</h1>
+<p>Use the same tutor5.py server side script, but change the layout
+of the form itself. Notice the separation of user interface and procressing
+logic here. the CGI script is independent of the HTML used to interact with
+the user/client.</p>
+<hr>
+<form method="post" action="cgi-bin/tutor5.py">
+    <h3>please complete the following form and click Send</h3>
+    <p><table border cellpadding="3">
+    <tr>
+        <th align="right">Name:
+        <td><input type="text" name="name">
+    <tr>
+        <th align="right">Shoe size:
+        <td>
+        <input type="radio" name="shoesize" value="small">Small
+        <input type="radio" name="shoesize" value="medium">Medium
+        <input type="radio" name="shoesize" value="large">Large
+    <tr>
+        <th align="right">Occupation:
+        <td><select name="job">
+            <option>Developer
+            <option>Manager
+            <option>Student
+            <option>Evangelist
+            <option>>Other
+        </select>
+    <tr>
+    <th align="right">Political affiliations:
+    <td>
+        <p><input type="checkbox" name="language" value="Python">Pythonista
+        <p><input type="checkbox" name="language" value="Perl">Perlmonger
+        <p><input type="checkbox" name="language" value="Tcl">Tcler
+    <tr>
+        <th align="right">Comments:
+        <td><textarea name="comment" cols="30" rows="2">Enter text here</textarea></td>
+    <tr>
+        <td colspan="2" align="center">
+        <input type="submit" value="Send">
+        <input type="reset" value="Reset">
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://cs-people.bu.edu/azs/mf703/assignments/a9.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Assignment 9 — MF 703, Boston University</title>
+
+<meta name="description" content="Course website for MF 703, Boston University.">
+<link rel="stylesheet" href="./Assignment 9 — MF 703, Boston University_files/style.css">
+<!-- 
+<link rel="icon" type="image/x-icon" href="http://cs-people.bu.edu/azs/mf703img/favicon.ico"> 
+<link rel="mask-icon" href="http://cs-people.bu.edu/azs/mf703/img/111.svg" color="#cc0000">
+-->
+<script src="./Assignment 9 — MF 703, Boston University_files/respond.min.js.下载"></script>
+<script src="./Assignment 9 — MF 703, Boston University_files/html5shiv.js.下载"></script>
+<script src="./Assignment 9 — MF 703, Boston University_files/cs111.js.下载"></script>
+<meta name="viewport" content="width=device-width, user-scalable=yes">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+</head>
+
+<body onload="setup();">
+
+<div id="left">
+<a id="header" href="http://cs-people.bu.edu/azs/mf703/" class="">
+MF 703
+</a>
+<div id="subheader">
+Fall 2017
+</div>
+
+<nav>
+<ul>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/index.html">Home</a></li>
+    <li><a href="https://questromtools.bu.edu/" target="_top">Questrom Tools</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/files/syllabus.pdf">Syllabus</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/staff.html">Staff</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/assignments/">Assignments</a></li>
+    <li><a href="https://piazza.com/class/j7akiyy9xs84n3" target="_blank">Piazza Discussion</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/resources.html">Resources</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">Collaboration</a></li>
+<!--
+    <li><a href="http://cs-people.bu.edu/azs/mf703/policies.html">Policies</a></li>
+-->
+</ul>
+<ul class="external">
+    <li><a href="http://pythontutor.com/visualize.html#py=3" target="_blank">Python Tutor</a></li>
+<!--    <li><a href="http://cs-people.bu.edu/azs/mf703/apollo/" target="_blank">Apollo</a></li> -->
+</ul>
+</nav>
+
+</div><!-- end #left -->
+
+<div id="middle">
+<section class="main">
+<h1 id="assignment-9">Assignment 9</h1>
+<div class="toc" style="display: none;">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#assignment-9">Assignment 9</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#preliminaries">Preliminaries</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#objective-and-overview">Objective and Overview</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#task-1-some-linear-algebra-with-numpy-bond-pricing-and-anayltics">Task 1: Some linear algebra with numpy: bond pricing and anayltics</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#task-2-efficient-portfolios-and-the-efficient-frontier">Task 2: Efficient Portfolios and the Efficient Frontier</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#task-3-graphing-with-matplotlib-and-pandas">Task 3: Graphing with matplotlib and pandas.</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><em>due by <font color="blue"><strong>9:00 p.m.</strong></font> on <s>Sunday, November 5, 2017</s> Wednesday, November 8, 2017</em></p>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>In your work on this assignment, make sure to abide by the
+<a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">collaboration policies</a> of the course.  </p>
+<p>If you have questions while working on this assignment, please post them on <a href="http://cs-people.bu.edu/azs/mf703/assignments/piazza">Piazza</a>.
+This is the best way to get a quick response from your classmates and the course staff. </p>
+<div class="admonition note">
+<p class="admonition-title">NumPy, MatPlotLib, and Pandas Programming Toolkits</p>
+<p>In this assignment, we will use 3 special programming toolkits.s</p>
+<p>If you are using Anaconda/Spyder, these packages are already installed for you. 
+If you not using Spyder, you will need to install it yourself. 
+I recommend running this installer at the Python Console:</p>
+</div>
+<p>Try the following:</p>
+<div class="codehilite"><pre><span class="n">Python</span> <span class="mf">3.5</span><span class="o">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">v3</span><span class="o">.</span><span class="mf">5.1</span><span class="p">:</span><span class="mi">37</span><span class="n">a07cee5969</span><span class="p">,</span> <span class="n">Dec</span>  <span class="mi">5</span> <span class="mi">2015</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">44</span><span class="p">)</span> 
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">4.2</span><span class="o">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">Apple</span> <span class="n">Inc</span><span class="o">.</span> <span class="n">build</span> <span class="mi">5666</span><span class="p">)</span> <span class="p">(</span><span class="n">dot</span> <span class="mi">3</span><span class="p">)]</span> <span class="n">on</span> <span class="n">darwin</span>
+<span class="n">Type</span> <span class="s">"copyright"</span><span class="p">,</span> <span class="s">"credits"</span> <span class="ow">or</span> <span class="s">"license()"</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pip</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pip</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s">'install'</span><span class="p">,</span><span class="s">'numpy'</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pip</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s">'install'</span><span class="p">,</span><span class="s">'matplotlib'</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pip</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s">'install'</span><span class="p">,</span><span class="s">'pandas'</span><span class="p">])</span>
+</pre></div>
+
+
+<p>The above will take some time to install, so please be patient. </p>
+<h2 id="objective-and-overview">Objective and Overview</h2>
+<p><em>Objective</em>: Become familiar with the <code>numpy</code>, <code>matplotlib</code>, and <code>pandas</code> packages in Python.</p>
+<p><em>Overview</em>: In this assignment, you will develop some experience working with the
+<code>numpy</code>, <code>matplotlib</code>, and <code>pandas</code> packages in Python. In particular, you will become 
+familiar with the <code>numpy.arrays</code> and <code>numpy.matrix</code> classes for linear algebra computations,
+and with the the <code>pandas.DataFrame</code> object for managing time-series and panel data.
+Finally, you will do some graphing using the <code>matplotlib</code> package. </p>
+<h3 id="task-1-some-linear-algebra-with-numpy-bond-pricing-and-anayltics">Task 1: Some linear algebra with <code>numpy</code>: bond pricing and anayltics</h3>
+<p><em>15 points; <strong>individual-only</strong></em></p>
+<p>Do this entire task in a file called <code>a9task1.py</code>.</p>
+<ol>
+<li>
+<p>Write the function <code>bond_price(times, cashflows, rate)</code> that calculates and returns
+    the price of a bond, given it’s series of cashflows and discount rate. 
+    The parameters are: 
+    <code>times</code> is a list of the times at which the cashflows occur; <br>
+    <code>cashflows</code> is a list of the cashflows for this bond;<br>
+    <code>r</code> is the <em>periodic</em> (not annual) discount rate.<br></p>
+<p>For example:    </p>
+<div class="codehilite"><pre>&gt;&gt;&gt; times = [1,2,3]
+&gt;&gt;&gt; cashflows = [10,10,110]
+&gt;&gt;&gt; rate = 0.10
+&gt;&gt;&gt; bond_price(times, cashflows, rate)
+99.99999999999997
+&gt;&gt;&gt; rate = 0.085
+&gt;&gt;&gt; bond_price(times, cashflows, rate)
+103.8310335571048
+</pre></div>
+
+
+<p>This function must use linear algebra to calculate the price of the bond. 
+The price of a bond is given by: </p>
+<p><img src="./Assignment 9 — MF 703, Boston University_files/bond_price_la.jpg"></p>
+<p>where <code>d</code> is the series of discount factors, i.e., <code>1/(1+r)^t for t in times</code><br>
+and <code>C</code> is the series of cash flows.</p>
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>You may not use a loop or accumulator in this function.</p>
+</li>
+<li>
+<p>You may use a list comprehension to create the list of discount factors. </p>
+</li>
+<li>
+<p>You will need to convert all parameters to <code>numpy.matrix</code> types before doing the
+    calculations, and you must return the result as a <code>float</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>bond_duration(times, cashflows, rate)</code> to calculate and return
+    the duration metric for a bond. The parameters are: 
+    <code>times</code> is a list of the times at which the cashflows occur; <br>
+    <code>cashflows</code> is a list of the cashflows for this bond;<br>
+    <code>r</code> is the <em>periodic</em> (not annual) discount rate.<br></p>
+<p>This function must use linear algebra to calculate the price of the bond. 
+The duration is calculated by:
+<img src="./Assignment 9 — MF 703, Boston University_files/bond_duration_la.jpg">    </p>
+<p>where <code>B</code> is the price of the bond, <code>t</code> is an <code>np.array</code> of the times at which the
+bond’s cashflows occur, <code>C</code> is a <code>np.matrix</code> of the bonds’ cashflows, and <code>d</code> a<br>
+<code>np.array</code> of discount factors. </p>
+<p>For example: </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="c"># example with normal (coupon) bond</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cashflows</span> <span class="o">=</span> <span class="p">[</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">,</span> <span class="mf">1040.0</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">bond_duration</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">cashflows</span><span class="p">,</span> <span class="mf">0.035</span><span class="p">)</span>
+<span class="mf">8.4723105333131112</span>
+</pre></div>
+
+
+<p>All other things being equal, a bond with higher coupon payments will have lower 
+duration than a bond with lower coupon payments.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="c"># another example with normal (coupon) bond</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cashflow</span> <span class="o">=</span> <span class="p">[</span><span class="mf">70.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">,</span> <span class="mf">1070.0</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">bond_duration</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">cashflows</span><span class="p">,</span> <span class="mf">0.035</span><span class="p">)</span> <span class="c"># rate of 7% per year</span>
+<span class="mf">7.843182123763313</span>
+</pre></div>
+
+
+<p>And a zero-coupon bond (which pays only the maturity value in the future) will have
+a duration equal to its maturity:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="c"># example with a zero-coupon bond:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cashflows</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">bond_duration</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">cashflows</span><span class="p">,</span> <span class="mf">0.035</span><span class="p">)</span> <span class="c"># rate of 7% per year</span>
+<span class="mf">10.0</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>You may not use a loop or accumulator in this function.</p>
+</li>
+<li>
+<p>You may use a list comprehension to create the list of discount factors. </p>
+</li>
+<li>
+<p>You will need to <strong>convert the parameters</strong> to <code>numpy.array</code> types before doing the
+    calculations, and you must return the result as a <code>float</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>bootstrap(cashflows, prices)</code> to implement the bootstrap method. 
+    This function will take parameters <code>cashflows</code>, which is a matrix (2-dimensional list) 
+    containing the cashflows for some bonds, and <code>prices</code> which is a column matrix 
+    (2-dimensional list) containing the prices of these bonds.</p>
+<p>We can find the prices of the implied zero-coupon bonds (i.e., discount factors)
+using this equation: </p>
+<p><img src="./Assignment 9 — MF 703, Boston University_files/bootstrap_la.jpg"></p>
+<p>where <code>P</code> is a matrix containing the price of the bond, <code>CF</code> is the matrix of the 
+bonds’ cashflows, and <code>d</code> is the matrix of implied discount factors.</p>
+<p>Example:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">CF</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">105</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">107</span><span class="p">]]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mf">99.5</span><span class="p">,</span> <span class="mf">101.25</span><span class="p">,</span> <span class="mf">100.35</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">bootstrap</span><span class="p">(</span><span class="n">CF</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="n">matrix</span><span class="p">([[</span> <span class="mf">0.94761905</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mf">0.90154987</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mf">0.8168768</span> <span class="p">]])</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>You may not use a loop or accumulator in this function.</p>
+</li>
+<li>
+<p>You may use a list comprehension to create the list of discount factors. </p>
+</li>
+<li>
+<p>You will need to convert all parameters to type <code>numpy.matrix</code> types before doing the
+    calculations, and you must return the result as a <code>numpy.matrix</code>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="task-2-efficient-portfolios-and-the-efficient-frontier">Task 2: Efficient Portfolios and the Efficient Frontier</h3>
+<p><em>60 points; <strong>individual-only</strong></em><br>
+    <em>questions (1, 2, 5, 7) are worth 5 points each; questions (3, 4, 6, 8) are 10 points each.</em></p>
+<p>Harry Markowitz won the <em>Nobel Prize</em> for his work on understanding the risk-return
+  trade-off in investments, and specifically the <a target="_blank" href="https://en.wikipedia.org/wiki/Modern_portfolio_theory">Efficient Frontier</a>.  </p>
+<p>The Markowitz Efficient Frontier is the set of all efficient portfolios, i.e., 
+  portfolios that have give the highest expected return for a given level of risk 
+  (standard deviation). In this section, you will implement the fundamental calculations 
+  to find efficient (minimum variance) portfolios, as well as the global minimum variance 
+  portfolio.</p>
+<p><strong>The mathematics required for these calculations</strong> are explained in <a target="_blank" href="http://cs-people.bu.edu/azs/mf703/files/a9/recipes_efficient_frontier.pdf">this excerpt from the
+  book “Numerical Recipes”</a>. 
+  Read these pages first, before continuing on to the questions below. </p>
+<p>Do this entire task in a file called <code>a9task2.py</code>. 
+  You should include this import statement at the top of your file:</p>
+<div class="codehilite"><pre>    <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>Write the function <code>calc_portfolio_return(e, w)</code> that calculates and returns the 
+    portfolio return (as a <code>float</code>) for a portfolio of <code>n</code> &gt;= 2 assets. 
+    The parameters are: 
+    <code>e</code> is a matrix of expected returns for the assets<br>
+    <code>w</code> is a matrix of portfolio weights of the assets, which sums to 1.<br></p>
+<p>For example:    </p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_return</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.09666666666666668</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># another example</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_return</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.083</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>The function must return the resulting rate of return as a <code>float</code>.</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>calc_portfolio_stdev(v, w)</code> that calculates and returns the
+    portfolio standard deviation (as a <code>float</code>) for a portfolio of <code>n</code> &gt;= 2 assets. 
+    The parameters are: 
+    <code>e</code> is a matrix of expected returns for the assets<br>
+    <code>v</code> is a matrix of covariances among the assets.<br></p>
+<p>For example:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_stdev</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.23345235059857505</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># another example</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_stdev</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.4301162633521313</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>The function must return the resulting standard deviation as a <code>float</code>.</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>calc_global_min_variance_portfolio(v)</code> that returns the
+    portfolio weights corresponding to the global minimum variance portfolio. That is,
+    this function will find the portfolio with the absolute minimum variance that can be
+    composed of the selected assets, where <code>v</code> is the matrix of covariances among the assets.<br></p>
+<p>Given the set of portfolio assets and the covariances among these assets, there is
+a single <em>best</em> portfolio that results in the absolute minimum amount of protfolio 
+variance (i.e., standard deviation). </p>
+<p>For example:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="c"># first example:</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">calc_global_min_variance_portfolio</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="c"># these are the portfolio weights for the global minimum variance portfolio</span>
+<span class="n">matrix</span><span class="p">([[</span> <span class="mf">0.23076923</span><span class="p">,</span>  <span class="mf">0.46153846</span><span class="p">,</span>  <span class="mf">0.30769231</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># this is the rate of return on the global minimum variance portfolio</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_return</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> 
+<span class="mf">0.09846153846153845</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># this is the standard deviation on the global minimum variance portfolio</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_stdev</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.21483446221182986</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># second example</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">calc_global_min_variance_portfolio</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="c"># these are the portfolio weights for the global minimum variance portfolio</span>
+<span class="n">matrix</span><span class="p">([[</span> <span class="mf">0.6122449</span> <span class="p">,</span>  <span class="mf">0.14285714</span><span class="p">,</span>  <span class="mf">0.24489796</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># this is the rate of return on the global minimum variance portfolio</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_return</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.10346938775510206</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># this is the standard deviation on the global minimum variance portfolio</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_stdev</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.41649656391752155</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>The function must return the resulting portfolio as a <code>np.matrix</code> of 
+    portfolio weights.</p>
+</li>
+<li>
+<p>Once we know the portfolio weights, we can use these to calculate the portfolio’s
+    expected return and standard deviation.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>calc_min_variance_portfolio(e, v, r)</code> that finds and returns the
+    portfolio weights corresponding to the minimum variance portfolio for the required
+    rate of return <code>r</code>.   <br>
+    The parameters are: 
+    <code>e</code> is a matrix of expected returns for the assets<br>
+    <code>v</code> is a matrix of covariances among the assets.<br>
+    <code>r</code> is the required rate of return<br></p>
+<p>Given the set of portfolio assets and the covariances among these assets, there is
+a single <em>best</em> portfolio that achieves the required rate of return <code>r</code> at the 
+minimum amount of protfolio variance (i.e., standard deviation). </p>
+<p>For example:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="c"># consider these three assets and the covariance matrix:    </span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># find minimum variance portfolio for r = 0.09</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">calc_min_variance_portfolio</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="c"># these are the portfolio weights</span>
+<span class="n">matrix</span><span class="p">([[</span> <span class="mf">0.21276596</span><span class="p">,</span>  <span class="mf">0.19148936</span><span class="p">,</span>  <span class="mf">0.59574468</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_return</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.08999999999999958</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_stdev</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.2568218191830864</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># find minimum variance portfolio for r = 0.10</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">calc_min_variance_portfolio</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="c"># these are the portfolio weights</span>
+<span class="n">matrix</span><span class="p">([[</span> <span class="mf">0.23404255</span><span class="p">,</span>  <span class="mf">0.5106383</span> <span class="p">,</span>  <span class="mf">0.25531915</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_return</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.09999999999999953</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_stdev</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.21635274585338046</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># find minimum variance portfolio for r = 0.11</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="n">calc_min_variance_portfolio</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">w</span> <span class="c"># these are the portfolio weights</span>
+<span class="n">matrix</span><span class="p">([[</span> <span class="mf">0.25531915</span><span class="p">,</span>  <span class="mf">0.82978723</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08510638</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_return</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.10999999999999946</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">calc_portfolio_stdev</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="mf">0.28806027738002005</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>The function must return the resulting portfolio as a <code>np.matrix</code> of 
+    portfolio weights.</p>
+</li>
+<li>
+<p>Once we know the portfolio weights, we can use these to calculate the portfolio’s
+    expected return and standard deviation.</p>
+</li>
+<li>
+<p>Note that as we change the required rate of return <code>r</code>, the resulting portfolio
+    weights change, to help achieve the minimum variance portfolio for this rate of 
+    return.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>calc_efficient_portfolios_stdev(e, v, rs)</code> which finds a series 
+    of minimum variance portfolios and returns their standard deviations.   <br>
+    The parameters are: 
+    <code>e</code> is a matrix of expected returns for the assets<br>
+    <code>v</code> is a matrix of covariances among the assets.<br>
+    <code>rs</code> is a <code>numpy.array</code> of rates of return for which to calculate the corresponding 
+    minimum variance portfolio’s standard deviation<br></p>
+<p>This function should use a loop and an accumulator pattern, along with the other 
+functions defined above, to develop the efficient (minimum variance) portfolios that
+correspond to the series of rates of return. This is best illustrated with an example.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.11</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c"># generate 10 steps between 0.07 and 0.12</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">rs</span> <span class="c"># these are the rates of return for which to find efficient portfolios</span>
+<span class="n">array</span><span class="p">([</span> <span class="mf">0.07</span>      <span class="p">,</span>  <span class="mf">0.07555556</span><span class="p">,</span>  <span class="mf">0.08111111</span><span class="p">,</span>  <span class="mf">0.08666667</span><span class="p">,</span>  <span class="mf">0.09222222</span><span class="p">,</span>
+        <span class="mf">0.09777778</span><span class="p">,</span>  <span class="mf">0.10333333</span><span class="p">,</span>  <span class="mf">0.10888889</span><span class="p">,</span>  <span class="mf">0.11444444</span><span class="p">,</span>  <span class="mf">0.12</span>      <span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sigmas</span> <span class="o">=</span> <span class="n">calc_efficient_portfolios_stdev</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">rs</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0700</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5198</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.17021277</span> <span class="o">-</span><span class="mf">0.44680851</span>  <span class="mf">1.27659574</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0756</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.4374</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.1820331</span>  <span class="o">-</span><span class="mf">0.26950355</span>  <span class="mf">1.08747045</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0811</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.3597</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.19385343</span> <span class="o">-</span><span class="mf">0.09219858</span>  <span class="mf">0.89834515</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0867</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2909</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.20567376</span>  <span class="mf">0.08510638</span>  <span class="mf">0.70921986</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0922</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2386</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.21749409</span>  <span class="mf">0.26241135</span>  <span class="mf">0.52009456</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.0978</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2151</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.22931442</span>  <span class="mf">0.43971631</span>  <span class="mf">0.33096927</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.1033</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2296</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.24113475</span>  <span class="mf">0.61702128</span>  <span class="mf">0.14184397</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.1089</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2761</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.25295508</span>  <span class="mf">0.79432624</span> <span class="o">-</span><span class="mf">0.04728132</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.1144</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.3418</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.26477541</span>  <span class="mf">0.97163121</span> <span class="o">-</span><span class="mf">0.23640662</span><span class="p">]]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.1200</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.4177</span>  <span class="n">w</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.27659574</span>  <span class="mf">1.14893617</span> <span class="o">-</span><span class="mf">0.42553191</span><span class="p">]]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sigmas</span> <span class="c"># the portfolio standard deviations corresponding to the rates of return rs</span>
+<span class="n">array</span><span class="p">([</span> <span class="mf">0.51981994</span><span class="p">,</span>  <span class="mf">0.4373548</span> <span class="p">,</span>  <span class="mf">0.3597492</span> <span class="p">,</span>  <span class="mf">0.29091849</span><span class="p">,</span>  <span class="mf">0.23858219</span><span class="p">,</span>
+        <span class="mf">0.21513522</span><span class="p">,</span>  <span class="mf">0.22960548</span><span class="p">,</span>  <span class="mf">0.27609419</span><span class="p">,</span>  <span class="mf">0.34177644</span><span class="p">,</span>  <span class="mf">0.41769377</span><span class="p">])</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>For each rate of return, there is a corresponding minimum variance portfolio 
+    and its associated standard deviation. </p>
+</li>
+<li>
+<p>The lines showing <code>r</code>, <code>sigma</code>, and <code>w</code> are print statements generated inside the loop.</p>
+</li>
+<li>
+<p>The function must return a sequence of standard deviations as a <code>np.array</code>. 
+    Use the accumulator pattern to build this array inside a loop. </p>
+</li>
+</ul>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Reading stock price data from files</p>
+<p>In the next part of this task, you will write some functions to read stock price 
+data from <code>.csv</code> files, and use that data to produce a minimum variance portfolio.
+The files follow the format from Yahoo Finance, and you can obtain your own
+data files using the instructions contained in Assignment 3 Task 2. </p>
+<p><strong>We will use the toolkit called <code>pandas</code> to read these data files and manipulate 
+the data. <code>pandas</code> will be discussed in class on Thursday 11/2.</strong></p>
+<p>Here are links to the data files used in the examples below:<br>
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/AAPL-monthly.csv">AAPL-monthly.csv</a><br>
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/DIS-monthly.csv">DIS-monthly.csv</a><br>
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/GOOG-monthly.csv">GOOG-monthly.csv</a><br>
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/HSY-monthly.csv">HSY-monthly.csv</a><br>
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/KO-monthly.csv">KO-monthly.csv</a><br>
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/WMT-monthly.csv">WMT-monthly.csv</a><br></p>
+<p>And some additional data files with daily stock price data:<br> 
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/AAPL-daily.csv">AAPL-daily.csv</a><br>
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/GOOG-daily.csv">GOOG-daily.csv</a><br>
+<a href="http://cs-people.bu.edu/azs/mf703/files/a9/IBM-daily.csv">IBM-daily.csv</a><br></p>
+</div>
+<ol start="6">
+<li>
+<p>Write the function <code>get_stock_prices_from_csv_files(symbols)</code> to 
+    obtain a <code>pandas.DataFrame</code> containing historical stock prices for several stocks. 
+    The parameter <code>symbols</code> will be a list of stock symbols, and the return value will 
+    be a <code>pandas.DataFrame</code> containing the monthly stock prices for each of those stock 
+    symbols, for the period of dates given in the CSV files. </p>
+<p>For example, consider the following 2 data files containing stock price data 
+for two stocks:</p>
+<p><strong><code>File: AAPL-monthly.csv</code> </strong></p>
+<div class="codehilite"><pre>    Date,Open,High,Low,Close,Adj Close,Volume
+    11/1/07,26.942858,27.525715,21.518572,26.031429,23.419334,6549947600
+    12/1/07,25.98,28.994286,25.284286,28.297142,25.457693,4313169700
+    1/1/08,28.467142,28.608572,18.02,19.337143,17.396778,8793472100
+    2/1/08,19.462856,19.512857,16.491428,17.860001,16.067854,6216488600
+    3/1/08,17.777143,20.82,16.857143,20.5,18.442949,5731818400
+    4/1/08,20.9,25.714285,20.515715,24.85,22.356453,5696745600
+    5/1/08,24.994286,27.462856,24.571428,26.964285,24.258581,4647053600
+</pre></div>
+
+
+<p><strong><code>File: DIS-monthly.csv</code> </strong></p>
+<div class="codehilite"><pre>    Date,Open,High,Low,Close,Adj Close,Volume
+    11/1/07,34.509998,34.709999,30.68,33.150002,28.840109,219617300
+    12/1/07,33.060001,33.5,31.709999,32.279999,28.083218,193431800
+    1/1/08,32.32,32.630001,26.299999,29.84,26.240885,311584700
+    2/1/08,30.75,33.23,30.049999,32.41,28.500908,273015700
+    3/1/08,32.610001,32.709999,30.049999,31.379999,27.595139,228129500
+    4/1/08,31.52,33.029999,29.57,32.43,28.518496,253682300
+    5/1/08,32.450001,35.02,32.419998,33.599998,29.547377,265545100
+</pre></div>
+
+
+<p>This function will process these files and return the <code>pandas.DataFrame</code>. </p>
+<p><strong>Getting started</strong></p>
+<p>To begin this function,  you will need to process all of the data files, one at a time
+in a loop. Your first objective is to obtain a single <code>pandas.DataFrame</code> object 
+containing the <code>Date</code> and <code>Adj Close</code> price for each stock, for example, this: </p>
+<div class="codehilite"><pre>Date
+2007-11-01    23.419334
+2007-12-01    25.457693
+2008-01-01    17.396778
+2008-02-01    16.067854
+2008-03-01    18.442949
+</pre></div>
+
+
+<p>Next, you should use an accumulator pattern to build a new <code>DataFrame</code> by iteratively
+joining the data for each stock into a single dataset. Use the stock symbol as the 
+key for the column. Specifically, use the method <code>pandas.DataFrame.join(df)</code>, which
+will join together two data frames into one data frame. </p>
+<p>For example, this data frame contains the data from all stocks above:</p>
+<div class="codehilite"><pre>                 AAPL        DIS        GOOG         KO        WMT
+2011-01-01  43.610184  35.478046  298.240234  25.634483  46.988205
+2011-02-01  45.395367  39.923080  304.718109  26.070902  43.560680
+2011-03-01  44.791302  39.329807  291.484161  27.057940  43.619331
+2011-04-01  44.999500  39.338928  270.292023  27.714268  46.397697
+2011-05-01  44.703896  37.997211  262.800720  27.447216  46.600239
+</pre></div>
+
+
+<p>The function <code>get_stock_prices_from_csv_files(symbols)</code> should return such a data set.</p>
+<p><strong><em> Hints: </em></strong>     </p>
+<ul>
+<li>
+<p>It will be helpful to build this code step-by-step at the command prompt,
+    and examine the intermediary results as you go. Remeber you can use
+    <code>pandas.DataFrame.head()</code> to view the first 5 rows of the data frame.</p>
+</li>
+<li>
+<p>You may assume that the files have the name format
+    <code>SYMBOL-monthly.csv</code> (replacing <code>SYMBOL</code> with the actual stock symbol) 
+    and that the data in the files all correspond to the same time periods, 
+    as in the example above.</p>
+</li>
+<li>
+<p>We will test this code with some different stock returns, so your code must work 
+    with <strong>any</strong> CSV data file, so long as they follow the same data format.  </p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>get_stock_returns_from_csv_files(symbols)</code>, which iwll return
+    a single <code>pandas.DataFrame</code> object containing the stock returns. Begin by 
+    calling your function <code>get_stock_prices_from_csv_files(symbols)</code> to obtain stock
+    prices. Manipulate the data frame to convert from stock prices into stock returns. 
+    The result of this function is to return a single <code>pandas.DataFrame</code> object 
+    containing the stock returns. </p>
+<p>It will have the stock symbols as column names and the dates as index values.
+Here is an example:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s">'AAPL'</span><span class="p">,</span>  <span class="s">'DIS'</span><span class="p">,</span> <span class="s">'GOOG'</span><span class="p">,</span> <span class="s">'KO'</span><span class="p">,</span> <span class="s">'WMT'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="c"># note that the function also produces this small printout for debugging</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">returns</span> <span class="o">=</span> <span class="n">get_stock_returns_from_csv_files</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">azs</span><span class="o">/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">AAPL</span><span class="o">-</span><span class="n">monthly</span><span class="o">.</span><span class="n">csv</span>
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">azs</span><span class="o">/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">DIS</span><span class="o">-</span><span class="n">monthly</span><span class="o">.</span><span class="n">csv</span>
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">azs</span><span class="o">/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">GOOG</span><span class="o">-</span><span class="n">monthly</span><span class="o">.</span><span class="n">csv</span>
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">azs</span><span class="o">/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">KO</span><span class="o">-</span><span class="n">monthly</span><span class="o">.</span><span class="n">csv</span>
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">azs</span><span class="o">/</span><span class="n">Downloads</span><span class="o">/</span><span class="n">WMT</span><span class="o">-</span><span class="n">monthly</span><span class="o">.</span><span class="n">csv</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">returns</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+                <span class="n">AAPL</span>       <span class="n">DIS</span>      <span class="n">GOOG</span>        <span class="n">KO</span>       <span class="n">WMT</span>
+<span class="mi">2007</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">01</span>       <span class="n">NaN</span>       <span class="n">NaN</span>       <span class="n">NaN</span>       <span class="n">NaN</span>       <span class="n">NaN</span>
+<span class="mi">2007</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">01</span>  <span class="mf">0.087037</span> <span class="o">-</span><span class="mf">0.026244</span> <span class="o">-</span><span class="mf">0.002193</span> <span class="o">-</span><span class="mf">0.006391</span> <span class="o">-</span><span class="mf">0.007724</span>
+<span class="mi">2008</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">01</span> <span class="o">-</span><span class="mf">0.316640</span> <span class="o">-</span><span class="mf">0.065603</span> <span class="o">-</span><span class="mf">0.183924</span> <span class="o">-</span><span class="mf">0.038618</span>  <span class="mf">0.072348</span>
+<span class="mi">2008</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mo">01</span> <span class="o">-</span><span class="mf">0.076389</span>  <span class="mf">0.086126</span> <span class="o">-</span><span class="mf">0.165019</span> <span class="o">-</span><span class="mf">0.009153</span> <span class="o">-</span><span class="mf">0.022664</span>
+<span class="mi">2008</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">01</span>  <span class="mf">0.147817</span> <span class="o">-</span><span class="mf">0.031780</span> <span class="o">-</span><span class="mf">0.065177</span>  <span class="mf">0.041225</span>  <span class="mf">0.062311</span>
+</pre></div>
+
+
+<p><strong><em> Hints: </em></strong>     </p>
+<ul>
+<li>
+<p>We cannot calculate returns for the first period. Instead, set the first 
+    row of returns to be the value <code>float('Nan')</code>, i.e, “not a number.” </p>
+</li>
+<li>
+<p>You may assume that the files exist, and that the data in the files
+    all correspond to the same time periods, as in the example above.</p>
+</li>
+<li>
+<p>We will test this code with some different stock returns, so your code must work 
+    with <strong>any</strong> CSV data file, so long as they follow the same data format.  </p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write the function <code>get_covariance_matrix(returns)</code>, which generates a
+    covariance matrix for the stock returns in <code>returns</code>. 
+    The parameter <code>return</code> will be a <code>pandas.DataFrame</code> object, i.e., the result 
+    from the <code>get_stock_returns_from_csv_files(symbols)</code> function above.</p>
+<p>For example:</p>
+<div class="codehilite"><pre>    <span class="o">&gt;&gt;&gt;</span> <span class="nx">symbols</span> <span class="o">=</span> <span class="cp">[</span><span class="s1">'AAPL'</span><span class="p">,</span>  <span class="s1">'DIS'</span><span class="p">,</span> <span class="s1">'GOOG'</span><span class="p">,</span> <span class="s1">'KO'</span><span class="p">,</span> <span class="s1">'WMT'</span><span class="cp">]</span>
+    <span class="o">&gt;&gt;&gt;</span> <span class="err">#</span> <span class="nx">note</span> <span class="nx">that</span> <span class="nx">the</span> <span class="kd">function</span> <span class="nx">also</span> <span class="nx">produces</span> <span class="k">this</span> <span class="nx">small</span> <span class="nx">printout</span> <span class="k">for</span> <span class="nx">debugging</span>
+    <span class="o">&gt;&gt;&gt;</span> <span class="nx">returns</span> <span class="o">=</span> <span class="nx">get_stock_returns_from_csv_files</span><span class="p">(</span><span class="nx">symbols</span><span class="p">)</span>
+    <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">azs</span><span class="o">/</span><span class="nx">Downloads</span><span class="o">/</span><span class="nx">AAPL</span><span class="o">-</span><span class="nx">monthly</span><span class="p">.</span><span class="nx">csv</span>
+    <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">azs</span><span class="o">/</span><span class="nx">Downloads</span><span class="o">/</span><span class="nx">DIS</span><span class="o">-</span><span class="nx">monthly</span><span class="p">.</span><span class="nx">csv</span>
+    <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">azs</span><span class="o">/</span><span class="nx">Downloads</span><span class="o">/</span><span class="nx">GOOG</span><span class="o">-</span><span class="nx">monthly</span><span class="p">.</span><span class="nx">csv</span>
+    <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">azs</span><span class="o">/</span><span class="nx">Downloads</span><span class="o">/</span><span class="nx">KO</span><span class="o">-</span><span class="nx">monthly</span><span class="p">.</span><span class="nx">csv</span>
+    <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">azs</span><span class="o">/</span><span class="nx">Downloads</span><span class="o">/</span><span class="nx">WMT</span><span class="o">-</span><span class="nx">monthly</span><span class="p">.</span><span class="nx">csv</span>
+
+    <span class="o">&gt;&gt;&gt;</span> <span class="nx">covar</span> <span class="o">=</span> <span class="nx">get_covariance_matrix</span><span class="p">(</span><span class="nx">returns</span><span class="p">)</span>
+    <span class="o">&gt;&gt;&gt;</span> <span class="nx">covar</span>
+              <span class="nx">AAPL</span>       <span class="nx">DIS</span>      <span class="nx">GOOG</span>        <span class="nx">KO</span>       <span class="nx">WMT</span>
+    <span class="nx">AAPL</span>  <span class="mf">0.007775</span>  <span class="mf">0.002384</span>  <span class="mf">0.003823</span>  <span class="mf">0.001165</span>  <span class="mf">0.000468</span>
+    <span class="nx">DIS</span>   <span class="mf">0.002384</span>  <span class="mf">0.004245</span>  <span class="mf">0.002378</span>  <span class="mf">0.001221</span>  <span class="mf">0.000410</span>
+    <span class="nx">GOOG</span>  <span class="mf">0.003823</span>  <span class="mf">0.002378</span>  <span class="mf">0.006470</span>  <span class="mf">0.000995</span>  <span class="mf">0.000348</span>
+    <span class="nx">KO</span>    <span class="mf">0.001165</span>  <span class="mf">0.001221</span>  <span class="mf">0.000995</span>  <span class="mf">0.001941</span>  <span class="mf">0.000726</span>
+    <span class="nx">WMT</span>   <span class="mf">0.000468</span>  <span class="mf">0.000410</span>  <span class="mf">0.000348</span>  <span class="mf">0.000726</span>  <span class="mf">0.002221</span>          
+    <span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>Your function will return a <code>pandas.DataFrame</code> object (dimensions <code>n * n</code>), 
+    containing the covariance matrix for the returns of these stocks.</p>
+</li>
+<li>
+<p>For each element of the covariance matrix, you will calculate the covariance
+    between the returns of two stocks. You can do either of two ways:<br>
+    (a) by manipulating the column data as a <code>DataFrame</code>, or <br>
+    (b) by converting the column data into a list, and then re-using the function 
+    <code>covariance(x,y)</code> from Assignment 3 Task 1. <br></p>
+<p>Either way will be fine, but pick only one!</p>
+</li>
+</ul>
+<p>Here we continue this example, and re-use the functions (from above) to find 
+the global minimum variance portfolio among these stocks:</p>
+<div class="codehilite"><pre>    &gt;&gt;&gt; symbols = ['AAPL',  'DIS', 'GOOG', 'KO', 'WMT']
+    &gt;&gt;&gt; returns = get_stock_returns_from_csv_files(symbols)
+    &gt;&gt;&gt; covar = get_covariance_matrix(returns)
+    &gt;&gt;&gt;
+    &gt;&gt;&gt; # convert to np.matrix types:
+    &gt;&gt;&gt; v = np.matrix(covar)
+    &gt;&gt;&gt; e = np.matrix(returns.mean())
+
+    &gt;&gt;&gt; w = calc_global_min_variance_portfolio(v) # portfolio weights:
+    matrix([[ 0.0160424 ,  0.10065317,  0.06856947,  0.39892614,  0.41580881]])
+    &gt;&gt;&gt; calc_portfolio_return(e, w)
+    0.008553022022309877
+    &gt;&gt;&gt; calc_portfolio_stdev(v, w)
+    0.0358612976659109
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="task-3-graphing-with-matplotlib-and-pandas">Task 3: Graphing with <code>matplotlib</code> and <code>pandas</code>.</h3>
+<p><em>25 points; <strong>individual-only</strong></em>
+    <em>questions (1, 2, 3) are worth 5 points each; question 4 is worth 10 points.</em></p>
+<p>In this task, you will create several graphs using the packages <code>matplotlib</code> and <code>pandas</code>. 
+  Do this entire task in a file called <code>a9task3.py</code>. 
+  You must include these import statement at the top of your file:</p>
+<div class="codehilite"><pre>    <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.dates</span> <span class="kn">as</span> <span class="nn">mdates</span>
+    <span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
+</pre></div>
+
+
+<p>In addition, you will need to import some functions that you have previously written.<br>
+  Use these additional import statements:</p>
+<div class="codehilite"><pre>    <span class="kn">from</span> <span class="nn">a8task2</span> <span class="kn">import</span> <span class="o">*</span>               <span class="c"># monte carlo simulation</span>
+    <span class="kn">from</span> <span class="nn">a9task2</span> <span class="kn">import</span> <span class="o">*</span>               <span class="c"># efficient frontier</span>
+</pre></div>
+
+
+<ol>
+<li>
+<p>Write the function <code>plot_stock_prices(symbols)</code>, which creates a graph of
+    the historical stock prices for several stocks. This function should take a parameter 
+    which is a list of stock symbols. For each stock symbol, the function will expect a 
+    <code>.csv</code> file containing stock price data (i.e., from Yahoo Finance), with monthly
+    stock prices, for example the data files above.</p>
+<p>For example, this graph was created using this function:</p>
+<p><img src="./Assignment 9 — MF 703, Boston University_files/monthly_stock_prices.png"></p>
+<p>Example function call:</p>
+<div class="codehilite"><pre>    symbols = ['AAPL',  'DIS', 'GOOG', 'KO', 'WMT']
+    plot_stock_prices(symbols)
+</pre></div>
+
+
+<p>Re-use your <code>get_stock_prices_from_csv_files(symbols)</code> function from <code>a9task2</code> to 
+obtain a <code>pandas.DataFrame</code> containing the stock prices.</p>
+<p>For example, this dataset contains the data from all stocks above:</p>
+<div class="codehilite"><pre>                     AAPL        DIS        GOOG         KO        WMT
+    2011-01-01  43.610184  35.478046  298.240234  25.634483  46.988205
+    2011-02-01  45.395367  39.923080  304.718109  26.070902  43.560680
+    2011-03-01  44.791302  39.329807  291.484161  27.057940  43.619331
+    2011-04-01  44.999500  39.338928  270.292023  27.714268  46.397697
+    2011-05-01  44.703896  37.997211  262.800720  27.447216  46.600239
+</pre></div>
+
+
+<p>Create a plot with stock prices on the vertical axis (x-axis), and the dates on the
+horizontal axis (y-axis). </p>
+<p>Add a title to the plot. </p>
+<p>Show the plot.  </p>
+</li>
+<li>
+<p>One of the problems with the graph produced in <code>plot_stock_prices(symbols)</code> is that
+    one of the stock’s prices (GOOG) is much higher than any of the others (in dollars), 
+    so it’s hard to see the detail about how they performed relative to each other. 
+    A better visualization would be to show the cumulative change in price since the 
+    starting point. </p>
+<p>Write the function <code>plot_stock_cumulative_change(symbols)</code>, which creates a graph of
+the cumulative stock returns for several stock. This function should take a parameter 
+which is a list of stock symbols. For each stock symbol, the function will expect a 
+<code>.csv</code> file containing stock price data (i.e., from Yahoo Finance), with monthly
+stock prices, for example the data files above.</p>
+<p>For example, this graph was created using this function:</p>
+<p><img src="./Assignment 9 — MF 703, Boston University_files/cum_change_stock_prices.png"></p>
+<p>Example function call:</p>
+<div class="codehilite"><pre>    symbols = ['AAPL',  'DIS', 'GOOG', 'KO', 'WMT']
+    plot_stock_cumulative_change(symbols)
+</pre></div>
+
+
+<p>Re-use your <code>get_stock_prices_from_csv_files(symbols)</code> function from <code>a9task2</code> to 
+obtain a <code>pandas.DataFrame</code> containing the stock prices.</p>
+<p>Create a new <code>pandas.DataFrame</code> containing the cumulative change in price since the
+earliest period.</p>
+<p>For example, this dataset contains the data from all stocks above:</p>
+<div class="codehilite"><pre>                    AAPL       DIS      GOOG        KO       WMT
+    2011-01-01  1.000000  1.000000  1.000000  1.000000  1.000000
+    2011-02-01  1.040935  1.125290  1.021720  1.017025  0.927056
+    2011-03-01  1.027084  1.108567  0.977347  1.055529  0.928304
+    2011-04-01  1.031858  1.108825  0.906290  1.081132  0.987433
+    2011-05-01  1.025079  1.071006  0.881171  1.070715  0.991743
+</pre></div>
+
+
+<p>Create a plot with cumulative change in prices on the vertical axis (x-axis), 
+and the dates on the horizontal axis (y-axis). </p>
+<p>Add a title on the plot. </p>
+<p>Show the plot.  </p>
+</li>
+<li>
+<p>Write the function <code>plot_simulated_stock_returns(s, mu, sigma, t, ntrials)</code>, which 
+    will create a plot of simulated stock prices. The parameters are:<br>
+    <code>s</code>, the current (initial) stock price<br>
+    <code>mu</code>, the mean rate of return on the stock<br>
+    <code>sigma</code>, the standard deviation of the rate of return on the stock<br>
+    <code>t</code>, the time period for which to run the simulation (in years)<br>
+    <code>ntrials</code>, the number of trials to plot on the graph<br></p>
+<p>To obtain simulated stock prices, you will re-use the class <code>MCStockOption</code>
+that you developed in Assignment 8, Task 1. Inside this function, create an 
+object type <code>MCStockOption</code>, i.e., </p>
+<div class="codehilite"><pre>    # use MCStockOption as stock price generator
+    o = MCStockOption(s, s, mu, sigma, t, t*12, 1)
+</pre></div>
+
+
+<p>Inside a loop, use the object’s <code>generate_stock_prices</code> method to 
+generate a simulated stock price path. For example:</p>
+<div class="codehilite"><pre>    # create ntrials runs of stock prices
+    for i in range(ntrials):
+        prices = o.generate_stock_prices()
+</pre></div>
+
+
+<p>For each set of simulated <code>prices</code>, you will add a line to your plot. Examples:</p>
+<p>This is a plot of a single simulated price path (trial) for 1 year (12 periods/year). </p>
+<div class="codehilite"><pre>    plot_simulated_stock_returns(100, 0.10, 0.3, 1, 1)
+</pre></div>
+
+
+<p><img src="./Assignment 9 — MF 703, Boston University_files/plot_simulated_stock_prices1.jpg">    </p>
+<p>This is a plot of 10 simulated price paths (trials), for 1 year (12 periods/year). </p>
+<div class="codehilite"><pre>    plot_simulated_stock_returns(100, 0.10, 0.3, 1, 10)
+</pre></div>
+
+
+<p><img src="./Assignment 9 — MF 703, Boston University_files/plot_simulated_stock_prices2.jpg"></p>
+<p>This is a plot of 10 simulated price paths (trials), for 20 years (12 periods/year). </p>
+<div class="codehilite"><pre>    plot_simulated_stock_returns(100, 0.10, 0.3, 20, 10)
+</pre></div>
+
+
+<p><img src="./Assignment 9 — MF 703, Boston University_files/plot_simulated_stock_prices3.jpg"></p>
+</li>
+<li>
+<p>Write the function <code>plot_efficient_frontier(symbols)</code> to create a graph of the 
+    efficient frontier (the set of minimum variance portfolios) that can be achieved
+    using a small set of assets.  </p>
+<p>Consider this sample graph, which processes the file stocks shown above and produces
+the efficient frontier of portfolios of these stocks:</p>
+<p><img src="./Assignment 9 — MF 703, Boston University_files/plot_efficient_frontier.jpg"></p>
+<p><strong>*Notes:</strong></p>
+<ul>
+<li>
+<p>You have written most of the code required for this function in Task 2 (above).
+  Re-use the functions <code>get_stock_returns_from_csv_files(symbols)</code> and <code>get_covariance_matrix(returns)</code>
+  to obtain the stock symbols and returns, and covariance matrix.</p>
+</li>
+<li>
+<p>Calculate the average return for each stock, and create a <code>np.matrix</code> of returns.</p>
+</li>
+<li>
+<p>Use the function <code>np.linspace(start, stop)</code> to create a set of desired rates
+  of return (<code>rs</code>) at which to find efficient portfolios. <em>Hint:</em> I used the 
+  global minimum variance portfolio’s return, and then created a range of
+  possible returns above/below the minimum variance portfolio’s return. </p>
+</li>
+<li>
+<p>Use your <code>calc_efficient_portfolios_stdev(e, v, rs)</code> function to calculate the
+  standard deviations of the set of efficient portfolios, corresponding to the 
+  desired rates of return <code>rs</code>. </p>
+</li>
+<li>
+<p>Plot the resulting efficient frontier.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="submitting-your-work">Submitting Your Work</h2>
+<p>Log into <a href="https://questromtools.bu.edu/">Questromtools</a> to submit your work. 
+Under the heading for Assignment 9, attach each of the required files to your submission. 
+You may resubmit multiple times, but only the last submission will be graded. </p>
+<p><br></p>
+</section>
+
+<footer>
+Last modified on November  7, 2017.
+</footer>
+
+</div>
+
+<div id="right" style="display: inherit;">
+<div class="toc">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#assignment-9" class="current">Assignment 9</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#preliminaries" class="">Preliminaries</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#objective-and-overview" class="">Objective and Overview</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#task-1-some-linear-algebra-with-numpy-bond-pricing-and-anayltics" class="">Task 1: Some linear algebra with numpy: bond pricing and anayltics</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#task-2-efficient-portfolios-and-the-efficient-frontier" class="">Task 2: Efficient Portfolios and the Efficient Frontier</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#task-3-graphing-with-matplotlib-and-pandas" class="">Task 3: Graphing with matplotlib and pandas.</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a9.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div></div>
+
+
+
+
+</body></html>

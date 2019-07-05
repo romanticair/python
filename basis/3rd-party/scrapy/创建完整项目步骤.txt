@@ -1,0 +1,101 @@
+1.创建Scrapy爬虫项目(可加参数)
+L:\MyPythonProgr\Some...\my_first_scrapy_proj> scrapy startproject project_name
+
+2.进入爬虫项目
+L:\MyPythonProgr\Some...\my_first_scrapy_proj> cd project_name
+
+3.全局命令
+L:\MyPythonProgr\Some...\my_first_scrapy_proj> scrapy -h
+(1)fetch
+# 爬取网页,并显示爬虫爬取的过程(非项目目录中则调用Scrapy默认爬虫爬取)
+例:
+scrapy fetch url
+
+(2)runspider
+# 不依托Scrapy的爬虫完整项目,直接运行一个爬虫文件
+例:
+first.py
+------------
+from scrapy.spiders import Spider
+class FirstSpider(Spider):
+    name = 'first'
+    allowed_domains = ['baidu.com']
+    start_urls = ['http://www.baidu.com]
+    
+    der parse(self, response):
+        pass
+
+L:\*\*> scrapy runspider --loglevel=INFO first.py
+
+(3)settings
+# 查看Scrapy对应的配置信息
+例:
+L:\MyP*\Som*\my*\myfirstpjt\myfirstpjt> scrapy settings --get BOT_NAME
+L:\MyP*\Som*\my*\myfirstpjt\myfirstpjt> scrapy settings --get SPIDER_MODULES
+
+(4)shell
+# 启动Scrapy的交互终端(开发、调试时常用到)
+例:
+# 为爬取百度首页创建交互终端环境(之后再>>>中可直接使用命令-效率)
+L:\*\*> scrapy shell http://www.baidu.com --nolog
+
+(5)startproject
+# 创建项目,与顶部累赘
+
+(6)version
+# 查看Scrapy版本
+例:
+# 加上参数v, 查看与Scrapy相关的其它版本信息
+L:\*\*> scrapy version -v
+
+(7)view
+# 实现下载某网页并用浏览器查看的功能(并下载到本地？)
+例:
+L:\*\*> scrapy view http://news.163.com/
+
+
+4.项目命令
+# 需要进入项目中才能使用
+L:\*\Som*\my_fir*\myfirstpjt> scrapy -h
+(1)bench
+# 测试本地硬件的性能(会创建一本地服务器并以最大的速度爬行)
+例:
+#测试本地硬件性能,避免其它因素影响,仅对链接跟进
+L:\*\Som*\my_fir*\myfirstpjt> scrapy bench
+
+(2)check
+# 爬虫测试很麻烦,这里为对其进行合同检查(契约)
+例:
+L:\*\Som*\my_fir*\myfirstpjt> scrapy check 爬虫名
+
+(3)crawl
+# 启动某个爬虫
+例:
+L:\*\Som*\my_fir*\myfirstpjt> scrapy crawl 爬虫名
+
+注意: 爬虫名不是爬虫项目名,也不是爬虫文件名
+
+(4)edit(windows有bug)
+# 打开对应编辑器对爬虫文件进行编辑
+例:
+L:\*\Som*\my_fir*\myfirstpjt> scrapy edit myfile
+
+(5)genspider
+# 可创建Scrapy爬虫文件,这是一种快速创建爬虫文件的方式
+例:
+# 查看当前可使用的模板
+L:\*\Som*\my_fir*\myfirstpjt> scrapy genspider -l
+# 可基于其一爬虫模板来生成一爬虫文件,这里选basic模板举例
+L:\*\Som*\my_fir*\myfirstpjt> scrapy genspider -t basic myfile http://www.baidu.com
+# 查看爬虫模板csvfeed的内容
+L:\*\Som*\my_fir*\myfirstpjt> scrapy genspider -d csvfeed 
+
+(6)list
+# 列出当前可用的爬虫文件
+例:
+L:\*\Som*\my_fir*\myfirstpjt> scrpay list
+
+(7)parse(有很多可选参数)
+# 实现获取指定url网址,并使用对应的爬虫文件进行处理分析
+例:
+L:\*\Som*\my_fir*\myfirstpjt> scrapy http://www.baidu.com --nolog

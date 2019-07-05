@@ -1,0 +1,28 @@
+1.显示等待
+说明:
+一种条件等待,某一条件成立时才执行,可设超时
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_coditions as EC
+
+driver = webdriver.Firefox()
+driver.get('http://somedomain//url_that_delays_loading')
+try:
+    element = WebDriverWait(driver, 10).util(         # 默认500ms检测一次
+                  EC.presence_of_element_located((By.ID, 'myDynamicElement')))
+finally:
+    driver.quit()
+    
+2.隐式等待
+说明:
+在尝试发现某元素时，若没发现，等待固定长度时间，是Webdriver对象实例
+的整个生命周期,Webdriver执行每条命令超时时间都一样
+from selenium import webdriver
+driver = webdriver.Firefox()
+driver.implicitly_wait(10)  # seconds
+driver.get('http://somedomain/url_that_delays_loading')
+myDynamicElement = driver.find_element_by_id('myDynamicElement')
+
+3.线程等待
+time.sleep(time)

@@ -1,0 +1,216 @@
+mailParser.py
+    MailParser(MailTool)
+        walkNamedParts(message)
+        partName(part, ix)
+        saveParts(savedir, message)
+        saveOnePart(savedir, partname, message)
+        partsList(message)
+        findOnePart(partname, message)
+        decodePayload(part, asStr=True)
+        findMainText(message, asStr=True)
+        decodeHeader(rawheader)
+        decodeAddrHeader(rawheader)
+        splitAddresses(field)
+        parseHeaders(mailtext)
+        parseMessage(fulltext)
+        parseMessageRaw(fulltext)
+
+
+mailSender.py
+    fix_encode_base64(msgobj)
+    fix_text_required(encodingname)
+
+    MailSender(MailTool)
+        sendMessage(From, To, Subj, extrahdrs, bodytext, attaches,
+                    saveMailSeparator=(('=' * 80) + 'PY\n'),
+                    bodytextEncoding='us-ascii',
+                    attachesEncodings=None)
+        addAttachments(mainmsg, bodytext, attaches, bodytextEncoding, attachesEncodings)
+        saveSentMessage(fullText, saveMailSeparator)
+        encodeHeader(headertext, unicodeencoding='utf-8')
+        encodeAddrHeader(headertext, unicodeencoding='utf-8')
+        authenticateServer(server) -> pass
+        getPassword() -> pass
+
+    MailSenderAuth(MailSender)
+        authenticateServer(server)
+        getPassword()
+        askSmtpPassword() -> pass
+
+    MailSenderAuthConsole(MailSenderAuth)
+        askSmtpPassword()
+
+    SilentMailSender(SilentMailTool, MailSender)
+
+
+mailFetcher.py
+    DeleteSynchError(Exception):pass
+    TopNotSupported(Exception):pass
+	MessageSynchError(Exception):pass
+
+	MailFetcher(MailTool)
+	    connect()
+	    decodeFulltext(messageBytes)
+	    downloadMessage(msgnum)
+	    downloadAllHeaders(progress=None, loadfrom=1)
+	    downloadAllMessages(progress=None, loadfrom=1)
+	    deleteMessages(msgnums, progress=None)
+	    deleteMessagesSafely(msgnums, synchHeaders, progress=None)
+	    checkSynchError(synchHeaders)
+	    headersMatch(hdrtext1, hdrtext2)
+	    getPassword()
+	    askPopPassword() -> pass
+
+	MailFetcherConsole(MailFetcher)
+	    askPopPassword()
+
+	SilentMailFetcher(SilentMailTool, MailFetcher)pass
+
+
+mailTool.py
+    MailTool
+        trace(message)
+
+    SilentMailTool
+        trace(message) -> pass
+
+
+messagecache.py
+    MessageInfo
+
+    MessageCache(mailtools.MailFetcher)
+        loadHeaders(forceReloads, progress=None)
+        getMessage(msgnum)
+        getMessages(msgnums, progress=None)
+        getSize(msgnum)
+        isLoaded(msgnum)
+        allHdrs()
+        deleteMessages(msgnums, progress=None)
+
+    GuiMessageCache(MessageCache)
+        setPopPassword(appname)
+        askPopPassword()
+
+
+popuputil.py
+	HelpPopup(PopupWindow)
+
+	askPasswordWindow(appname, prompt)
+
+	BusyBoxWait(PopupWindow)
+		makeModal()
+		changeText(newtext)
+		quit()
+
+	BusyBoxNowait(BusyBoxWait)
+		makeModal() -> pass
+
+
+wraplines.py
+	wrapLinesSimple(lineslist, size=defaultsize)
+	wrapLinesSmart(lineslist, size=defaultsize, delimiters='.,\t ')
+	wrapText1(text, size=defaultsize)
+	wrapText2(text, size=defaultsize)
+	wrapText3(text, size=defaultsize)
+	wrapLines1(lines, size=defaultsize)
+	wrapLines2(lines, size=defaultsize)
+
+
+ViewWindows.py
+	ViewWindow(windows.PopupWindow, mailtools.MailParser)
+		makeWidgets(headermap, showtext)
+		makeHeaders(headermap)
+		actionButtons()
+		makePartButtons()
+		onOnePart(partname)
+		onParts()
+		onSplit()
+		askOpen(appname, prompt)
+		openParts(partfiles)
+
+	WriteWindow(ViewWindow, MailSenderClass)
+		actionButtons()
+		onParts()
+		onAttach()
+		resolveUnicodeEncodings()
+		onSend()
+		onSendExit(popup)
+		onSendFail(exc_info, popup)
+		askSmtpPassword()              //need to find
+
+	ReplyWindow(WriteWindow)
+	ForwardWindow(WriteWindow)
+
+
+ListWindows.py
+	PyMailCommon(mailtools.MailParser)    // thread something wrong
+		 makeWidgets()
+		 onCheckAll()
+		 onViewRawMail()
+		 contViewRaw(msgnums, pyedit=True)
+		 onViewFormatMail()
+		 contViewFmt(msgnums)
+		 onWriteMail()
+		 onReplyMail()
+		 contReply(msgnums)
+		 onFwdMail()
+		 contFwd(msgnums)
+		 onSaveMailFile()
+		 contSave(msgnums, filename)
+		 onOpenMailFile(filename=None)
+		 onDeleteMail()
+		 selectedMsgs()
+		 verifySelectedMsgs()
+		 fillIndex(maxhdrsize=25)
+		 replyCopyTo(message)
+		 formatQuotedMainText(message)
+		 quoteOrigText(maintext, message)
+		 getMessages(msgnums, after)
+		 getMessage(msgnum) -> pass
+    	 headersMaps() -> pass
+     	 mailSize(msgnum) -> pass
+    	 doDelete() -> pass
+
+    PyMailFile(PyMailCommon)
+    	actions()
+    	loadMailFileThread()
+    	loadMailFile()
+    	onLoadMailFileExit(savetitle)
+    	onLoadMailFileFail(exc_info, savetitle)
+    	addSavedMails(fulltextlist)
+    	okayToSave()
+    	okayToDelete()
+    	doDelete(msgnums)
+    	deleteMailFile(msgnums)
+    	onDeleteMailFileExit(savetitle)
+    	onDeleteMailFileFail(exc_info, savetitle)
+    	getMessages(msgnums, after)
+    	getMessage(msgnum)
+    	headersMaps()
+    	mailSize(msgnum)
+    	quit()
+
+    PyMailServer(PyMailCommon)
+    	actions()
+    	makeWidgets()
+    	addHelpBar()
+    	onShowHelp()
+    	onShowMySource(showAsMail=False)
+    	onLoadServer(forceReload=False)
+    	onLoadHdrsExit(popup)
+    	onLoadHdrsFail(exc_info, popup)
+    	onLoadHdrsProgress(i, n, popup)
+    	okayToSave()
+    	okayToDelete()
+    	doDelete(msgnumlist)
+    	onDeleteExit(popup)
+    	onDeleteFail(exc_info, popup)
+    	onDeleteProgress(i, n, popup)
+    	getMessages(msgnums, after)
+    	getMessage(msgnum)
+    	onLoadMsgsExit(after, popup, toLoad)
+    	onLoadMsgsFail(exc_info, after, popup, toLoad)
+    	onLoadMsgsProgress(i, n, after, popup, toLoad)
+    	headersMaps()
+    	mailSize(msgnum)
+    	okayToQuit()

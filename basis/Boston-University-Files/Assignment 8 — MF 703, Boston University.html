@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://cs-people.bu.edu/azs/mf703/assignments/a8.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Assignment 8 — MF 703, Boston University</title>
+
+<meta name="description" content="Course website for MF 703, Boston University.">
+<link rel="stylesheet" href="./Assignment 8 — MF 703, Boston University_files/style.css">
+<!-- 
+<link rel="icon" type="image/x-icon" href="http://cs-people.bu.edu/azs/mf703img/favicon.ico"> 
+<link rel="mask-icon" href="http://cs-people.bu.edu/azs/mf703/img/111.svg" color="#cc0000">
+-->
+<script src="./Assignment 8 — MF 703, Boston University_files/respond.min.js.下载"></script>
+<script src="./Assignment 8 — MF 703, Boston University_files/html5shiv.js.下载"></script>
+<script src="./Assignment 8 — MF 703, Boston University_files/cs111.js.下载"></script>
+<meta name="viewport" content="width=device-width, user-scalable=yes">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+</head>
+
+<body onload="setup();">
+
+<div id="left">
+<a id="header" href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#" class="backtotop">↑</a>
+<div id="subheader">
+Fall 2017
+</div>
+
+<nav>
+<ul>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/index.html">Home</a></li>
+    <li><a href="https://questromtools.bu.edu/" target="_top">Questrom Tools</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/files/syllabus.pdf">Syllabus</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/staff.html">Staff</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/assignments/">Assignments</a></li>
+    <li><a href="https://piazza.com/class/j7akiyy9xs84n3" target="_blank">Piazza Discussion</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/resources.html">Resources</a></li>
+    <li><a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">Collaboration</a></li>
+<!--
+    <li><a href="http://cs-people.bu.edu/azs/mf703/policies.html">Policies</a></li>
+-->
+</ul>
+<ul class="external">
+    <li><a href="http://pythontutor.com/visualize.html#py=3" target="_blank">Python Tutor</a></li>
+<!--    <li><a href="http://cs-people.bu.edu/azs/mf703/apollo/" target="_blank">Apollo</a></li> -->
+</ul>
+</nav>
+
+</div><!-- end #left -->
+
+<div id="middle">
+<section class="main">
+<h1 id="assignment-8">Assignment 8</h1>
+<div class="toc">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#assignment-8">Assignment 8</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#preliminaries">Preliminaries</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#objective-and-overview">Objective and Overview</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#task-1-black-scholes-option-pricing">Task 1: Black-Scholes option pricing</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#task-2-monte-carlo-option-pricing">Task 2: Monte-Carlo Option Pricing</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><em>due by <font color="blue"><strong>9:00 p.m.</strong></font> on Sunday, October 29th, 2017</em></p>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>In your work on this assignment, make sure to abide by the
+<a href="http://cs-people.bu.edu/azs/mf703/collaboration.html">collaboration policies</a> of the course.  </p>
+<p>If you have questions while working on this assignment, please post them on <a href="http://cs-people.bu.edu/azs/mf703/assignments/piazza">Piazza!</a>
+This is the best way to get a quick response from your classmates and the course staff. </p>
+<div class="admonition note">
+<p class="admonition-title">SciPy Programming Toolkit</p>
+<p>This assignment will require the cumulative probability density function, which is 
+available in the (free) <a href="https://www.scipy.org/" target="_blank">SciPy</a>
+toolkit of scientific programming tools. </p>
+<p>If you are using Anaconda/Spyder, this package is already installed for you. 
+If you not using Spyder, you will need to install it yourself. 
+I recommend running this installer at the Python Console:</p>
+<div class="codehilite"><pre><span class="n">Python</span> <span class="mf">3.5</span><span class="o">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">v3</span><span class="o">.</span><span class="mf">5.1</span><span class="p">:</span><span class="mi">37</span><span class="n">a07cee5969</span><span class="p">,</span> <span class="n">Dec</span>  <span class="mi">5</span> <span class="mi">2015</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">44</span><span class="p">)</span> 
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">4.2</span><span class="o">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">Apple</span> <span class="n">Inc</span><span class="o">.</span> <span class="n">build</span> <span class="mi">5666</span><span class="p">)</span> <span class="p">(</span><span class="n">dot</span> <span class="mi">3</span><span class="p">)]</span> <span class="n">on</span> <span class="n">darwin</span>
+<span class="n">Type</span> <span class="s">"copyright"</span><span class="p">,</span> <span class="s">"credits"</span> <span class="ow">or</span> <span class="s">"license()"</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pip</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pip</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s">'install'</span><span class="p">,</span><span class="s">'scipy'</span><span class="p">])</span>
+</pre></div>
+
+
+<p>The above will take some time to install, so please be patient. </p>
+</div>
+<h2 id="objective-and-overview">Objective and Overview</h2>
+<p><em>Objective</em>: Additional practice with object-oriented programming, class definintions,
+inheritance, and polymorphism.</p>
+<p><em>Overview</em>: In this assignment, you will implement some classes to assist with option
+pricing using the Black-Scholes formula (task 1) and Monte Carlo simulation (task 2). 
+In each task, you will implement a base class to encapsulate the fundamental data members 
+and common calculations used by both call and put options, and then create subclasses to 
+implement call- or put-specific features.</p>
+<h3 id="task-1-black-scholes-option-pricing">Task 1: Black-Scholes option pricing</h3>
+<p><em>50 points; <strong>individual-only</strong></em></p>
+<p>The <a target="_blank" href="https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model">
+  Black-Scholes</a> model is a mathematical model used for valuing European call and put 
+  options. </p>
+<p>In this task, you will write several class definitions as well as some client code to 
+  implement and test the Black-Scholes pricing formula. Do this entire task in a file 
+  called <code>a8task1.py</code>. </p>
+<ol>
+<li>
+<p>Write a definition for the class <code>BSOption</code>, which encapsulates the data required
+    to do Black-Scholes option pricing formula. The data required include:<br>
+        <code>s</code> (the current stock price in dollars), <br>
+        <code>x</code> (the option strike price),<br>
+        <code>t</code> (the option maturity time in years), <br>
+        <code>sigma</code> (the annualized standard deviation of returns), <br>
+        <code>rf</code> (the annualized risk free rate of return),<br>
+        <code>div</code> (the annualized dividend rate; assume continuous dividends rate), <br></p>
+<p>Create the <code>__init__</code> and <code>__repr__</code> methods for the class <code>BSOption</code>, such that you 
+can create and print out an object like this:</p>
+<p>Example: </p>
+<div class="codehilite"><pre>&gt;&gt;&gt; option = BSOption(100, 100, 0.25, 0.3, 0.06, 0.00)
+&gt;&gt;&gt; print(option)
+s = $100.00, x = $100.00, t = 0.25 (years), sigma = 0.300, rf = 0.060, div = 0.00
+</pre></div>
+
+
+</li>
+<li>
+<p>The Black-Scholes formula for call and put options require the following factors:</p>
+<p><img src="./Assignment 8 — MF 703, Boston University_files/d1d2.jpg"></p>
+<p>Create the following 4 methods on the class <code>BSOption</code> to calculate 
+<code>d1</code>, <code>d2</code>, <code>nd1</code>, and <code>nd2</code>. You should be able to test these formulas as such:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; option = BSOption(100, 100, 0.25, 0.3, 0.06, 0.00)
+&gt;&gt;&gt; print(option)
+s = $100.00, x = $100.00, t = 0.25 (years), sigma = 0.300, rf = 0.060, div = 0.00
+&gt;&gt;&gt; option.d1()
+0.175
+&gt;&gt;&gt; option.d2()
+0.024999999999999994
+&gt;&gt;&gt; option.nd1()
+0.56946018320767366
+&gt;&gt;&gt; option.nd2()
+0.50997251819523803
+</pre></div>
+
+
+<p><strong><em>Notes:</em></strong> </p>
+<ul>
+<li>
+<p>The methods <code>nd1()</code> and <code>nd2()</code> correspond to the expressions <code>N(d1)</code> and <code>N(d2)</code>,
+    which are the normal cumulative probability density of <code>d1</code> and <code>d2</code> respectively. 
+    To calculate this, begin by importing the <code>norm</code> module from the <code>scipy.stats</code> 
+    package:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>After importing, you can use the function <code>norm.cdf(x)</code> to find the cumulative
+    probability density of <code>x</code>. </p>
+</li>
+</ul>
+</li>
+<li>
+<p>Write method declarations on class <code>BSOption</code> for the methods <code>value(self)</code> and 
+    <code>delta(self)</code>. These are methods that will be concretely implemented in the subclasses, 
+    but we want to have them as part of the interface of the base class. This will be further
+    explained in parts 2 and 3 below. For now, the implementation should merely.
+    print out a brief message and return 0, i.e.,</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; option = BSOption(100, 100, 0.25, 0.3, 0.06, 0.00)
+&gt;&gt;&gt; print(option)
+s = $100.00, x = $100.00, t = 0.25 (years), sigma = 0.300, rf = 0.060, div = 0.00
+&gt;&gt;&gt; option.value()
+Cannot calculate value for base class BSOption. # print statement
+0 # return value
+&gt;&gt;&gt; option.delta()
+Cannot calculate delta for base class BSOption. # print statement
+0 # return value
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a definition for the class <code>BSEuroCallOption</code>, which inherits from the
+    base class <code>BSOPtion</code> and implements the pricing algorithm for a European-style call 
+    option. This new class will have a constructor that takes all of the same parameters, 
+    as <code>BSOption</code>, in the same order, and initializes the base-class object appropriately.</p>
+<p>Your class <code>BSEuroCallOption</code> must override the <code>__repr__(self)</code> and <code>value(self)</code> 
+methods, to provide a specific implementation appropriate for a European Call option.
+For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call = BSEuroCallOption(100, 100, 1, 0.30, 0.06, 0.00)
+&gt;&gt;&gt; print(call)
+BSEuroCallOption, value = $14.72,
+parameters = (s = $100.00, x = $100.00, t = 1.00 (years), sigma = 0.300, rf = 0.060, div = 0.00) ,
+&gt;&gt;&gt; call.value()
+14.717072420289298
+</pre></div>
+
+
+<p>Note that the call option’s <code>__repr__</code> method includes the option’s value. 
+I recommend that you implement the <code>value</code> method first, and then complete the 
+<code>__repr__</code> method.</p>
+<p>The European call option’s value is given by this equation:</p>
+<p><img src="./Assignment 8 — MF 703, Boston University_files/bs_call_value.jpg"></p>
+<p>Note that this method takes no parameters, other than the required reference <code>self</code>.
+In your implementation, you will use the data members of the base-class <code>BSOption</code>,
+as well as the base-class methods <code>nd1()</code> and <code>nd2()</code>. This method will not print
+anything, but will return the call option’s value.</p>
+<p>Here are some additional examples/test cases:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; # in-the-money (S &gt; X) call option:
+&gt;&gt;&gt; call = BSEuroCallOption(100, 90, 1.0, 0.30, 0.06, 0.00)
+&gt;&gt;&gt; call.value()
+20.250875968027721
+&gt;&gt;&gt; # out-of-the-money (X &gt; S) call option:
+&gt;&gt;&gt; call = BSEuroCallOption(90, 100, 1.0, 0.30, 0.06, 0.00)
+&gt;&gt;&gt; call.value()
+9.0162606515961699
+&gt;&gt;&gt; # call on dividend-paying stock:
+&gt;&gt;&gt; call = BSEuroCallOption(90, 100, 1.0, 0.30, 0.06, 0.04)
+&gt;&gt;&gt; call.value()
+7.3465659048018956
+&gt;&gt;&gt; # call with short maturity:
+&gt;&gt;&gt; call = BSEuroCallOption(90, 100, 0.25, 0.30, 0.06, 0.04)
+&gt;&gt;&gt; call.value()
+2.1119301352579818
+&gt;&gt;&gt; # call with higher standard deviation:
+&gt;&gt;&gt; call = BSEuroCallOption(90, 100, 0.25, 0.50, 0.06, 0.04)
+&gt;&gt;&gt; call.value()
+5.3656759063754969
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a definition for the class <code>BSEuroPutOption</code>, which inherits from the
+    base class <code>BSOPtion</code> and implements the pricing algorithm for a European-style put 
+    option. This new class will have a constructor that takes all of the same parameters, 
+    as <code>BSOption</code>, in the same order, and initializes the base-class object appropriately.</p>
+<p>Your class <code>BSEuroPutOption</code> must override the <code>__repr__(self)</code> and <code>value(self)</code> 
+methods, to provide a specific implementation appropriate for a European Put option.
+For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; put = BSEuroPutOption(100, 100, 1, 0.30, 0.06, 0.00)
+&gt;&gt;&gt; print(put)
+BSEuroPutOption, value = $8.89,
+parameters = (s = $100.00, x = $100.00, t = 1.00 (years), sigma = 0.300, rf = 0.060, div = 0.00) 
+&gt;&gt;&gt; put.value()
+8.8935257787141637
+</pre></div>
+
+
+<p>Note that the put option’s <code>__repr__</code> method includes the option’s value. 
+I recommend that you implement the <code>value</code> method first, and then complete the 
+<code>__repr__</code> method.</p>
+<p>The European put option’s value is given by this equation:</p>
+<p><img src="./Assignment 8 — MF 703, Boston University_files/bs_put_value.jpg"></p>
+<p>Note that this method takes no parameters, other than the required reference <code>self</code>.
+In your implementation, you will use the data members of the base-class <code>BSOption</code>,
+as well as the base-class methods <code>nd1()</code> and <code>nd2()</code>. This method will not print
+anything, but will return the put option’s value.</p>
+<p>Here are some additional examples/test cases:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; # out-of-the-money (S &gt; X) put option:
+&gt;&gt;&gt; put = BSEuroPutOption(100, 90, 1.0, 0.30, 0.06, 0.00)
+&gt;&gt;&gt; put.value()
+5.0096839906100996
+&gt;&gt;&gt; # in-the-money (S &lt; X) put option:
+&gt;&gt;&gt; put = BSEuroPutOption(90, 100, 1.0, 0.30, 0.06, 0.00)
+&gt;&gt;&gt; put.value()
+13.192714010021035
+&gt;&gt;&gt; # put option on dividend-paying stock
+&gt;&gt;&gt; put = BSEuroPutOption(90, 100, 1.0, 0.30, 0.06, 0.04)
+&gt;&gt;&gt; put.value()
+15.051969739517673
+&gt;&gt;&gt; # put option with short maturity
+&gt;&gt;&gt; put = BSEuroPutOption(90, 100, 0.25, 0.30, 0.06, 0.04)
+&gt;&gt;&gt; put.value()
+11.518639058139101
+&gt;&gt;&gt; # put option with higher standard deviation
+&gt;&gt;&gt; put = BSEuroPutOption(90, 100, 0.25, 0.50, 0.06, 0.04)
+&gt;&gt;&gt; put.value()
+14.772384829256616
+</pre></div>
+
+
+</li>
+<li>
+<p>Add method declarations on the <code>BSEuroCallOption</code> and <code>BSEuroPutOption</code> classes to 
+    override the base-class implementation of the <code>delta(self)</code> method. We can think of 
+    the delta as an approximation of the change in the value of this option for a $1 
+    change in price in the underlying stock.</p>
+<p>The detlas for European call and put options are given by these equations:</p>
+<p><img src="./Assignment 8 — MF 703, Boston University_files/bs_delta_call.jpg">
+<img src="./Assignment 8 — MF 703, Boston University_files/bs_delta_put.jpg"></p>
+<p>Note that this method takes no parameters, other than the required reference <code>self</code>.
+In your implementation, you will use the data members of the base-class <code>BSOption</code>,
+as well as the base-class method <code>nd1()</code>. This method will not print anything, but 
+will return the option’s delta value.</p>
+<p>Here are some examples generated using the <code>delta</code> methods on these objects:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call = BSEuroCallOption(100, 100, 0.5, 0.25, 0.04, 0.02)
+&gt;&gt;&gt; call.delta()
+0.55762754555777638
+&gt;&gt;&gt; put = BSEuroPutOption(100, 100, 0.5, 0.25, 0.04, 0.02)
+&gt;&gt;&gt; put.delta()
+-0.44237245444222362
+&gt;&gt;&gt; # change standard deviation:
+&gt;&gt;&gt; call.sigma = 0.5
+&gt;&gt;&gt; call.delta()
+0.58123775373393827
+&gt;&gt;&gt; put.sigma = 0.5
+&gt;&gt;&gt; put.delta()
+-0.41876224626606173
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a client-code function <code>generate_option_value_table(s, x, t, sigma, rf, div)</code> 
+    (not a class method) which will generate a printout to illustrate the change in option 
+    prices with respect to the change in the underlying stock price. The function will 
+    require the following parameters: <br>
+        <code>s</code> (the current stock price in dollars), <br>
+        <code>x</code> (the option strike price),<br>
+        <code>t</code> (the option maturity time in years), <br>
+        <code>sigma</code> (the annualized standard deviation of returns), <br>
+        <code>rf</code> (the annualized risk free rate of return),<br>
+        <code>div</code> (the annualized dividend rate; assume continuous dividends rate), <br></p>
+<p>Here is a sample output from this function:</p>
+<div class="codehilite"><pre>BSEuroCallOption, value = $7.44,
+parameters = (s = $100.00, x = $100.00, t = 0.50 (years), sigma = 0.250, rf = 0.040, div = 0.02) 
+BSEuroPutOption, value = $6.46,
+parameters = (s = $100.00, x = $100.00, t = 0.50 (years), sigma = 0.250, rf = 0.040, div = 0.02)
+
+Change in option values w.r.t. change in stock price:
+   price        call value  put value   call delta  put delta
+$   90.00   $    3.06   $   11.98     0.3260         -0.6740
+$   91.00   $    3.40   $   11.32     0.3488         -0.6512
+$   92.00   $    3.76   $   10.69     0.3719         -0.6281
+$   93.00   $    4.14   $   10.08     0.3953         -0.6047
+$   94.00   $    4.54   $    9.49     0.4188         -0.5812
+$   95.00   $    4.96   $    8.93     0.4423         -0.5577
+$   96.00   $    5.41   $    8.39     0.4657         -0.5343
+$   97.00   $    5.89   $    7.87     0.4891         -0.5109
+$   98.00   $    6.38   $    7.38     0.5122         -0.4878
+$   99.00   $    6.90   $    6.91     0.5351         -0.4649
+$  100.00   $    7.44   $    6.46     0.5576         -0.4424
+$  101.00   $    8.01   $    6.03     0.5797         -0.4203
+$  102.00   $    8.59   $    5.62     0.6014         -0.3986
+$  103.00   $    9.20   $    5.24     0.6225         -0.3775
+$  104.00   $    9.82   $    4.88     0.6431         -0.3569
+$  105.00   $   10.47   $    4.53     0.6631         -0.3369
+$  106.00   $   11.14   $    4.21     0.6825         -0.3175
+$  107.00   $   11.82   $    3.90     0.7011         -0.2989
+$  108.00   $   12.52   $    3.62     0.7191         -0.2809
+$  109.00   $   13.24   $    3.35     0.7365         -0.2635
+$  110.00   $   13.98   $    3.10     0.7530         -0.2470
+</pre></div>
+
+
+<p><strong><em>Implementation Notes:</em></strong> </p>
+<ul>
+<li>
+<p>This function should create exactly 2 option objects, a <code>call</code> and a <code>put</code>.</p>
+</li>
+<li>
+<p>Inside the function, use a loop to iterate over a range of possible prices. At each
+    price, change the object’s stock price (<code>call.s</code> or <code>put.s</code>), and then use the methods
+    to obtain the options’s value and delta.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>One limitation of the Black-Scholes model is that while we can observe the current 
+    stock price, we cannot know with certainty the appropriate standard deviation to use. 
+    However, this limitation can become an advantage, as we can observe stock and option 
+    prices in the market, and use the Black-Scholes model to find the implied volatility,
+    i.e., the amount of standard deviation that explains the current option price. 
+    The implied volatility tells us how risky the stock is, according to the opinion of
+    options market-makers.</p>
+<p>For example, here is a listing of 28-day call options on Apple Computer as of 10/21/2016:</p>
+<p><img src="./Assignment 8 — MF 703, Boston University_files/aapl_options.jpg"></p>
+<p>(source: Yahoo Finance, <a target="_blank" href="http://finance.yahoo.com/quote/AAPL/options?p=AAPL">
+http://finance.yahoo.com/quote/AAPL/options?p=AAPL</a>)</p>
+<p>Write a client function <code>calculate_implied_volatility(option, value)</code> to calculate 
+the implied volatility of an observed option. For example, here is a function call
+to find the implied volatility of Apple’s 28-day option at a $75 strike price:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call = BSEuroCallOption(116.67, 75, 28/365, 0.5, 0.00, 0.00)
+&gt;&gt;&gt; call.value()
+41.672478830044255
+&gt;&gt;&gt; calculate_implied_volatility(call,43.21) # at last trade price
+1.25
+&gt;&gt;&gt; calculate_implied_volatility(call,41.95) # at last ask price
+0.859375
+</pre></div>
+
+
+<p>Note in this example that since we don’t know the actual sigma to use, I just picked
+a number (0.5). Also, note that the current risk-free rate is approximately 0%.</p>
+<p><strong><em>Implementation Notes:</em></strong> </p>
+<ul>
+<li>
+<p>You have a lot of discretion about how to implement this function, but a good 
+    approach is to use an indefinite (<code>while</code>) loop as well as some decision logic.</p>
+</li>
+<li>
+<p>Iterate and change the option’s sigma until the option’s value is close enough 
+    to the observed price, for example, using an acceptable margin of error.</p>
+</li>
+</ul>
+<p>While writing/debugging this function, it might be helpful to include a print statement
+inside your loop, i.e., </p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call = BSEuroCallOption(116.67, 75, 28/365, 0.5, 0.00, 0.00)
+&gt;&gt;&gt; call.value()
+41.672478830044255
+&gt;&gt;&gt; calculate_implied_volatility(call,41.95)
+sigma=0.500000, value=41.672479
+sigma=1.000000, value=42.274526
+sigma=0.750000, value=41.786081
+sigma=0.875000, value=41.973457
+sigma=0.812500, value=41.866020
+sigma=0.843750, value=41.916200
+sigma=0.859375, value=41.943936
+sigma=0.867188, value=41.958472
+sigma=0.863281, value=41.951148
+sigma=0.861328, value=41.947528
+0.8623046875
+</pre></div>
+
+
+<p><strong><em>Another Note:</em></strong> </p>
+<p>By using inheritance, the <code>calculate_implied_volatility(option, value)</code> function 
+doesn’t depend on which type of option it is working with. The parameter <code>option</code> 
+must be an instance of a <code>BSOption</code> object. However, since bother <code>BSEuroCallOption</code> 
+and <code>BSEuroPutOption</code> are subclasses of <code>BSOption</code>, either one will work. </p>
+<p>For example, here is the same function finding the implied volatility in a 28-day 
+put option on AAPL:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; put = BSEuroPutOption(116.67, 100, 28/365, 0.01, 0.00, 0.00)
+&gt;&gt;&gt; put.value()
+0.0
+&gt;&gt;&gt; calculate_implied_volatility(put,0.17)
+0.324453125
+</pre></div>
+
+
+</li>
+</ol>
+<h3 id="task-2-monte-carlo-option-pricing">Task 2: Monte-Carlo Option Pricing</h3>
+<p><em>50 points; <strong>individual-only</strong></em></p>
+<p>The Black-Scholes method provides the most efficient way to value standard options,
+  such as the European call or put options. However, there exist many exotic options types
+  for which the payoff depends on the path of the underlying assets, and thus require
+  a technique to simulate the path of a stock price (or other underlying asset) through 
+  time. </p>
+<p><strong>Monte Carlo Simulation</strong> is a mathematical technique in which we use data generated at
+  random to help understand what might occur in some real scenario. In this assignment, we
+  use Monte Carlo simulation to value stock options. To begin, will assume that a stock’s 
+  rate of return in any period follows a known statistical distribution. We will use a 
+  random-number generator to create simulated stock returns, and use these stock returns 
+  to find theoption’s payoff. </p>
+<p>We will use object-oriented techniques to implement our Monte Carlo simulation in a way
+  that makes it extensible to many different kinds of with similar fundamental 
+  characteristics such as the underlying stock’s mean rate of return and 
+  standard deviation of returns, but with different payoff algorithms (e.g., European, 
+  average price, or no-regret options).</p>
+<p>Do this entire task in a file called <code>a8task2.py</code>.</p>
+<ol>
+<li>
+<p>Begin by writing a class definition for the base class <code>MCStockOption</code>. This class
+    will encapsulate the idea of a Monte Carlo stock option, and contain all of the 
+    <strong>data members</strong> required to run stock-price simulations and calculate the option’s 
+    payoff. However, this class <strong>will not be a concrete option type</strong>, and thus 
+    <strong>will not implement</strong> the option’s value algorithm, which differs for each concrete 
+    option type.</p>
+<p>Write an <code>__init__</code> method that takes the following parameters:<br>
+<code>s</code>, which is the initial stock price<br> 
+<code>x</code>, which is the option’s exercise price<br><code>r</code>, which is the (expected) mean annual rate of return on the underlying stock<br>
+<code>sigma</code>, which is the annual standard deviation of returns on the underlying stock<br>
+<code>t</code>, which is the time to maturity for the option<br>
+<code>nsteps</code>, which is the number of discrete time steps with which to evaluate the option<br>
+<code>ntrials</code>, which is the number of trials to run with this option<br></p>
+<p>Write a <code>__repr__</code> method to create a nicely formatted printout of the <code>MCStockOption</code>
+object, which will be useful for debugging your work. </p>
+<div class="codehilite"><pre>&gt;&gt;&gt; option = MCStockOption(100, 100, 0.1, 0.3, 1, 5, 10)
+&gt;&gt;&gt; print(option)
+MCStockOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=5, ntrials=10
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a method <code>generate_stock_prices(self)</code> on your class <code>MCStockOption</code>, which will
+    generate and return a list containing simulated stock prices over the course of this
+    option’s lifetime <code>t</code>. We refer to this list of prices as the <em>price path</em> of the 
+    stock, i.e., if we were to observe the price of the stock at each discrete time between
+    now and the option’s maturity time. The number of discrete time steps is specified
+    by the field <code>nsteps</code>.</p>
+<p>Generating stock prices is a two-step process: first, we will create simulated 
+periodic returns for each discrete time period <code>dt</code>, and then we will use these returns
+to create a price-path beginning at the initial stock price (stored in a data member 
+<code>self.s</code>). </p>
+<p><strong> We will discuss the algorithm for creating random stock returns in class 
+on Thursday, 10/26/2017.  </strong></p>
+<p><strong> Algorithm to generate simulated stock returns </strong></p>
+<p>One method for creating simulated stock returns is to assume that future returns will
+follow the same probability distribution as historical returns. Let’s assume that 
+stock returns have historically been approximately normally distributed with a mean<code>mu</code> and standard deviation <code>sigma</code>. We can simiulate the <em>annual rate</em> of return as:</p>
+<p><img src="./Assignment 8 — MF 703, Boston University_files/sim_stock_return_ann.jpg"></p>
+<p>where <code>Z</code> is a randomly-drawn number from the standard normal distribution. 
+You can draw such a number using the function <code>random.gauss(mu, sigma)</code>. </p>
+<p>To find a simulated rate of return for an arbitrary discrete time period <code>dt</code>, we
+can use this formula:</p>
+<p><img src="./Assignment 8 — MF 703, Boston University_files/sim_stock_return_dt.jpg"></p>
+<p>Here are some examples of using this method:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; option = MCStockOption(100, 100, 0.1, 0.3, 1, 5, 10)
+&gt;&gt;&gt; print(option)
+MCStockOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=5, ntrials=10
+&gt;&gt;&gt; option.generate_stock_prices()
+[100, 113.31819841734618, 115.76873128211223, 85.00196299639693, 76.07784662217487, 79.52199632650436]
+# note: because of randomness, you will NEVER get the same set of prices twice...
+# sometimes, you will win big (i.e., stock price increases a lot!)
+&gt;&gt;&gt; option.generate_stock_prices()
+[100, 98.63978858219188, 112.37128208470853, 124.99069092542855, 136.38437602445984, 153.09903380621927]
+# sometimes, you will lose big (i.e., stock price decreases a lot!)
+&gt;&gt;&gt; option.generate_stock_prices()
+[100, 84.25850981643933, 59.54739559609961, 57.153280177198134, 56.81210271948082, 60.62153130693744]
+</pre></div>
+
+
+<p><strong><em>Notes/Hints:</em></strong> </p>
+<ul>
+<li>
+<p>Each run of <code>generate_stock_prices()</code> will return a new, independent list of 
+    simulated stock prices. You should not expect to get the same result twice!</p>
+</li>
+<li>
+<p>The prices in this list represent a simluated run through the time period <code>t</code>,
+    in discrete steps of length <code>t/nsteps</code>. It might be helpful to create a variable
+    <code>dt = t/nsteps</code> to represent the length of each discrete time period.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Add the following methods to your class <code>MCStockOption</code>:</p>
+<p>a. a method <code>value(self)</code>, which will return the value of the option. This method
+   cannot be concretely implemented in this base class, but will be overridden in each
+   subclass (see below). For now, the methods should print out a message and return 0.</p>
+<p>Example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; option = MCStockOption(100, 100, 0.1, 0.3, 1, 5, 10)
+&gt;&gt;&gt; option.value()
+Base class MCStockOption has no concrete implementation of .value(). # print statement
+0 # this is the return value
+</pre></div>
+
+
+<p>b. a method <code>stderr(self)</code>, which will return the standard error of this option’s value.
+   The standard error is calculated as <code>stdev / sqrt(ntrials)</code>, where stdev is the standard
+   deviation of the values obtains from many trials. </p>
+<p>The standard error can only be calculated after running some trials, and as such it
+   cannot be calculated until we implement the <code>value(self)</code> method in the concrete 
+   subclasses (explained below). 
+   For now, you should use the following method definition in class <code>MCStockOption</code>:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">stderr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s">'stdev'</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdev</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ntrials</span><span class="p">)</span>
+<span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+
+
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">The following notes apply to all remaining parts of this task:</p>
+<ul>
+<li>
+<p>For each option type that follows, you will create a separate class definition. 
+    In that class definition, you will need to implement the constructor (<code>__init__</code>), 
+    which will call the base class constructor, and also implement a new version of 
+    the <code>__repr__</code> method which should return a string that specifically identifies 
+    that option (see samples below). </p>
+</li>
+<li>
+<p>For each option type that follows, you will implement the option pricing algorithm 
+    by overriding the <code>value(self)</code> method, with the specific algorithm/formula 
+    required by that option type. </p>
+</li>
+<li>
+<p>Monte Carlo option pricing is achieved by running many random trials (sepcified by
+    the data member <code>ntrials).
+    In each trial, we generate a sequence of simulated stock returns by calling the</code>generate_stock_prices()<code>method, and use those prices to find the value of the 
+    option. The value of the option is the average result from many trials. 
+    We will also calculate the standard deviation of the results from all trials, 
+    and store this value in the data member</code>self.stdev<code>. It might be helpful to have
+    these lines of code near the end of your</code>value(self)` method:</p>
+<div class="codehilite"><pre>self.mean = statistics.mean(trials)
+self.stdev = statistics.pstdev(trials)
+</pre></div>
+
+
+<p>These lines use functions from the module <code>statistics</code>, which is part of the 
+standard python distribution. <code>import statistics</code> to gain access to them.</p>
+</li>
+</ul>
+</div>
+<ol start="4">
+<li>
+<p>Write a class definition for the class <code>MCEuroCallOption</code> which inherits from the base
+    class <code>MCStockOption</code>. </p>
+<p>For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call = MCEuroCallOption(100, 100, 0.1, 0.3, 1, 100, 1000)
+&gt;&gt;&gt; print(call)
+MCEuroCallOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=100, ntrials=1000
+&gt;&gt;&gt; call.value()
+17.772669156169734
+</pre></div>
+
+
+<p><strong><em>Calculating the option value:</em></strong> </p>
+<p>The value of the European call option is calculated by: </p>
+<p><img src="./Assignment 8 — MF 703, Boston University_files/mc_euro_call.jpg"></p>
+<p>where S<sub>t</sub> is the value of the underlying stock in the <strong>last</strong> discrete time
+period. </p>
+<p>Note that each time your execute the <code>.value()</code> method, you will get a different result 
+to to the nature of the random trials:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call.value()
+17.783328376694705
+&gt;&gt;&gt; call.value()
+17.71327829459001
+&gt;&gt;&gt; call.value()
+17.858182463371747
+</pre></div>
+
+
+<p>The standard error of the option’s value describes how good or bad this estimate is. 
+In this case for a call option value calculated with 1000 random trials, the standard
+error is quite large:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call.stderr()
+0.8692860579785078
+</pre></div>
+
+
+<p>We can obtain a better estimate of the option value (i.e., with lower standard error)
+by increasing the number of trials:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call = MCEuroCallOption(100, 100, 0.1, 0.3, 1, 100, 1000)
+&gt;&gt;&gt; print(call)
+MCEuroCallOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=100, ntrials=1000
+&gt;&gt;&gt; call.value()
+16.503474076319893
+&gt;&gt;&gt; call.stderr()
+0.8238156462378557
+&gt;&gt;&gt; # change ntrials from 1,000 to 100,000
+&gt;&gt;&gt; call.ntrials = 100000
+&gt;&gt;&gt; call.value() # note: this took about 18 seconds to run on my computer
+16.80027562260201
+&gt;&gt;&gt; call.stderr()
+0.0840351742191497
+</pre></div>
+
+
+<p>The value of this option given by Black-Scholes is:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; bseurocall = BSEuroCallOption(100, 100, 1.0, 0.3, 0.10)
+&gt;&gt;&gt; bseurocall.value()
+16.734133582386661
+</pre></div>
+
+
+<p>We can obtain a closer estimate by further increasing the number of trials, i.e., </p>
+<div class="codehilite"><pre>&gt;&gt;&gt; call.ntrials = 1000000
+&gt;&gt;&gt; call.value() # this calculation took about 2 minutes on my computer.
+16.71326518279437
+&gt;&gt;&gt; call.stderr()
+0.026455359403943838
+</pre></div>
+
+
+<p>Again, using Monte Carlo simulation to calculate the value is very inefficient
+for European call/put options. However, pricing European call options via our Monte
+Carlo simulation is a good way to check that our simulation is working correctly, 
+i.e., we can check the value obtained for these options agains the values from 
+Black-Scholes.</p>
+<p>Here is one more example against which you can test your work:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; bseurocall = BSEuroCallOption(40, 40, 0.25, 0.3, 0.08)
+&gt;&gt;&gt; print(bseurocall)
+BSEuroCallOption, value = $2.78,
+parameters = (s = $40.00, x = $40.00, t = 0.25 (years), sigma = 0.300, rf = 0.080, div = 0.00)
+&gt;&gt;&gt; bseurocall.value()
+2.7847366578216608
+&gt;&gt;&gt; call = MCEuroCallOption(40, 40, 0.08, 0.30, 0.25, 100, 1000000)
+&gt;&gt;&gt; print(call)
+MCEuroCallOption, s=40.00, x=40.00, r=0.08, sigma=0.30, t=0.25, n=1000000
+&gt;&gt;&gt; call.value()
+2.783108741572539
+&gt;&gt;&gt; call.stderr()
+0.004165330239091126
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a class definition for the class <code>MCEuroPutOption</code> which inherits from the base
+    class <code>MCStockOption</code>. </p>
+<p>For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; put = MCEuroPutOption(100, 100, 0.1, 0.3, 1, 100, 1000)
+&gt;&gt;&gt; print(put)
+MCEuroPutOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=100, ntrials=1000
+&gt;&gt;&gt; put.value()
+6.792675522051833
+</pre></div>
+
+
+<p><strong><em>Calculating the option value:</em></strong> </p>
+<p>The value of the European put option is calculated by: 
+<img src="./Assignment 8 — MF 703, Boston University_files/mc_euro_put.jpg"></p>
+<p>where S<sub>t</sub> is the value of the underlying stock in the <strong>last</strong> discrete time
+period. </p>
+<p>Note that each time your execute the <code>.value()</code> method, you will get a different result 
+to to the nature of the random trials:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; put.value()
+6.792675522051833
+&gt;&gt;&gt; put.value()
+7.27460759974286
+&gt;&gt;&gt; put.value()
+6.859371894720996
+&gt;&gt;&gt; put.value()
+7.284086238821782
+</pre></div>
+
+
+<p>The standard error of the option’s value describes how good or bad this estimate is. 
+In this case for a call option value calculated with 1000 random trials, the standard
+error is quite large:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; put.stderr()
+0.35428508008303067
+</pre></div>
+
+
+<p>We can obtain a better estimate of the option value (i.e., with lower standard error)
+by increasing the number of trials:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; put = MCEuroPutOption(100, 100, 0.1, 0.3, 1, 100, 100000)
+&gt;&gt;&gt; print(put)
+MCEuroPutOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=100, ntrials=100000
+&gt;&gt;&gt; put.value()
+7.211753626273089
+&gt;&gt;&gt; put.stderr()
+0.03555178086854566
+</pre></div>
+
+
+<p>The value of this option given by Black-Scholes is:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; bseuroput = BSEuroPutOption(100, 100, 1.0, 0.3, 0.10)
+&gt;&gt;&gt; bseuroput.value()
+7.2178753859826088
+</pre></div>
+
+
+<p>Again, using Monte Carlo simulation to calculate the value is very inefficient
+for European call/put options. However, pricing European put options via our Monte
+Carlo simulation is a good way to check that our simulation is working correctly, 
+i.e., we can check the value obtained for these options against the values from 
+Black-Scholes.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Valuing path-dependent options</p>
+<ul>
+<li>
+<p>For a little background reading about path-dependent options, 
+    read this page from Wikipedia on
+    <a target="_blank" href="https://en.wikipedia.org/wiki/Exotic_option">Exotic options</a>.</p>
+</li>
+<li>
+<p>For the option types below, there is no precise pricing formula such as 
+    Black-Scholes. The prices of these options depend on the price-path through time. 
+    These options can be priced exactly using historical data, i.e., at maturity. 
+    At any time before maturity, we can only estimate the value of these options
+    by simulating the path of future stock prices.</p>
+</li>
+</ul>
+</div>
+<ol start="6">
+<li>
+<p>Write a class definition for the class <code>MCAsianCallOption</code> which inherits from the base
+    class <code>MCStockOption</code>. The Asian call option’s payoff the amount by which the <em>average</em> 
+    stock price exceeds the option’s exercise price during the option’s lifetime.</p>
+<p>(The “Asian” or average price option was developed by two British bankers, who just
+happened to be in Tokyo when “they developed the first commercially used pricing 
+formula for options linked to the average price of crude oil.” - Wikipedia)</p>
+<p><strong><em>Calculating the option value:</em></strong> </p>
+<p>The value of the Asian call option (in a single trial) is calculated by: 
+<img src="./Assignment 8 — MF 703, Boston University_files/mc_asian_call.jpg"></p>
+<p>where S is <em>price-path</em> of the of the underlying stock form now until time <code>t</code>.</p>
+<p>For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; acall = MCAsianCallOption(100, 100, 0.10, 0.30, 1, 100, 1000)
+&gt;&gt;&gt; print(acall)
+MCAsianCallOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=100, ntrials=1000
+&gt;&gt;&gt; acall.value()
+9.383934065892786
+&gt;&gt;&gt; acall.stderr()
+0.3972320422156776
+&gt;&gt;&gt;
+</pre></div>
+
+
+<p>We can obtain a better estimate of the option value (i.e., with lower standard error)
+by increasing the number of trials:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; # change ntrials to reduce the standard error:
+&gt;&gt;&gt; acall.ntrials = 100000
+&gt;&gt;&gt; acall.value()
+9.082241249588852
+&gt;&gt;&gt; acall.stderr()
+0.039660682189637385
+</pre></div>
+
+
+<p>There is no “exact” right answer, but we can increase the number of trials until the 
+standard error is sufficiently small (e.g., maybe a standard error of $0.01 is 
+“good enough”.)</p>
+<p>Here are some additional examples of Asian call options with different parameters:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; acall = MCAsianCallOption(35, 30, 0.08, 0.25, 1, 100, 100000)
+&gt;&gt;&gt; acall.value()
+6.10676499229242
+&gt;&gt;&gt; acall.stderr()
+0.014791094213907266
+&gt;&gt;&gt; acall = MCAsianCallOption(35, 40, 0.08, 0.40, 1, 100, 100000)
+&gt;&gt;&gt; acall.value()
+1.9336597090613712
+&gt;&gt;&gt; acall.stderr()
+0.013909777807322249
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a class definition for the class <code>MCAsianPutOption</code> which inherits from the base
+    class <code>MCStockOption</code>. The Asian put option’s payoff the amount by which the option’s 
+    exercise price exceeds <em>average</em> stock price during the option’s lifetime. </p>
+<p><strong><em>Calculating the option value:</em></strong> </p>
+<p>The value of the Asian put option (in a single trial) is calculated by: 
+<img src="./Assignment 8 — MF 703, Boston University_files/mc_asian_put.jpg"></p>
+<p>where S is <em>price-path</em> of the of the underlying stock form now until time <code>t</code>.</p>
+<p>For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; aput = MCAsianPutOption(100, 100, 0.10, 0.30, 1, 100, 1000)
+&gt;&gt;&gt; print(aput)
+MCAsianPutOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=100, ntrials=1000
+&gt;&gt;&gt; aput.value()
+4.214287901770933
+&gt;&gt;&gt; aput.stderr()
+0.21694935747523975
+</pre></div>
+
+
+<p>We can obtain a better estimate of the option value (i.e., with lower standard error)
+by increasing the number of trials:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; # change ntrials to reduce the standard error:
+&gt;&gt;&gt; aput.ntrials = 100000
+&gt;&gt;&gt; aput.value()
+4.369344428491687
+&gt;&gt;&gt; aput.stderr()
+0.02196487755461348
+</pre></div>
+
+
+<p>There is no “exact” right answer, but we can increase the number of trials until the 
+standard error is sufficiently small (e.g., maybe a standard error of $0.01 is 
+“good enough”.)</p>
+<p>Here are some additional examples of Asian put options with different parameters:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; aput = MCAsianPutOption(35, 30, 0.08, 0.25, 1, 100, 100000)
+&gt;&gt;&gt; aput.value()
+0.17081451092121083
+&gt;&gt;&gt; aput.stderr()
+0.0021427462876315935
+&gt;&gt;&gt; aput = MCAsianPutOption(35, 40, 0.08, 0.40, 1, 100, 100000)
+&gt;&gt;&gt; aput.value()
+5.202096070272916
+&gt;&gt;&gt; aput.stderr()
+0.01579490624224986
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a class definition for the class <code>MCLookbackCallOption</code> which inherits from the base
+    class <code>MCStockOption</code>. The look-back call option’s payoff the amount by which the option’s 
+    exercise price exceeds <em>maximum</em> stock price during the option’s lifetime. </p>
+<p><strong><em>Calculating the option value:</em></strong> </p>
+<p>The value of the look-back call option (in a single trial) is calculated by: 
+<img src="./Assignment 8 — MF 703, Boston University_files/mc_lookback_call.jpg"></p>
+<p>where S is <em>price-path</em> of the of the underlying stock form now until time <code>t</code>.</p>
+<p>For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; lcall = MCLookbackCallOption(100, 100, 0.10, 0.30, 1, 100, 1000)
+&gt;&gt;&gt; print(lcall)
+MCLookbackCallOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=100, ntrials=1000
+&gt;&gt;&gt; lcall.value()
+27.623315806983594
+&gt;&gt;&gt; lcall.stderr()
+0.7849042509114783
+</pre></div>
+
+
+<p>We can obtain a better estimate of the option value (i.e., with lower standard error)
+by increasing the number of trials:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; # change ntrials to reduce the standard error:
+&gt;&gt;&gt; lcall.ntrials = 100000
+&gt;&gt;&gt; lcall.value()
+28.25988421663273
+&gt;&gt;&gt; lcall.stderr()
+0.07978179212787108
+</pre></div>
+
+
+<p>There is no “exact” right answer, but we can increase the number of trials until the 
+standard error is sufficiently small (e.g., maybe a standard error of $0.01 is 
+“good enough”.)</p>
+<p>Here are some additional examples of look-back call options with different parameters:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; lcall = MCLookbackCallOption(35, 30, 0.08, 0.25, 1, 100, 100000)
+&gt;&gt;&gt; lcall.value()
+12.77950317693695
+&gt;&gt;&gt; lcall.stderr()
+0.022307140359480636
+&gt;&gt;&gt; lcall = MCLookbackCallOption(35, 40, 0.08, 0.40, 1, 100, 100000)
+&gt;&gt;&gt; lcall.value()
+8.794892213218377
+&gt;&gt;&gt; lcall.stderr()
+0.03689429324794948
+</pre></div>
+
+
+</li>
+<li>
+<p>Write a class definition for the class <code>MCLookbackPutOption</code> which inherits from the base
+    class <code>MCStockOption</code>. The look-back put option’s payoff the amount by which the option’s 
+    exercise price exceeds <em>minimum</em> stock price during the option’s lifetime. </p>
+<p><strong><em>Calculating the option value:</em></strong> </p>
+<p>The value of the look-back call option (in a single trial) is calculated by: 
+<img src="./Assignment 8 — MF 703, Boston University_files/mc_lookback_put.jpg"></p>
+<p>where S is <em>price-path</em> of the of the underlying stock form now until time <code>t</code>.</p>
+<p>For example:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; print(lput)
+MCLookbackPutOption, s=100.00, x=100.00, r=0.10, sigma=0.30, t=1.00, nsteps=100, ntrials=1000
+&gt;&gt;&gt; lput.value()
+14.968295917890794
+&gt;&gt;&gt; lput.stderr()
+0.3669254592774948
+</pre></div>
+
+
+<p>We can obtain a better estimate of the option value (i.e., with lower standard error)
+by increasing the number of trials:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; # change ntrials to reduce the standard error:
+&gt;&gt;&gt; lput.ntrials = 100000
+&gt;&gt;&gt; lput.value()
+15.173249621749418
+&gt;&gt;&gt; lput.stderr()
+0.03691269486451156
+</pre></div>
+
+
+<p>There is no “exact” right answer, but we can increase the number of trials until the 
+standard error is sufficiently small (e.g., maybe a standard error of $0.01 is 
+“good enough”.)</p>
+<p>Here are some additional examples of look-back put options with different parameters:</p>
+<div class="codehilite"><pre>&gt;&gt;&gt; lput = MCLookbackPutOption(35, 30, 0.08, 0.25, 1, 100, 100000)
+&gt;&gt;&gt; lput.value()
+1.473450162184218
+&gt;&gt;&gt; lput.stderr()
+0.007596162700364556
+&gt;&gt;&gt; lput = MCLookbackPutOption(35, 40, 0.08, 0.40, 1, 100, 100000)
+&gt;&gt;&gt; lput.value()
+12.28338712431232
+&gt;&gt;&gt; lput.stderr()
+0.016902847424762495
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="submitting-your-work">Submitting Your Work</h2>
+<p>Log into <a href="https://questromtools.bu.edu/">Questromtools</a> to submit your work. 
+Under the heading for Assignment 8, attach each of the required files to your submission. 
+You may resubmit multiple times, but only the last submission will be graded. </p>
+<p><br></p>
+</section>
+
+<footer>
+Last modified on October 25, 2017.
+</footer>
+
+</div>
+
+<div id="right">
+<div class="toc">
+<ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#assignment-8">Assignment 8</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#preliminaries">Preliminaries</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#objective-and-overview">Objective and Overview</a><ul>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#task-1-black-scholes-option-pricing">Task 1: Black-Scholes option pricing</a></li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#task-2-monte-carlo-option-pricing" class="current">Task 2: Monte-Carlo Option Pricing</a></li>
+</ul>
+</li>
+<li><a href="http://cs-people.bu.edu/azs/mf703/assignments/a8.html#submitting-your-work">Submitting Your Work</a></li>
+</ul>
+</li>
+</ul>
+</div></div>
+
+
+
+
+</body></html>

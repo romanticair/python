@@ -1,0 +1,164 @@
+================================================================================PY
+Content-Type: multipart/mixed; boundary="===============0787034532=="
+MIME-Version: 1.0
+From: user_siri@foxmail.com
+To: user_bigsir@163.com
+Subject: Testing mailtoos package
+Date: Sat, 09 Jun 2018 11:48:44 -0000
+X-Mailer: mailtools
+X-Mailer: m, a, i, l, t, o, o, l, s
+
+A multi-part MIME format message.
+
+--===============0787034532==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Here is my source code
+
+--===============0787034532==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachments; filename="selftest.py"
+
+"""
+################################################################################################
+self-test when this file is run as program
+################################################################################################
+"""
+
+import sys
+sys.path.append('..')
+import mailconfig
+print('config:', mailconfig.__file__)
+
+# get from __init__
+from Internet.Email.mailtools import (MailFetcherConsole, MailSender,
+                                      MailSenderAuthConsole, MailParser)
+
+if not mailconfig.smtpuser:
+    sender = MailSender(tracesize=5000)
+else:
+    sender = MailSenderAuthConsole(mailconfig.smtpservername, mailconfig.popusername, tracesize=5000)
+
+sender.sendMessage(From=mailconfig.popusername,
+                   To=[mailconfig.smtpuser],
+                   Subj='Testing mailtoos package',
+                   extrahdrs=[('X-Mailer', 'mailtools')],
+                   bodytext='Here is my source code\n',
+                   attaches=['selftest.py'])
+                  # bodytextEncoding='utf-8'                  # other test
+                  # attachesEncodings=['latin-1'],            # check title
+                  # attaches=['monkeys.jpg']                  # check base64
+                  # to='i18n adddr list...'                   # test Mime/Unicode
+
+
+def status(*args):
+    print(args)
+
+fetcher = MailFetcherConsole()
+hdrs, sizes, loadedall = fetcher.downloadAllHeaders(status)
+for num, hdr in enumerate(hdrs[:5]):
+    print(hdr)
+    if input('load mail?') in ['y', 'Y']:
+        print(fetcher.downloadMessage(num+1).rstrip(), '\n', '-'*70)
+
+last5 = len(hdrs) - 4
+msgs, sizes, loadedall = fetcher.downloadAllMessages(status, loadfrom=last5)
+for msg in msgs:
+    print(msg[:200], '\n', '-'*70)
+
+parser = MailParser()
+for i in range(0, len(msgs)):
+    fulltext = msgs[i]
+    message = parser.parseMessage(fulltext)
+    ctype, maintext = parser.findMainText(message)
+    print('Parsed:', message['Subject'])
+    print(maintext)
+input('Press Enter to exit')
+
+--===============0787034532==--
+================================================================================PY
+Content-Type: multipart/mixed; boundary="===============0679636889=="
+MIME-Version: 1.0
+From: user_siri@foxmail.com
+To: user_bigsir@163.com
+Subject: Testing mailtoos package
+Date: Sat, 09 Jun 2018 14:24:03 -0000
+X-Mailer: mailtools
+X-Mailer: m, a, i, l, t, o, o, l, s
+
+A multi-part MIME format message.
+
+--===============0679636889==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Here is my source code
+
+--===============0679636889==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachments; filename="selftest.py"
+
+"""
+################################################################################################
+self-test when this file is run as program
+################################################################################################
+"""
+
+import sys
+sys.path.append('..')
+import mailconfig
+print('config:', mailconfig.__file__)
+
+# get from __init__
+from Internet.Email.mailtools import (MailFetcherConsole, MailSender,
+                                      MailSenderAuthConsole, MailParser)
+
+if not mailconfig.smtpuser:
+    sender = MailSender(tracesize=5000)
+else:
+    sender = MailSenderAuthConsole(mailconfig.smtpservername, mailconfig.popusername, tracesize=5000)
+
+sender.sendMessage(From=mailconfig.popusername,
+                   To=[mailconfig.smtpuser],
+                   Subj='Testing mailtoos package',
+                   extrahdrs=[('X-Mailer', 'mailtools')],
+                   bodytext='Here is my source code\n',
+                   attaches=['selftest.py'])
+                  # bodytextEncoding='utf-8'                  # other test
+                  # attachesEncodings=['latin-1'],            # check title
+                  # attaches=['monkeys.jpg']                  # check base64
+                  # to='i18n adddr list...'                   # test Mime/Unicode
+
+
+def status(*args):
+    print(args)
+
+fetcher = MailFetcherConsole()
+hdrs, sizes, loadedall = fetcher.downloadAllHeaders(status)
+for num, hdr in enumerate(hdrs[:5]):
+    print(hdr)
+    if input('load mail?') in ['y', 'Y']:
+        print(fetcher.downloadMessage(num+1).rstrip(), '\n', '-'*70)
+
+last5 = len(hdrs) - 4
+msgs, sizes, loadedall = fetcher.downloadAllMessages(status, loadfrom=last5)
+for msg in msgs:
+    print(msg[:200], '\n', '-'*70)
+
+parser = MailParser()
+for i in range(0, len(msgs)):
+    fulltext = msgs[i]
+    message = parser.parseMessage(fulltext)
+    ctype, maintext = parser.findMainText(message)
+    print('Parsed:', message['Subject'])
+    print(maintext)
+input('Press Enter to exit')
+
+--===============0679636889==--
